@@ -4160,6 +4160,32 @@ function attrec($mrinno){
 		$query_result = $query->result();
 		return $query_result;
 	}
+
+	
+	
+function pocomrec($pono){
+		$this->db->select('*');
+		$this->db->from('po_compodetails');
+		$this->db->where('PO_No',$pono);
+		$this->db->where('flag <> ','D');
+		$query = $this->db->get();
+		//echo $this->db->last_query();
+		//exit();
+		$query_result = $query->result();
+		return $query_result;
+	}
+
+function poattrec($pono){
+		$this->db->select('*');
+		$this->db->from('poattach_details');
+		$this->db->where('PO_No',$pono);
+		$this->db->where('flag <> ','D');
+		$query = $this->db->get();
+		//echo $this->db->last_query();
+		//exit();
+		$query_result = $query->result();
+		return $query_result;
+	}
 	
 function mrindetedit($mrinno){
 		$this->db->select('m.*,s.*,u.Name,a.V_Asset_no,a.V_Tag_no,a.V_Serial_no,a.V_Asset_name,a.V_Manufacturer,a.V_Brandname,a.V_Model_no,b.V_PO_date,b.N_Cost');
@@ -4542,17 +4568,56 @@ function getuserpodept(){
 	return $query->result();
 }
 
-function getpofollow($whatpo,$visitwhat){
+function getuserpodept(){
 	//$this->db->select("CONCAT('PO/',".$this->db->escape(date('m').date('y')).",'/',RIGHT(CONCAT('0000',CAST(po_next_no AS char)), 5)) AS pono,po_next_no",FALSE);
 	//echo "<br> sdkkfjslkdfjl : ".$whichone."<br>";
-	$this->db->select("*");
-	$this->db->from('tbl_po');
-	$this->db->where('PO_No', $whatpo);
-	$this->db->where('visit', $visitwhat);
+	$this->db->select("IFNULL(v_GroupID,'NONE') AS dept",FALSE);
+	$this->db->from('pmis2_sa_user');
+	$this->db->where('v_UserID', $this->session->userdata('v_UserName') );
 	$query = $this->db->get();
 	//echo $this->db->last_query();
 	//exit();
 	return $query->result();
+}
+
+function getpofollow($whatpo,$visitwhat){
+   $this->db->select("*");
+   $this->db->from('tbl_po');
+   $this->db->where('PO_No', $whatpo);
+	$this->db->where('visit', $visitwhat); 
+ 
+
+$query = $this->db->get();
+	/* echo $this->db->last_query();
+	exit(); */
+	return $query->result();
+
+	
+}
+function getpocom($whatpo,$visitwhat){
+$this->db->select("*");
+$this->db->from('po_compodetails');
+$this->db->where('PO_No', $whatpo);
+$this->db->where('visit', $visitwhat); 
+
+
+$query = $this->db->get();
+	/* echo $this->db->last_query();
+	exit(); */
+	return $query->result();	
+}
+function getpoat($whatpo,$visitwhat){
+ $this->db->select("*");
+$this->db->from('poattach_details');
+ $this->db->where('PO_No', $whatpo);
+$this->db->where('visit', $visitwhat); 
+
+$query = $this->db->get();
+	/* echo $this->db->last_query();
+	exit(); */
+	return $query->result();
+
+	
 }
 
 function sumrq_a2($month,$year,$reqtype,$grpsel,$bystak="")

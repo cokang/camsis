@@ -1728,7 +1728,7 @@ class Contentcontroller extends CI_Controller {
 		$this->load->model("get_model");
 		$data['asset_images'] = $this->get_model->assetimage();
 
-		$data['limit'] = 20;
+		$data['limit'] = 24;
 		isset($_GET['numrow']) ? $data['numrow'] = $_GET['numrow'] : $data['numrow'] = 1;
 		isset($_GET['p']) ? $data['page'] = $_GET['p'] : $data['page'] = 1;
 
@@ -2179,10 +2179,12 @@ class Contentcontroller extends CI_Controller {
 		$this->load->model("get_model");
 		$data['ppm_list'] = $this->get_model->assetppmlog($data['assetno']);
 		$data['ppm_list_cost'] = $this->get_model->assetlaborpartbyppm($data['assetno']);
-		$this->load->model("display_model");
-    $data['result'] = $this->display_model->searchassettag($data['assetno']);
+    $this->load->model("display_model");
+        $data['result'] = $this->display_model->searchassettag($data['assetno']);
+		if ($this->input->get('ex') != 'excel') {
 		$this ->load->view("head");
 		$this ->load->view("left" , $data);
+		}
 		$this ->load->view("content_asset_logcards");
 		$this ->load->view("content_asset_logcards_Maintenance", $data);
 	}
@@ -2191,11 +2193,12 @@ class Contentcontroller extends CI_Controller {
 		$this->load->model("get_model");
 		$data['wo_list'] = $this->get_model->assetwolog($data['assetno']);
 		$data['wo_list_cost'] = $this->get_model->assetlaborpartbywo($data['assetno']);
-		$this->load->model("display_model");
-    $data['result'] = $this->display_model->searchassettag($data['assetno']);
+    $this->load->model("display_model");
+        $data['result'] = $this->display_model->searchassettag($data['assetno']);
+		if ($this->input->get('ex') != 'excel') {
 		$this ->load->view("head");
 		$this ->load->view("left" , $data);
-
+        }
 		$this ->load->view("content_asset_logcards");
 		$this ->load->view("content_asset_logcards_Unschedule", $data);
 	}
@@ -7294,7 +7297,7 @@ public function assethistory(){
 					$data['record'] = NULL;
 				}
 		}
-		//print_r($data['recordji']);
+		//print_r($data);
 		//exit();
 		//$this ->load->view("head");
 		//$this ->load->view("left");
@@ -8638,6 +8641,53 @@ public function rcm_fdreport2(){
 		print_r($data['records']); */
 		$this ->load->view("headprinter");
 		$this ->load->view("Content_unstfy_rpt", $data);
+	}
+
+
+	public function testview(){
+		$this ->load->view("headprinter");
+		$this ->load->view("content_service_report");
+	}
+
+	public function qap4(){
+
+		$this ->load->view("head");
+		$this ->load->view("left");
+		$this ->load->view("content_qap4");
+	}
+
+	public function qap4_(){
+
+		$this ->load->view("head");
+		$this ->load->view("left");
+		$this ->load->view("content_qap4_res");
+	}
+
+	public function qap4_table(){
+
+		$this ->load->view("head");
+		$this ->load->view("left");
+		$this ->load->view("content_qap4_table");
+	}
+	public function completed_as_schedule(){
+
+		$this ->load->view("head");
+		$this ->load->view("content_complete_as_schedule");
+	}
+	public function calculation_noAsset(){
+
+		$this ->load->view("head");
+		$this ->load->view("content_cal_noAsset");
+	}
+	public function qap4_indicator(){
+
+		$this ->load->view("head");
+		$this ->load->view("content_indicator");
+	}
+	public function indicator_noAsset(){
+
+		$this ->load->view("head");
+		$this ->load->view("indicator_noAsset");
 	}
 
 }

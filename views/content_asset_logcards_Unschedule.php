@@ -1,4 +1,16 @@
-<?php include 'content_logcards.php';?>   
+<?php
+if ($this->input->get('ex') == 'excel'){
+	$filename = "log_cards_" .date('F', mktime(0, 0, 0,  date("m"), 10)) . date("y").".xls";
+	header('Content-type: application/ms-excel');
+	header('Content-Disposition: attachment; filename='.$filename);
+}
+?>
+
+<?php
+if ($this->input->get('ex') != 'excel') {
+include 'content_logcards.php';
+}
+?>   
 						<tr>
 							<td colspan="6" style="background:white;">
 								<table class="ui-content-middle-menu-workorder ui-left_web" width="100%" border="0">
@@ -47,6 +59,7 @@
 				        			</tr> 
 										<?php } ?>	 		
 								</table>
+								<?php if ($this->input->get('ex') != 'excel') { ?>
 								<table class="ui-mobile-table-desk ui-left_mobile" style="color:black;">
 									<?php  if (!empty($wo_list)) {?>
 									<?php $rownum = 1; foreach($wo_list as $row):?>   			
@@ -107,6 +120,7 @@
 										</tr>
 										<?php } ?>
 								</table>
+								<?php } ?>
 							</td>
 						</tr>
 					</table>

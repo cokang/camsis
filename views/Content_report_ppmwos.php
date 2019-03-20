@@ -34,6 +34,40 @@ function barchart(a,b,c,d,e,f){
 
 <div id="Instruction" >
 <center>View List : 
+<?php if ($this->input->get('fon')) { ?>
+
+<form method="get" action="">
+		<?php 
+			$month_list = array(
+			'01' => 'January',
+			'02' => 'February',
+			'03' => 'March',
+			'04' => 'April',
+			'05' => 'May',
+			'06' => 'June',
+			'07' => 'July',
+			'08' => 'August',
+			'09' => 'September',
+			'10' => 'October',
+			'11' => 'November',
+			'12' => 'December'
+		 );
+		?>
+		<?php echo form_dropdown('m', $month_list, set_value('m', isset($record[0]->Month) ? $record[0]->Month : $month) , 'style="width: 90px;" id="cs_month"'); ?>
+		
+		<?php 
+			for ($dyear = '2015';$dyear <= date("Y");$dyear++){
+				$year_list[$dyear] = $dyear;
+			}
+		?>
+		<?php echo form_dropdown('y', $year_list, set_value('y', isset($record[0]->Year) ? $record[0]->Year : $year) , 'style="width: 65px;" id="cs_year"'); ?>
+<input type="hidden" value="<?php echo set_value('grp', ($this->input->get('grp')) ? $this->input->get('grp') : ''); ?>" name="grp"> 
+<input type="hidden" value="<?php echo set_value('fon', ($this->input->get('fon')) ? $this->input->get('fon') : ''); ?>" name="fon"> 
+<input type="submit" value="Apply" onchange="javascript: submit()"/></center>
+</form>
+
+<?php } else { ?>
+
 <form method="get" action="">
  <label for="from">From</label>
 	<input type="date" name="from" id="from" value="<?=($from) ? $from : $from?>" class="form-control-button2 n_wi-date2">
@@ -43,13 +77,15 @@ function barchart(a,b,c,d,e,f){
 <input type="hidden" value="<?php echo set_value('fon', ($this->input->get('fon')) ? $this->input->get('fon') : ''); ?>" name="fon"> 
 <input type="submit" value="Apply" onchange="javascript: submit()"/></center>
 </form>
+
+<?php } ?>
 </div>
 <?php } ?>
 <div class="m-div">
 	<table class="rport-header">
 		<tr>
 		<?php if($this->input->get('m')){ ?>
-		<td colspan="5">PPM Work Order Summary <?= substr(date('M',mktime(0, 0, 0, $month, 10)),0,3).' '.$year ?> - <?php echo $this->session->userdata('usersessn');?> ( <?php if ($this->input->get('grp') == ''){echo 'ALL'; }else{ echo 'Group '.$this->input->get('grp');} ?> )</td>
+		<td colspan="5">PPM Work Order Summary <?= substr(date('M',mktime(0, 0, 0, $month, 10)),0,3).' '.$year ?> - <?php echo $this->session->userdata('usersessn');?> ( <?php if ($this->input->get('grp') == ''){echo 'ALL'; }else{ echo 'Group '.$this->input->get('grp');} ?> ) <?php if ($this->input->get('fon') == ''){echo ''; }else{ echo '(Freeze)';} ?></td>
 		<?php } else { ?>
 		<td colspan="5">PPM Work Order Summary ( <?= date("d-m-Y", strtotime($from)).' To '.date("d-m-Y", strtotime($to)); ?> ) - <?php echo $this->session->userdata('usersessn');?> ( <?php if ($this->input->get('grp') == ''){echo 'ALL'; }else{ echo 'Group '.$this->input->get('grp');} ?> ) <?php if ($this->input->get('fon') == ''){echo ''; }else{ echo '(Freeze)';} ?></td>
 		<?php } ?>
@@ -133,8 +169,7 @@ function barchart(a,b,c,d,e,f){
 			  <td><?= isset($total[0]->TND) == TRUE ? $total[0]->TND : '0'?></td>
 			  
 			  <?php } else { ?>
-				  <td><?php if (($ppmsum[0]->total + $reschout[0]->reschout == 0)) { echo "0"; } else {echo anchor('contentcontroller/report_vols?'.$a.'&'.$b.'&stat=total&resch=nt&btp=1&grp='.$this->input->get('grp').'&fon='.$this->input->get('fon'),$ppmsum[0]->total + $reschout[0]->reschout);} ?></td>
-				  <!--<td><?php if (($ppmsum[0]->total == 0)) { echo "0"; } else {echo anchor('contentcontroller/report_vols?'.$a.'&'.$b.'&stat=fbfb&resch=nt&grp=&btp=1'.$this->input->get('grp'),$ppmsum[0]->total);} ?></td>-->
+		      <td><?php if (($ppmsum[0]->total + $reschout[0]->reschout == 0)) { echo "0"; } else {echo anchor('contentcontroller/report_vols?'.$a.'&'.$b.'&stat=total&resch=nt&btp=1&grp='.$this->input->get('grp').'&fon='.$this->input->get('fon'),$ppmsum[0]->total + $reschout[0]->reschout);} ?></td>
 			  <td><?php if (($ppmsum[0]->comp == 0)) { echo "0"; } else {echo anchor('contentcontroller/report_vols?'.$a.'&'.$b.'&stat=A&resch=nt&btp=1&grp='.$this->input->get('grp').'&fon='.$this->input->get('fon'),$ppmsum[0]->comp);} ?></td>
 			  <td><?php if ($ppmsum[0]->resch == 0) { echo "0"; } else {echo anchor('contentcontroller/report_vols?'.$a.'&'.$b.'&stat=A&resch=ys&btp=1&grp='.$this->input->get('grp').'&fon='.$this->input->get('fon'),$ppmsum[0]->resch);} ?></td>
 			  <td><?php if (($reschout[0]->reschout == 0)) { echo "0"; } else {echo anchor('contentcontroller/report_vols?'.$a.'&'.$b.'&stat=E&resch=nt&btp=1&grp='.$this->input->get('grp').'&fon='.$this->input->get('fon'),$reschout[0]->reschout);} ?></td>

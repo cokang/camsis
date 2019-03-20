@@ -1,4 +1,16 @@
-<?php include 'pdf_head.php';?>	<html>
+<?php include 'pdf_head.php';?>
+<?php 
+$colspan='colspan="16"';
+$rowspan ="";
+
+
+if (($this->session->userdata('usersess')=='BES') && ($this->input->get('req') <> 'A9')) {
+$rowspan = 'rowspan="2"';
+$colspan='colspan="18"';
+//exit();	
+}
+?>
+	<html>
 	<head>
 	<style>
 	.rport-header{padding-bottom:10px;}
@@ -71,35 +83,44 @@
 	</table>
 	<table class="tftable" border="1" style="text-align:center; font-size:7px;" cellpadding="5" cellspacing="0">
 		<tr nobr="true">
-			<th style="width:19px;">No</th>
-			<th >Date Req</th>
-			<th>Time Req</th>
-			<th>Request No</th>
-			<th>Asset No</th>				
-			<th>Request Summary</th>
-			<th>ULC</th>
-			<th>Requestor<br>Name</th>
-			<th>Status</th>
-			<?php if ($this->input->get('stat') == 'A') {?>
-			<th>Completion<br>Date</th>
-			<th>Completion<br>Time</th>
-			<th>Closed<br>By</th>
-			<th>Duration<br>of Repair (Days)</th>
-			<th>Actual Work Done</th>
-			<?php  } else {?>
-			<th>Respond<br>Date</th>
-			<th>Respond<br>Time</th>
-			<th>Responded<br>By</th>
-			<th>Duration<br>of Repair (Days)</th>
-			<th>Respond Finding</th>
+			<th <?=$rowspan?> style="width:19px;">No</th>
+			<th <?=$rowspan?>>Date Req</th>
+			<th <?=$rowspan?>>Time Req</th>
+			<th <?=$rowspan?>>Request No</th>
+			<th <?=$rowspan?>>Asset No</th>				
+			<th <?=$rowspan?>>Request Summary</th>
+			<th <?=$rowspan?>>ULC</th>
+			<th <?=$rowspan?>>Requestor<br>Name</th>
+			<th <?=$rowspan?>>Status</th>
+			<?php if (($this->session->userdata('usersess')=='BES') && ($this->input->get('req') <> 'A9')) { ?>
+			<th <?=$display?> colspan="2">Test</th>
 			<?php } ?>
-			<th style="width:85px;">Dept/Loc</th>
+			<?php if ($this->input->get('stat') == 'A') {?>
+			<th <?=$rowspan?>>Completion<br>Date</th>
+			<th <?=$rowspan?>>Completion<br>Time</th>
+			<th <?=$rowspan?>>Closed<br>By</th>
+			<th <?=$rowspan?>>Duration<br>of Repair (Days)</th>
+			<th <?=$rowspan?>>Actual Work Done</th>
+			<?php  } else {?>
+			<th <?=$rowspan?>>Respond<br>Date</th>
+			<th <?=$rowspan?>>Respond<br>Time</th>
+			<th <?=$rowspan?>>Responded<br>By</th>
+			<th <?=$rowspan?>>Duration<br>of Repair (Days)</th>
+			<th <?=$rowspan?>>Respond Finding</th>
+			<?php } ?>
+			<th <?=$rowspan?> style="width:85px;">Dept/Loc</th>
 			<?php if ($this->input->get('broughtfwd') != '') { ?>
-			<th>Work Order Group</th>
+			<th <?=$rowspan?>>Work Order Group</th>
 			<?php } else { ?>
-			<th style="width:35px;">Asset Group</th>
+			<th <?=$rowspan?> style="width:35px;">Asset Group</th>
 			<?php } ?>
 		</tr>
+			<?php if (($this->session->userdata('usersess')=='BES') && ($this->input->get('req') <> 'A9')) { ?>
+		   <tr>
+			<th>S</th>
+			<th>P</th>
+		   </tr>
+			<?php } ?>
 		<?php  if (!empty($record)) {?>
 		<?php $numrow = 1; foreach($record as $row):?>
 			<?php echo ($numrow%2==0) ? '<tr class="ui-color-color-color" nobr="true">' : '<tr nobr="true">'; ?>
@@ -118,6 +139,10 @@
 			<td><?= ($row->v_location_code) ? $row->v_location_code : 'N/A' ?></td>
 			<td><?= ($row->V_requestor) ? $row->V_requestor : 'N/A' ?></td>
 			<td><?= ($row->V_request_status) ? $row->V_request_status : 'N/A' ?></td>
+				<?php if (($this->session->userdata('usersess')=='BES') && ($this->input->get('req') <> 'A9')) { ?>
+			<td><?= ($row->v_stest) ? $row->v_stest : 'N/A' ?></td>
+			<td><?= ($row->v_ptest) ? $row->v_ptest : 'N/A' ?></td>
+				<?php } ?>
 			<?php if ($this->input->get('stat') == 'A') {?>
 			<td><?= ($row->v_closeddate) ? date("d/m/Y",strtotime($row->v_closeddate)) : 'N/A' ?></td>
 			<td><?= ($row->v_closedtime) ? $row->v_closedtime : 'N/A' ?></td>
@@ -163,7 +188,7 @@
 		<?php endforeach;?>
 		<?php }else { ?>
 		<tr align="center" style="background:white; height:200px;">
-			<td colspan="15"><span style="color:red;">NO RECORDS FOUND FOR THIS WORK ORDER.</span></td>
+			<td <?=$colspan?>><span style="color:red;">NO RECORDS FOUND FOR THIS WORK ORDER.</span></td>
 		</tr>
 		<?php } ?>
 	</table>	

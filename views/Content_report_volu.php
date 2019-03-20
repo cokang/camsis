@@ -17,7 +17,16 @@ if ($this->input->get('ex') == 'excel'){
 
 $assetone = "0";
 $locationone = "0";
+$colspan="colspan='16'";
+$rowspan ="";
+$display="style='display:none;'";
 
+if (($this->session->userdata('usersess')=='BES') && ($this->input->get('req') <> 'A9')) {
+$rowspan = 'rowspan=2';
+$display = '';
+$colspan="colspan='18'";
+//exit();	
+} 
 ?>
 <?php $req = $this->input->get('req');?>
 <?php switch ($req) {
@@ -108,36 +117,40 @@ $locationone = "0";
 				</table>
 				<table class="tftable" border="1" style="text-align:center;"><!--filexcel-->
 					<tr>
-						<th>No</th>
-						<th >Date Req</th>
-						<th>Time Req</th>
-						<th>Request No</th>
-						<th>Asset No</th>
-						<th>Request Summary</th>
-						<th>ULC</th>
-						<th>Requestor<br>Name</th>
-						<th>Status</th>
+						<th <?=$rowspan?>>No</th>
+						<th <?=$rowspan?>>Date Req</th>
+						<th <?=$rowspan?>>Time Req</th>
+						<th <?=$rowspan?>>Request No</th>
+						<th <?=$rowspan?>>Asset No</th>
+						<th <?=$rowspan?>>Request Summary</th>
+						<th <?=$rowspan?>>ULC</th>
+						<th <?=$rowspan?>>Requestor<br>Name</th>
+						<th <?=$rowspan?>>Status</th>
+						<th <?=$display?> colspan=2>Test</th>
 						<?php if ($this->input->get('stat') == 'A') {?>
-						<th>Completion<br>Date</th>
-						<th>Completion<br>Time</th>
-						<th>Closed<br>By</th>
-						<th>Duration<br>of Repair (Days)</th>
-						<th>Actual Work Done</th>
+						<th <?=$rowspan?>>Completion<br>Date</th>
+						<th <?=$rowspan?>>Completion<br>Time</th>
+						<th <?=$rowspan?>>Closed<br>By</th>
+						<th <?=$rowspan?>>Duration<br>of Repair (Days)</th>
+						<th <?=$rowspan?>>Actual Work Done</th>
 						<?php  } else {?>
-						<th>Respond<br>Date</th>
-						<th>Respond<br>Time</th>
-						<th>Responded<br>By</th>
-						<th>Duration<br>of Repair (Days)</th>
-						<th>Respond Finding</th>
+						<th <?=$rowspan?>>Respond<br>Date</th>
+						<th <?=$rowspan?>>Respond<br>Time</th>
+						<th <?=$rowspan?>>Responded<br>By</th>
+						<th <?=$rowspan?>>Duration<br>of Repair (Days)</th>
+						<th <?=$rowspan?>>Respond Finding</th>
 						<?php } ?>
-						<th>Dept/Loc</th>
+						<th <?=$rowspan?>>Dept/Loc</th>
 						<?php if ($this->input->get('broughtfwd') != '') { ?>
-						<th>Work Order Group</th>
+						<th <?=$rowspan?>>Work Order Group</th>
 						<?php } else { ?>
-						<th>Asset Group</th>
+						<th <?=$rowspan?>>Asset Group</th>
 						<?php } ?>
 					</tr>
-
+                    <tr <?=$display?>>
+					<th>S</th>
+					<th>P</th>
+					</tr>
 					<?php  if (!empty($record)) {?>
 						<?php $numrow = 1; foreach($record as $row):?>
 							<?php echo ($numrow%2==0) ? '<tr class="ui-color-color-color">' : '<tr>'; ?>
@@ -155,6 +168,8 @@ $locationone = "0";
 								<td><?= ($row->v_location_code) ? $row->v_location_code : 'N/A' ?></td>
 								<td><?= ($row->V_requestor) ? $row->V_requestor : 'N/A' ?></td>
 								<td><?= ($row->V_request_status) ? $row->V_request_status : 'N/A' ?></td>
+								<td <?=$display?>><?= ($row->v_stest) ? $row->v_stest : 'N/A' ?></td>
+								<td <?=$display?>><?= ($row->v_ptest) ? $row->v_ptest : 'N/A' ?></td>
 								<?php if ($this->input->get('stat') == 'A') {?>
 									<td><?= ($row->v_closeddate) ? date("d/m/Y",strtotime($row->v_closeddate)) : 'N/A' ?></td>
 									<td><?= ($row->v_closedtime) ? $row->v_closedtime : 'N/A' ?></td>
@@ -204,189 +219,6 @@ $locationone = "0";
 					<?php } ?>
 				</table>
 			</div>
-		<?php } ?>
-
-
-
-
-		<?php  if (empty($record)) {?>
-			<?php if (($this->input->get('ex') == '') or ($this->input->get('none') == 'closed')){?>
-				<?php include 'content_headprint.php';?>
-			<?php } ?>
-
-			<?php if (($this->input->get('ex') == '' && $this->input->get('broughtfwd') == '') OR ($this->input->get('ex') != '' && $this->input->get('broughtfwd') != '')){?>
-				<div id="Instruction" >
-					<center>View List :
-						<form method="get" action="">
-							<?php
-							$idArray = array_map('toArray', $this->session->userdata('accessr'));
-							if (!(in_array("contentcontroller/Schedule(main)", $idArray))) {
-								if ($this->session->userdata('usersess')=="HKS") {
-									$req_type = array(
-										'' => 'All',
-										'A1' => 'A1 - Breakdown Maintenance (BM)',
-										//'A2' => 'A2 - Schedule Corrective Maintenance (SCM)',
-										'A3' => 'A3 - Corrective Maintenance (CM)',
-										'A4' => 'A4 - User Requests',
-										'A5' => 'A5 - Investigation of Incidences',
-										'A6' => 'A6 - Technical Advice',
-										'A7' => 'A7 - User Training',
-										'A8' => 'A8 - Testing and Commissioning (T&C)',
-										'A9' => 'A9 - Internal Request',
-										'A10' => 'A10 - Reimbursable Work',
-										'F' => 'Floor - Related Report',
-										'WD' => 'Wall / Door - Related Report',
-										'C' => 'Ceiling - Related Report',
-										'W' => 'Window - Related Report',
-										'FIX' => 'Fixtures - Related Report',
-										'FUR' => 'Furniture / Fitting - Related Report'
-									 );
-								} else {
-		 							$req_type = array(
-										'' => 'All',
-										'A1' => 'A1 - Breakdown Maintenance (BM)',
-										//'A2' => 'A2 - Schedule Corrective Maintenance (SCM)',
-										'A3' => 'A3 - Corrective Maintenance (CM)',
-										'A4' => 'A4 - User Requests',
-										'A5' => 'A5 - Investigation of Incidences',
-										'A6' => 'A6 - Technical Advice',
-										'A7' => 'A7 - User Training',
-										'A8' => 'A8 - Testing and Commissioning (T&C)',
-										'A9' => 'A9 - Internal Request',
-										'A10' => 'A10 - Reimbursable Work'
-									 );
-								}
-							 	if (strtoupper(substr($this->session->userdata('v_UserName'),0,4)) == "IIUM") {
-									unset($req_type['A9']);
-								}
-								/*
-								$req_type = array(
-								'' => 'All',
-								'A1' => 'A1 - Breakdown Maintenance (BM)',
-								'A2' => 'A2 - Schedule Corrective Maintenance (SCM)',
-								'A3' => 'A3 - Corrective Maintenance (CM)',
-								'A4' => 'A4 - User Requests',
-								'A5' => 'A5 - Investigation of Incidences',
-								'A6' => 'A6 - Technical Advice',
-								'A7' => 'A7 - User Training',
-								'A8' => 'A8 - Testing and Commissioning (T&C)',
-								'A9' => 'A9 - Internal Request',
-								'A10' => 'A10 - Reimbursable Work'
-							 );*/
-								?>
-								<?php echo form_dropdown('req', $req_type, set_value('req', $reqtype) , 'style="width: 300px;" id="cs_month"'); ?><br>
-
-							<?php  } else {
-								$_POST['req'] = '';
-							}
-							$month_list = array(
-								'01' => 'January',
-								'02' => 'February',
-								'03' => 'March',
-								'04' => 'April',
-								'05' => 'May',
-								'06' => 'June',
-								'07' => 'July',
-								'08' => 'August',
-								'09' => 'September',
-								'10' => 'October',
-								'11' => 'November',
-								'12' => 'December'
-							);
-							?>
-							<?php echo form_dropdown('m', $month_list, set_value('m', isset($record[0]->Month) ? $record[0]->Month : $month) , 'style="width: 90px;" id="cs_month"'); ?>
-
-							<?php
-							for ($dyear = '2015';$dyear <= date("Y");$dyear++){
-								$year_list[$dyear] = $dyear;
-							}
-							?>
-							<?php echo form_dropdown('y', $year_list, set_value('y', isset($record[0]->Year) ? $record[0]->Year : $year) , 'style="width: 65px;" id="cs_year"'); ?>
-							<input type="hidden" value="<?php echo set_value('stat', ($this->input->get('stat')) ? $this->input->get('stat') : ''); ?>" name="stat">
-							<input type="hidden" value="<?php echo set_value('grp', ($this->input->get('grp')) ? $this->input->get('grp') : ''); ?>" name="grp">
-							<input type="submit" value="Apply" onchange="javascript: submit()"/></center>
-						</form>
-					</center>
-				</div>
-			<?php } ?>
-			<div class="m-div">
-				<table class="rport-header">
-					<tr>
-						<?php if ($this->input->get('req') == $req) {?>
-						<td colspan="4" valign="top">
-							<?php if (($this->input->get('broughtfwd') != '')&&($req !='A10')){?>
-								Unscheduled Brought Forward Work Order Details
-							<?php } elseif (($this->input->get('broughtfwd') != '') && ($req == 'A10')){?>
-								Work Order A10 Summary Report
-							<?php }else{ ?>
-								Work Order Report Listing
-							<?php }?>- <?=date('F', mktime(0, 0, 0, $month, 10))?> <?=$year?> - <?php echo $this->session->userdata('usersessn');?>  ( <?php if (($this->input->get('req')) and (($this->input->get('grp') == '2') or ($this->input->get('grp') == '3'))){ echo 'Group'.$this->input->get('grp').','.$tulis; } elseif ($this->input->get('req')){echo $tulis; }elseif ($this->input->get('grp') == ''){ echo 'All';}else{ echo 'Group '.$this->input->get('grp');} ?> )</td>
-						<?php } ?>
-					</tr>
-				</table>
-				<?php if(empty($record)){?>
-				<table class="tftable" border="1" style="text-align:center;">
-					<tr>
-						<th>No</th>
-						<th>Date Req</th>
-						<th>Time Req</th>
-						<th>Request No</th>
-						<th>Asset No</th>
-						<th>Request Summary</th>
-						<th>ULC</th>
-						<th>Requestor<br>Name</th>
-						<th>Status</th>
-						<?php if ($this->input->get('stat') == 'A') {?>
-						<th>Completion<br>Date</th>
-						<th>Completion<br>Time</th>
-						<th>Closed<br>By</th>
-						<th>Duration<br>of Repair (Days)</th>
-						<th>Actual Work Done</th>
-						<?php  } else {?>
-						<th>Respond<br>Date</th>
-						<th>Respond<br>Time</th>
-						<th>Responded<br>By</th>
-						<th>Duration<br>of Repair (Days)</th>
-						<th>Respond Finding</th>
-						<?php } ?>
-						<th>Dept/Loc</th>
-						<?php if ($this->input->get('broughtfwd') != '') { ?>
-						<th>Work Order Group</th>
-						<?php } else { ?>
-						<th>Asset Group</th>
-						<?php } ?>
-					</tr>
-
-					<tr align="center" style="background:white; height:200px;">
-						<td colspan="16"><span style="color:red;">NO RECORDS FOUND FOR THIS WORK ORDER.</span></td>
-					</tr>
-				</table>
-				<?php } ?>
-			</div>
-
-			<?php if (($this->input->get('ex') == '') or ($this->input->get('none') == 'closed')){?>
-
-				<table width="99%" border="0">
-					<tr>
-						<td valign="top" colspan="2"><hr color="black" size="1Px"></td>
-					</tr>
-					<tr>
-						<td width="50%">
-							<?php if (($this->input->get('broughtfwd') != '')&&($req !='A10')){?>
-								Unscheduled Brought Forward Work Order Details
-							<?php } elseif (($this->input->get('broughtfwd') != '') && ($req == 'A10')){?>
-								Work Order A10 Summary Report
-							<?php }else{ ?>
-								Work Order Status Report
-							<?php }?><br><i>Computer Generated - CAMSIS</i></td>
-						<td width="50%" align="right"></td>
-					</tr>
-				</table>
-
-			<?php } ?>
-			<?php if (($this->input->get('ex') == '') or ($this->input->get('none') == 'closed')){?>
-				<?php include 'content_footerprint.php';?>
-			<?php } ?>
 		<?php } ?>
 
 
@@ -512,35 +344,40 @@ $locationone = "0";
 							</table>
 							<table class="tftable tbl-go" border="1" style="text-align:center;">
 								<tr>
-									<th>No</th>
-									<th <?php if($this->input->get('wid')== 1){ echo "style='width:30px;'";}?>>Date Req</th>
-									<th>Time Req</th>
-									<th>Request No</th>
-									<th>Asset No</th>
-									<th <?php if($this->input->get('wid')== 1){ echo "style='width:10%;'";}?>>Request Summary</th>
-									<th>ULC</th>
-									<th>Requestor<br>Name</th>
-									<th>Status</th>
+									<th <?=$rowspan?>>No</th>
+									<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:30px;'";}?>>Date Req</th>
+									<th <?=$rowspan?>>Time Req</th>
+									<th <?=$rowspan?>>Request No</th>
+									<th <?=$rowspan?>>Asset No</th>
+									<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:10%;'";}?>>Request Summary</th>
+									<th <?=$rowspan?>>ULC</th>
+									<th <?=$rowspan?>>Requestor<br>Name</th>
+									<th <?=$rowspan?>>Status</th>
+									<th <?=$display?> colspan=2>Test</th>
 									<?php if ($this->input->get('stat') == 'A') {?>
-										<th <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Completion<br>Date</th>
-										<th <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Completion<br>Time</th>
-										<th <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Closed<br>By</th>
-										<th <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Duration<br>of Repair (Days)</th>
-										<th <?php if($this->input->get('wid')== 1){ echo "style='width:10%;'";}?>>Actual Work Done</th>
+										<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Completion<br>Date</th>
+										<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Completion<br>Time</th>
+										<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Closed<br>By</th>
+										<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Duration<br>of Repair (Days)</th>
+										<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:10%;'";}?>>Actual Work Done</th>
 									<?php  } else {?>
-										<th <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Respond<br>Date</th>
-										<th <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Respond<br>Time</th>
-										<th <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Responded<br>By</th>
-										<th <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Duration<br>of Repair (Days)</th>
-										<th <?php if($this->input->get('wid')== 1){ echo "style='width:10%;'";}?>>Respond Finding</th>
+										<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Respond<br>Date</th>
+										<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Respond<br>Time</th>
+										<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Responded<br>By</th>
+										<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Duration<br>of Repair (Days)</th>
+										<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:10%;'";}?>>Respond Finding</th>
 									<?php } ?>
 
-									<th <?php if($this->input->get('wid')== 1){ echo "style='width:10%;'";}?>>Dept/Loc</th>
-									<th><?php if($this->input->get('wid')== 1){ echo "grp";}else{ if($this->input->get('broughtfwd') != ''){echo "Work Order Group";} else{echo "Asset Group";}}?></th>
+									<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:10%;'";}?>>Dept/Loc</th>
+									<th <?=$rowspan?>><?php if($this->input->get('wid')== 1){ echo "grp";}else{ if($this->input->get('broughtfwd') != ''){echo "Work Order Group";} else{echo "Asset Group";}}?></th>
 								</tr>
+								<tr <?=$display?>>
+					            <th>S</th>
+					            <th>P</th>
+					           </tr>
 					<?php } ?>
 
-		    					<?php echo ($numrow%2==0) ? '<tr class="ui-color-color-color">' : '<tr>'; ?>
+		    					<?php echo ($numrow%2==0) ? '<tr class="ui-color-color-color" style="page-break-inside:avoid; page-break-after:auto">' : '<tr style="page-break-inside:avoid; page-break-after:auto ">'; ?>
 
 									<td><?= $numrow ?></td>
 									<td><?= ($row->D_date) ?  date("d/m/Y",strtotime($row->D_date)) : 'N/A' ?></td>
@@ -556,6 +393,8 @@ $locationone = "0";
 									<td><?= ($row->v_location_code) ? $row->v_location_code : 'N/A' ?></td>
 									<td><?= ($row->V_requestor) ? $row->V_requestor : 'N/A' ?></td>
 									<td><?= ($row->V_request_status) ? $row->V_request_status : 'N/A' ?></td>
+									 <td <?=$display?>><?= ($row->v_stest) ? $row->v_stest : 'N/A' ?></td>
+								     <td <?=$display?>><?= ($row->v_ptest) ? $row->v_ptest : 'N/A' ?></td>
 									<?php if ($this->input->get('stat') == 'A') {?>
 										<td><?= ($row->v_closeddate) ? date("d/m/Y",strtotime($row->v_closeddate)) : 'N/A' ?></td>
 										<td><?= ($row->v_closedtime) ? $row->v_closedtime : 'N/A' ?></td>
@@ -747,33 +586,41 @@ $locationone = "0";
 						<div class="scrolltable1">
 							<table class="tftable tbl-go" border="1" style="text-align:center;">
 								<tr>
-									<th>No</th>
-									<th <?php if($this->input->get('wid')== 1){ echo "style='width:30px;'";}?>>Date Req</th>
-									<th>Time Req</th>
-									<th>Request No</th>
-									<th>Asset No</th>
-									<th <?php if($this->input->get('wid')== 1){ echo "style='width:10%;'";}?>>Request Summary</th>
-									<th>ULC</th>
-									<th>Requestor<br>Name</th>
-									<th>Status</th>
+									<th <?=$rowspan?>>No</th>
+									<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:30px;'";}?>>Date Req</th>
+									<th <?=$rowspan?>>Time Req</th>
+									<th <?=$rowspan?>>Request No</th>
+									<th <?=$rowspan?>>Asset No</th>
+									<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:10%;'";}?>>Request Summary</th>
+									<th <?=$rowspan?>>ULC</th>
+									<th <?=$rowspan?>>Requestor<br>Name</th>
+									<th <?=$rowspan?>>Status</th>
+									
+									<th <?=$display?> colspan=2>Test</th>
+								
 									<?php if ($this->input->get('stat') == 'A') {?>
-										<th <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Completion<br>Date</th>
-										<th <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Completion<br>Time</th>
-										<th <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Closed<br>By</th>
-										<th <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Duration<br>of Repair (Days)</th>
-										<th <?php if($this->input->get('wid')== 1){ echo "style='width:10%;'";}?>>Actual Work Done</th>
+										<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Completion<br>Date</th>
+										<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Completion<br>Time</th>
+										<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Closed<br>By</th>
+										<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Duration<br>of Repair (Days)</th>
+										<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:10%;'";}?>>Actual Work Done</th>
 									<?php  } else {?>
-										<th <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Respond<br>Date</th>
-										<th <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Respond<br>Time</th>
-										<th <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Responded<br>By</th>
-										<th <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Duration<br>of Repair (Days)</th>
-										<th <?php if($this->input->get('wid')== 1){ echo "style='width:10%;'";}?>>Respond Finding</th>
+										<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Respond<br>Date</th>
+										<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Respond<br>Time</th>
+										<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Responded<br>By</th>
+										<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Duration<br>of Repair (Days)</th>
+										<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:10%;'";}?>>Respond Finding</th>
 									<?php } ?>
 
-									<th <?php if($this->input->get('wid')== 1){ echo "style='width:10%;'";}?>>Dept/Loc</th>
-									<th><?php if($this->input->get('wid')== 1){ echo "grp";}else{ if($this->input->get('broughtfwd') != ''){echo "Work Order Group";} else{echo "Asset Group";}}?></th>
+									<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:10%;'";}?>>Dept/Loc</th>
+									<th <?=$rowspan?> ><?php if($this->input->get('wid')== 1){ echo "grp";}else{ if($this->input->get('broughtfwd') != ''){echo "Work Order Group";} else{echo "Asset Group";}}?></th>
 								</tr>
-
+							
+                          <tr <?=$display?>>
+					<th style="position: sticky; top: 22px;">S</th>
+					<th style="position: sticky; top: 22px;">P</th>
+					</tr>
+								<?php if($record){?>
 								<?php $numrow = 1; foreach($record as $row):?>
 				   					<tr>
 										<td><?= $numrow ?></td>
@@ -790,6 +637,10 @@ $locationone = "0";
 										<td><?= ($row->v_location_code) ? $row->v_location_code : 'N/A' ?></td>
 										<td><?= ($row->V_requestor) ? $row->V_requestor : 'N/A' ?></td>
 										<td><?= ($row->V_request_status) ? $row->V_request_status : 'N/A' ?></td>
+										
+									    <td <?=$display?>><?= ($row->v_stest) ? $row->v_stest : 'N/A' ?></td>
+								        <td <?=$display?>><?= ($row->v_ptest) ? $row->v_ptest : 'N/A' ?></td>
+									
 										<?php if ($this->input->get('stat') == 'A') {?>
 											<td><?= ($row->v_closeddate) ? date("d/m/Y",strtotime($row->v_closeddate)) : 'N/A' ?></td>
 											<td><?= ($row->v_closedtime) ? $row->v_closedtime : 'N/A' ?></td>
@@ -834,6 +685,14 @@ $locationone = "0";
 										<?php } ?>
 				        			</tr>
 								<?php $numrow++; endforeach;?>
+								
+			<?php } else {?>
+					<tr align="center" style="background:white; height:200px;">
+						<td <?=$colspan?>><span style="color:red;">NO RECORDS FOUND FOR THIS WORK ORDER.</span></td>
+					</tr>
+			
+				<?php } ?>
+								
 							</table>
 						</div>
 					</div>

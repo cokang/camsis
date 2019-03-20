@@ -14,7 +14,7 @@
 	</div>
 	<div class="content-workorder">
 		<table class="ui-content-middle-menu-workorder" border="0" height="" align="center">
-			<?php 
+			<?php
 			// $procument = $this->input->get('tab');
 			$procument = $mrintype;
 			if ($procument == 0) {
@@ -43,11 +43,11 @@
 			<tr class="ui-color-desk desk2">
 				<td colspan="4" class="t-header" style="color:black; height:40px; padding-left:10px;"><b><?= $tulis ?></b> <?=date('F', mktime(0, 0, 0, $month, 10))?> <?=$year?> </td>
 			</tr>
-			<tr class="ui-color-desk bg-red-blood"> 
+			<tr class="ui-color-desk bg-red-blood">
 				<td colspan="4">
 					<table width="100%" class="ui-content-middle-menu-desk">
 						<tr style="background:#B3130A;">
-							<td width="3%" height="30px">							
+							<td width="3%" height="30px">
 								<a href="?pro=mrin&tab=<?=($tab!='') ? $tab : $this->input->get('tab') ?>&y=<?= $year-1?>&m=<?= $month?>">
 									<img src="<?php echo base_url(); ?>images/arrow-left2.png" alt="" class="ui-img-icon"/>
 								</a>
@@ -86,6 +86,7 @@
 							<th >Status</th>
 							<th >Issue Date</th>
 							<th >Remark</th>
+							<th >Requestor</th>
 						</tr>
 						<style>
 							.ui-content-middle-menu-workorder2 tr th {padding:8px;font-size:14px;}
@@ -124,7 +125,7 @@
 								}else{
 									$r_status = $row->ApprStatusID;
 								}
-							?>   			
+							?>
 						<tr align="center" <?= ($numrow%2==0) ?  'class="ui-color-color-color"' :  '' ?> >
 							<td class="td-desk"><?=$numrow++?></td>
 							<td class="td-desk" style="text-align:left;">
@@ -139,7 +140,7 @@
 									<?php
 										$s_Proc = "";
 										if ($row->ApprStatusID == $stat->StatusID){
-											$s_AM = $stat->Status;	
+											$s_AM = $stat->Status;
 										}
 										if ($row->ApprStatusIDx == $stat->StatusID){
 											$s_Proc = $stat->Status;
@@ -156,7 +157,7 @@
 									?>
 									<?php if ($r_status == $stat->StatusID) { ?>
 							<td class="" align="left">
-								<a rel="nofollow" title="Manager : <?=$s_AM?> <?php if ($s_AM != "Pending") { ?> ON <?=isset($row->DateApproval) ? date("d/m/Y H:i:s",strtotime($row->DateApproval)) : ''?>  <?php } ?> &#13;Procument : <?=$s_Proc?> <?php if ($s_Proc != "Pending") { ?> ON <?=isset($row->DateApprovalx) ? date("d/m/Y H:i:s",strtotime($row->DateApprovalx)) : ''?> &#13; <?=isset($row->DateApprovalxx) ? date("d/m/Y H:i:s",strtotime($row->DateApprovalxx)) : ''?>  
+								<a rel="nofollow" title="Manager : <?=$s_AM?> <?php if ($s_AM != "Pending") { ?> ON <?=isset($row->DateApproval) ? date("d/m/Y H:i:s",strtotime($row->DateApproval)) : ''?>  <?php } ?> &#13;Procument : <?=$s_Proc?> <?php if ($s_Proc != "Pending") { ?> ON <?=isset($row->DateApprovalx) ? date("d/m/Y H:i:s",strtotime($row->DateApprovalx)) : ''?> &#13; <?=isset($row->DateApprovalxx) ? date("d/m/Y H:i:s",strtotime($row->DateApprovalxx)) : ''?>
 								<?php } ?>">
 									<span class="td-desk3">
 										Manager : <?=$s_AM?> <!-- <br>Procument : <?=$s_Proc?> -->
@@ -167,6 +168,7 @@
 								<?php } ?>
 							<td class="td-desk"><?=isset($row->DateCreated) ? date("d M Y",strtotime($row->DateCreated)) : ''?></td>
 							<td class="td-desk"><?=isset($row->Commentsx) ? $row->Commentsx : ''?></td>
+							<td class="td-desk"><?=isset($row->v_username) ? $row->v_username : ''?></td>
 						</tr>
 						<?php endforeach; ?>
 						<?php } else { ?>
@@ -221,7 +223,7 @@
 							</tr>
 							<tr <?=($rownum % 2) == 1 ? 'class="ui-color-color-color"' : 'class="tr_color"'?>>
 								<td>MRIN Reference No</td>
-								<td class="td-desk">: 
+								<td class="td-desk">:
 									<a href="<?php echo base_url();?>index.php/Procurement?mrinno=<?=$row->DocReferenceNo?>&pro=<?=$pro?>">
 										<?=isset($row->DocReferenceNo) ? $row->DocReferenceNo : ''?>
 									</a><b></b>
@@ -239,7 +241,7 @@
 									<?php
 										$s_Proc = "";
 										if ($row->ApprStatusID == $stat->StatusID){
-											$s_AM = $stat->Status;	
+											$s_AM = $stat->Status;
 										}
 										if ($row->ApprStatusIDx == $stat->StatusID){
 											$s_Proc = $stat->Status;
@@ -258,7 +260,7 @@
 							<tr <?=($rownum % 2) == 1 ? 'class="ui-color-color-color"' : 'class="tr_color"'?>>
 								<td>Status</td>
 								<td class="td-desk">
-									<a rel="nofollow" title="Manager : <?=$s_AM?> <?php if ($s_AM != "Pending") { ?> ON <?=isset($row->DateApproval) ? date("d/m/Y H:i:s",strtotime($row->DateApproval)) : ''?>  <?php } ?> &#13;Procument : <?=$s_Proc?> <?php if ($s_Proc != "Pending") { ?> ON <?=isset($row->DateApprovalx) ? date("d/m/Y H:i:s",strtotime($row->DateApprovalx)) : ''?> &#13; <?=isset($row->DateApprovalxx) ? date("d/m/Y H:i:s",strtotime($row->DateApprovalxx)) : ''?>  
+									<a rel="nofollow" title="Manager : <?=$s_AM?> <?php if ($s_AM != "Pending") { ?> ON <?=isset($row->DateApproval) ? date("d/m/Y H:i:s",strtotime($row->DateApproval)) : ''?>  <?php } ?> &#13;Procument : <?=$s_Proc?> <?php if ($s_Proc != "Pending") { ?> ON <?=isset($row->DateApprovalx) ? date("d/m/Y H:i:s",strtotime($row->DateApprovalx)) : ''?> &#13; <?=isset($row->DateApprovalxx) ? date("d/m/Y H:i:s",strtotime($row->DateApprovalxx)) : ''?>
 									<?php } ?>">
 										<span>
 											Manager : <?=$s_AM?> <!-- <br>Procument : <?=$s_Proc?> -->
@@ -276,6 +278,10 @@
 								<td>Remark</td>
 								<td class="td-desk">: <?=isset($row->Commentsx) ? $row->Commentsx : ''?></td>
 							</tr>
+							<tr <?=($rownum % 2) == 1 ? 'class="ui-color-color-color"' : 'class="tr_color"'?>>
+								<td>Requestor</td>
+								<td class="td-desk">: <?=isset($row->v_username) ? $row->v_username : ''?></td>
+							</tr>
 								<?php $rownum++;endforeach;?>
 							<?php }else{?>
 								<tr align="center" style="height:200px; background:white;">
@@ -284,13 +290,13 @@
 							<?php } ?>
 						</tbody>
 					</table>
-				</td>	
+				</td>
 			</tr>
 			<tr class="ui-header-new" style="height:5px;">
 				<td align="center" colspan="4">
 				</td>
 			</tr>
-		</table>	
+		</table>
 	</div>
 </div>
 </body>

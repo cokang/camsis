@@ -3,9 +3,9 @@
 		<?php include 'content_menu.php';?>
 		<div class="ui-left-screen">
 			<?php echo anchor ('contentcontroller/content/'.$this->session->userdata('usersess'), '<div align="center" class ="header-page"><img src="'.base_url().'images/camsis2.png" style="width:150px; height:60px;"/><br /><span style="font-size:7px; color:black;">CAMSIS is a copyright product of Advance Pact Sdn Bhd. All rights reserved.</span></div>'); ?>
-			<div class="color_style_1 menuprofile">
-				<span style="font-size:18px;  text-transform: uppercase; display:inline-block; height: 100%; width:70%; padding:5px;"><?php echo $this->session->userdata('fullname');?></span>
-				<span id="loginButton"><img src="<?php echo base_url().'uploadfile/'?><?php echo $this->session->userdata('p_picture');?>" style="display:block; float:left; width:20%;"  /></span>
+			<div align="center" class="ui-header-left-color" style="font-weight:bold; padding-bottom:5px; color:white; background-color: #FFE135 !important;">
+				<span style="font-size:18px;  text-transform: uppercase; display:inline-block; height: 100%; width:70%; padding:5px;margin-top:5px;"><?php echo $this->session->userdata('fullname');?></span>
+				<span id="loginButton"><img src="<?php echo base_url().'uploadfile/'?><?php echo $this->session->userdata('p_picture');?>" style="display:block; float:left; width: 15%;"/></span>
 				<div id="loginBox">                
 					<div id="loginForm">
 						<div id="body-class">
@@ -49,6 +49,33 @@
 				<?php include 'content_picture_assets.php';?>
 			</div>
 			<div align="center"> <?php echo anchor ('logincontroller/logout','<button type="submit" class="btn btn-primary" style="width: 100%;"><span style="color:white;">Logout</span></button>');?></div>
+
+
+			<?php if( $this->uri->slash_segment(1) .$this->uri->slash_segment(2) == "contentcontroller/qap4/" || $this->uri->slash_segment(1) .$this->uri->slash_segment(2) == "contentcontroller/qap4_/" ){ ?>
+			<div align="center" class="ui-header-left-color" style="padding-top:5px; padding-bottom:5px; color:black; margin-top: 6px;">
+				Overall QAP Performance Indicator
+			</div>
+			<div align="center" class="ui-header-left-color" style="padding-top:5px; padding-bottom:5px; color:black; background-color: #FFE135 !important;">
+				FES Indicator Summary
+			</div>
+			<div align="center" class="ui-header-left-color" style="padding-top:5px; padding-bottom:5px; color:black;">
+				FES Performance Indicator Analysis
+			</div>
+			<div align="center" class="ui-header-left-color" style="padding-top:5px; padding-bottom:5px; color:black; background-color: #FFE135 !important;">
+				BES Indicator Summary
+			</div>
+			<div align="center" class="ui-header-left-color" style="padding-top:5px; padding-bottom:5px; color:black;">
+				BES Performance Indicator Analysis
+			</div>
+			<div align="center" class="ui-header-left-color" style="padding-top:5px; padding-bottom:5px; color:black; background-color: #FFE135 !important;">
+				QAP Type Code List
+			</div>
+			<div align="center" class="ui-header-left-color" style="padding-top:5px; padding-bottom:5px; color:black;">
+				HKS % Acceptable Quality Cleaning
+			</div>
+			<?php } ?>
+
+
 		</div>
 		<div class="background3"></div>
 	</body>

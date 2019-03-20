@@ -16,6 +16,13 @@
 				<?php echo anchor ('contentcontroller/vo3', '<img src="'. base_url() .'images/VariationOrder.png" alt="" class="ui-icon"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Variation Order'); ?>
 				</td>
 			</tr>
+			<?php if ($this->session->userdata('v_UserName') == "nezam") {?>
+			<tr class="ui-content-color-style">
+				<td colspan="2">
+					<?php echo anchor ('contentcontroller/qap4', '<img src="'. base_url() .'images/Quality.png" alt="" class="ui-icon"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quality Assurance Program 2'); ?>
+				</td>
+			</tr>
+			<?php }?>
 			<!--<tr class="ui-content-color-style">
 				<td>
 				<a href="#"><img src="<?php echo base_url(); ?>images/SystemAdministration.png" alt="" class="ui-icon"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System Administration</a>
@@ -37,14 +44,14 @@
 			<tr class="ui-content-color-style">
 				<td>
 				<a href="#"><img src="<?php echo base_url(); ?>images/usersecurty.png" alt="" class="ui-icon"/>&nbsp;&nbsp;&nbsp;&nbsp;User Security</a>
-				</td>	
-				<td>&nbsp;</td>					
+				</td>
+				<td>&nbsp;</td>
 			</tr>-->
 			<tr class="ui-header-new" style="height:8px;">
 				<td align="center" colspan="4" class="footer-class">
 				</td>
 			</tr>
-		</table>		
+		</table>
 	</div>
 </div>
 </body>

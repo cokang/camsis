@@ -217,9 +217,15 @@ if ($this->input->get('ex') == 'excel'){
 					<tr>
 						<td><?=$numrow?></td>
 						<td><?=isset($row->D_date) ? date("d-m-Y",strtotime($row->D_date)) : 'N/A' ?></td>
-						<td><?=isset($row->D_time) ? $row->D_time : 'N/A' ?></td>
-						<td><?=($row->V_Request_no) ? anchor ('contentcontroller/AssetRegis?wrk_ord='.$row->V_Request_no.'&assetno='.$row->V_Asset_no.'&m='.date("m",strtotime($this->input->get('jobdate'))).'&y='.date("Y",strtotime($this->input->get('jobdate'))).'&stat='.$this->input->get('stat').'&resch=fbfb&state='.$this->input->get('state'),''.$row->V_Request_no.'' ) : 'N/A' ?></td>
+						<td><?=isset($row->D_time) ? $row->D_time : 'N/A' ?></td>				
+					 <?php if ($this->input->get('ex')=='') { ?>
+				      <td><?=($row->V_Request_no) ? anchor ('contentcontroller/AssetRegis?wrk_ord='.$row->V_Request_no.'&assetno='.$row->V_Asset_no.'&m='.date("m",strtotime($this->input->get('jobdate'))).'&y='.date("Y",strtotime($this->input->get('jobdate'))).'&stat='.$this->input->get('stat').'&resch=fbfb&state='.$this->input->get('state'),''.$row->V_Request_no.'' ) : 'N/A' ?></td>
 						<td><?=(($row->V_Asset_no) && $row->V_Asset_no != 'N/A') ? anchor ('contentcontroller/AssetRegis?tab=Maintenance&assetno='.$row->V_Asset_no.'&state='.$this->input->get('state'),''.$row->v_tag_no.'' ) : 'N/A' ?></td>
+						<?php }else{ ?>
+			            <td><?=($row->V_Request_no) ? $row->V_Request_no : 'N/A' ?></td>
+						<td><?=(($row->V_Asset_no) && $row->V_Asset_no != 'N/A') ? $row->v_tag_no : 'N/A' ?></td>
+						<?php } ?>
+						
 						<td><?= ($row->ReqSummary) ? $row->ReqSummary : 'N/A' ?></td>
 						<td><?= ($row->v_location_code) ? $row->v_location_code : 'N/A' ?></td>
 						<td><?= ($row->V_requestor) ? $row->V_requestor : 'N/A' ?></td>

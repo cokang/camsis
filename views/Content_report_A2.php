@@ -4,22 +4,22 @@ $x=$this->input->get('req');
 switch ($x) {
 	case "A2plan":
 		$tulis = "Schedule Corrective Maintenance (SCM) Plan";
-		$tulis2= ' - '.date('F', mktime(0, 0, 0, $month, 10)).'&nbsp'.$year.' - FACILITY ENGINEERING SERVICES';
+		$tulis2= ' - '.date('F', mktime(0, 0, 0, $month, 10)).'&nbsp'.$year.' - '.$this->session->userdata('usersessn');
 		$tulis3='';
 		break;
 	case "A2com":
 		$tulis = "Schedule Corrective Maintenance (SCM) Completed";
-		$tulis2= ' - '.date('F', mktime(0, 0, 0, $month, 10)).'&nbsp'.$year.' - FACILITY ENGINEERING SERVICES';
+		$tulis2= ' - '.date('F', mktime(0, 0, 0, $month, 10)).'&nbsp'.$year.' - '.$this->session->userdata('usersessn');
 		$tulis3='';
 		break;
 	case "A2out":
 		$tulis = "Schedule Corrective Maintenance (SCM) Outstanding";
-		$tulis2= ' - '.date('F', mktime(0, 0, 0, $month, 10)).'&nbsp'.$year.' - FACILITY ENGINEERING SERVICES';
+		$tulis2= ' - '.date('F', mktime(0, 0, 0, $month, 10)).'&nbsp'.$year.' - '.$this->session->userdata('usersessn');
 		$tulis3='';
 		break;
 	default:
 		$tulis = "Schedule Corrective Maintenance (SCM) Listing";
-        $tulis2 = ' - '.date('F', mktime(0, 0, 0, $month, 10)).'&nbsp'.$year.' - FACILITY ENGINEERING SERVICES ( A2 - Schedule Corrective Maintenance (SCM) )'; 
+        $tulis2 = ' - '.date('F', mktime(0, 0, 0, $month, 10)).'&nbsp'.$year.' - '.$this->session->userdata('usersessn').' ( A2 - Schedule Corrective Maintenance (SCM) )'; 
 	    $tulis3 = 'Schedule Corrective Maintenance (SCM) Listing Work Order Status Report';
 		break;
 }

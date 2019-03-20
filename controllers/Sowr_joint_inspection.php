@@ -10,29 +10,29 @@ class sowr_joint_inspection extends CI_Controller {
 	                //$this->load->model('test_ler');
 	//echo 'ade3';
 			$this->load->library('session');
-	//echo 'ade4';	
+	//echo 'ade4';
 			$this->is_logged_in();
 	//echo 'ade5';
-		
-		
+
+
 	}
-	
+
 		function is_logged_in()
 	{
-		
+
 		$is_logged_in = $this->session->userdata('v_UserName');
-		
+
 		if(!isset($is_logged_in) || $is_logged_in !=TRUE)
 		redirect('LoginController/index');
 	}
 	public function index(){
    		$this->load->model("get_model");
-		$data['dept'] = $this->get_model->get_poploclistb();
+		$data['dept'] = $this->get_model->get_poploclistb('taknak');
 		//$data['schbi_weekly'] = $this->get_model->get_schbi_weekly('WGS2');
 		//print_r($data['schbi_weekly']);
 		$data['count'] = count($data['dept']);
-	  	$data['tabber'] = ($this->input->get('work-a') <> 0) ? $this->input->get('work-a') : '0';	
-		$data['year']= ($this->input->get('y') <> 0) ? $this->input->get('y') : date("Y");	
+	  	$data['tabber'] = ($this->input->get('work-a') <> 0) ? $this->input->get('work-a') : '0';
+		$data['year']= ($this->input->get('y') <> 0) ? $this->input->get('y') : date("Y");
 		$data['month']= ($this->input->get('m') <> 0) ? sprintf("%02d", $this->input->get('m')) : date("m");
 
 		$data['SWRJI'] = $this->get_model->SWRJI_period();
@@ -48,20 +48,20 @@ class sowr_joint_inspection extends CI_Controller {
     								   );
     	}
 		foreach ($data['dept'] as $key => $d){
-		
+
     	 $schbi_weekly = $this->get_model->get_schbi_weekly($d->v_UserDeptCode,$data['month'],$data['year']);
-		
+
 		 $data['dept'][$key]->week_2 = isset($schbi_weekly[0]->week_2) ? $schbi_weekly[0]->week_2 : '' ;
 		 $data['dept'][$key]->week_4 = isset($schbi_weekly[0]->week_4) ? $schbi_weekly[0]->week_4 : '' ;
 		 //$data['dept'][$key]->schdddate = 'dasdd';
     	}
 
-	
+
 	/* 	 if (($data['month'] == date('m')) AND ($data['year'] == date('Y'))) {
         isset($_GET['jobdate']) ? $data['job_D'] = $_GET['jobdate'] : $data['job_D'] = date("Y-m-d");
         }
         else {
-        isset($_GET['jobdate']) ? $data['job_D'] = $_GET['jobdate'] : $data['job_D'] = date("Y-m-d",strtotime($data['year'].'-'.$data['month'].'-01'));    
+        isset($_GET['jobdate']) ? $data['job_D'] = $_GET['jobdate'] : $data['job_D'] = date("Y-m-d",strtotime($data['year'].'-'.$data['month'].'-01'));
         } */
 	    //echo "<pre>";
         //print_r($data['dept']);
@@ -70,7 +70,7 @@ class sowr_joint_inspection extends CI_Controller {
     		$beginday = date('Y-m-d',strtotime($schdata['Duration_start_date']));
     		$lastday  = isset($schdata['Duration_end_date']) ? date('Y-m-d',strtotime($schdata['Duration_end_date'])) : NULL;
     		$begin = strtotime($beginday);
-    			
+
     		$lastday = is_null($lastday) ? date("Y-m-t", strtotime($data['year'].'-'.$data['month'].'-01')) : $lastday;
 			$end   = strtotime($lastday);
 			$begining = strtotime(date('Y',$begin).'-'.date('m',$begin).'-01');
@@ -121,7 +121,7 @@ class sowr_joint_inspection extends CI_Controller {
 		}
     	}
 
-  
+
 		$this ->load->view("headprinter");
 		$this ->load->view("content_sowr_joint_inspection", $data);
    	}

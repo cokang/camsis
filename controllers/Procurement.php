@@ -914,6 +914,7 @@ class Procurement extends CI_Controller {
 			if( isset($_POST["dateto"]) && $_POST["dateto"]!="" ){
 				$dateto = $this->input->post("dateto");
 			}
+			echo "siteee : " . $area;
 			$data["data_item_specification"] = $this->display_model->releaseNote_get_itemspecification($area,$datefrom, $dateto)['table'];
 
 			if($_SERVER['REQUEST_METHOD'] === 'POST' && $this->form_validation->run() == false){
@@ -940,6 +941,7 @@ class Procurement extends CI_Controller {
 					$dateto = $this->input->post("dateto");
 				} */
 		        $area = $this->input->post("area");
+						echo "siteee2 : " . $area;
 				$data["data_item_specification"] = $this->display_model->releaseNote_get_itemspecification($area,$datefrom, $dateto)['table'];
 				$this ->load->view("Content_Release_note_newedit",$data);
 			}else{

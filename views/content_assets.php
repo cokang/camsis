@@ -17,7 +17,7 @@ function fToggle(elementId) {
     $(e).slideToggle('slow');
     $('span.icon[id="l-'+id+'"]').toggleClass("icon-plus icon-minus");
   }
-};           
+};
 </script>
 <div class="ui-middle-screen">
 	<?php include 'content_tab_assets.php';?>
@@ -34,27 +34,27 @@ function fToggle(elementId) {
 			?>
 			<tr class="ui-color-contents-style-1">
 				<td colspan="3" class="assets-headear">Asset Catalog By Equipment Name <div class="sk_ttol">( Total of <?=$sum?> asset/s from <?=$sumx?> type/s of equipment )</div></td>
-			</tr>			
+			</tr>
 			<?php $numrow=1; foreach($asset_cat as $row):?>
-			        			
+
 	    	<tr class="asset-ajax item">
 				<td colspan="3">
-				<div class="asset1"> 
+				<div class="asset1">
 					<span class='icon icon-plus' id="l-<?=$row->V_Equip_code?>"></span>
 				</div>
 				<div class="asset2">
 				<a href="javascript:void(0);" onclick="javascript:fToggle('<?=$row->V_Equip_code?>');"><b><?=strtoupper($row->V_Asset_name)?></b></a>&nbsp;&nbsp;&nbsp;<?=$row->V_Equip_code?>&nbsp;&nbsp;&nbsp;<span class="FieldLabel">(<?=$row->aTotal?>)</span>
 				</div>
-				</td>				
+				</td>
 			</tr>
 			<tr class="asset-ajax item">
 				<td colspan="3">
 					<div id="<?=$row->V_Equip_code?>" class="asst<?=$row->V_Equip_code?>" style="display: none; margin-left:20px; width:98%;"></div>
 				</td>
-			</tr>	
-			<?php $numrow++ ?>			
+			</tr>
+			<?php $numrow++ ?>
     		<?php endforeach;?>
-			
+
 			<tr class="ui-header-new" style="height:5px;">
 				<td align="center" colspan="4">
 				<?php if (isset($next)): ?>
@@ -63,10 +63,10 @@ function fToggle(elementId) {
 					</div>
 			<?php endif?>
 				</td>
-			</tr>					
+			</tr>
 		</table>
 		</div>
-	</div>		
+	</div>
 </div>
 
 <script language="javascript" type="text/javascript">
@@ -74,10 +74,10 @@ function fToggle(elementId) {
 		var e = document.getElementById(elementId);
 		if ( !e.style.display || e.style.display != "none" ) {
 			e.style.display = "none";
-			 
+
 		} else {
 			e.style.display = "block";
-			
+
 		}
 	}
 </script>

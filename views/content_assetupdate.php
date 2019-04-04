@@ -23,7 +23,7 @@
 						</tr>
 						<tr >
 							<td class="ui-desk-style-table">
-								<table class="ui-content-form" width="100%" border="0">	
+								<table class="ui-content-form" width="100%" border="0">
 									<tr>
 										<td class="td-assest ">Registration Date&nbsp;: </td>
 										<td><?= ($asset_det[0]->D_Register_date) ? ($asset_det[0]->D_Register_date != '0000-00-00 00:00:00' ? date("d-m-Y",strtotime($asset_det[0]->D_Register_date)) : '-' ) : 'N/A' ?></td>
@@ -56,7 +56,7 @@
 										<td class="td-assest">Group: </td>
 										<td><?=$asset_UMDNS[0]->Asset_Group?></td>
 									</tr>
-									
+
 									<tr>
 										<td colspan="2" class="ui-bottom-border-color" style="font-weight: bold;">UMDNS Classification</td>
 									</tr>
@@ -64,17 +64,17 @@
 										<td class="td-assest">Asset Type: </td>
 										<td><?=$asset_UMDNS[0]->Asset_Type?></td>
 									</tr>
-									
+
 									<tr style="height:20px;">
 										<td class="td-assest">Description: </td>
 										<td><?=$asset_UMDNS[0]->Type_Desc?></td>
-									</tr>																												
+									</tr>
 								</table>
 							</td>
 						</tr>
 					</table>
 				</div>
-				
+
 				<div class="middle_d">
 					<table width="100%" class="ui-content-form-reg" style="">
 						<tr class="ui-color-contents-style-1" height="30px">
@@ -87,11 +87,11 @@
 						</tr>
 						<tr >
 							<td class="ui-desk-style-table">
-								<table class="ui-content-form" width="100%" border="0">	
+								<table class="ui-content-form" width="100%" border="0">
 									<tr>
 										<td class="td-assest">General Comments: </td>
 										<td><?=$asset_det[0]->V_Misc_details?></td>
-									</tr>					
+									</tr>
 								</table>
 							</td>
 						</tr>
@@ -110,7 +110,7 @@
 						</tr>
 						<tr >
 							<td class="ui-desk-style-table">
-								<table class="ui-content-form" width="100%" border="0">	
+								<table class="ui-content-form" width="100%" border="0">
 									<tr>
 										<td class="td-assest">Supplier&nbsp;: </td>
 										<td class="FieldValue"><?=$asset_det[0]->V_Vendor_code?>&nbsp;<?=$asset_det[0]->v_vendorname?></td>
@@ -118,7 +118,7 @@
 									<tr>
 										<td class="td-assest">3rd Party Service Provider&nbsp;: </td>
 										<td><?=$asset_det[0]->V_Agent?></td>
-									</tr>									
+									</tr>
 									<tr>
 										<td class="td-assest">File Reference&nbsp;: </td>
 										<td><?=$asset_det[0]->V_File_Ref_no?></td>
@@ -134,7 +134,7 @@
 									<tr>
 										<td class="td-assest">Purchase Date&nbsp;: </td>
 										<td><?=date('d-m-Y',strtotime($asset_det[0]->V_PO_date))?></td>
-									</tr>																							
+									</tr>
 								</table>
 							</td>
 						</tr>
@@ -155,7 +155,7 @@
 						</tr>
 						<tr >
 							<td class="ui-desk-style-table">
-								<table class="ui-content-form" width="100%" border="0">	
+								<table class="ui-content-form" width="100%" border="0">
 									<tr>
 										<td class="td-assest">Make (Country of Origin)&nbsp;: </td>
 										<td><?=$asset_det[0]->V_Make?></td>
@@ -199,7 +199,7 @@
 									<tr>
 										<td class="td-assest">Procedure Code&nbsp;: </td>
 										<td><?=$asset_det[0]->V_Procedure_code?></td>
-									</tr>																															
+									</tr>
 								</table>
 							</td>
 						</tr>
@@ -217,7 +217,7 @@
 						</tr>
 						<tr >
 							<td class="ui-desk-style-table">
-								<table class="ui-content-form" width="100%" border="0">	
+								<table class="ui-content-form" width="100%" border="0">
 									<tr>
 										<td class="td-assest">T & C Request Number&nbsp;: </td>
 										<td><a href="wo-item-a12.asp?id="><b><?=$asset_det[0]->v_tc_request_no?></b></a></td>
@@ -228,7 +228,7 @@
 									</tr>
 									<tr>
 										<td class="td-assest" valign="top">Warranty End Date&nbsp;: </td>
-										<?php if (strtotime($asset_det[0]->V_Wrn_end_code) > strtotime(date("d/m/Y"))){?>
+										<?php echo strtotime($asset_det[0]->V_Wrn_end_code)."lalalala".strtotime(date("Y-m-d")); if (strtotime($asset_det[0]->V_Wrn_end_code) > strtotime(date("Y-m-d"))){?>
 										<td>
 											<span style="color:#00FF00;">
 												<?= ($asset_det[0]->V_Wrn_end_code) ? ($asset_det[0]->V_Wrn_end_code != '0000-00-00 00:00:00' ? date("d-m-Y",strtotime($asset_det[0]->V_Wrn_end_code)) : '-' ) : 'N/A' ?>
@@ -257,7 +257,7 @@
 									<tr>
 										<td class="td-assest">Asset Workgroup Code&nbsp;: </td>
 										<td><?=$asset_det[0]->V_Asset_WG_code?></td>
-									</tr>																							
+									</tr>
 								</table>
 							</td>
 						</tr>
@@ -277,7 +277,7 @@
 						</tr>
 						<tr >
 							<td class="ui-desk-style-table">
-								<table class="ui-content-form" width="100%" border="0">	
+								<table class="ui-content-form" width="100%" border="0">
 									<tr>
 										<td class="td-assest">Criticality&nbsp;:  </td>
 										<td><?=$asset_det[0]->v_Criticality?></td>
@@ -316,7 +316,7 @@
 									<tr style="height:20px;">
 										<td class="td-assest">Date&nbsp;:  </td>
 										<td><?=$asset_det[0]->d_LocDate?></td>
-									</tr>	
+									</tr>
 									<tr style="height:20px;">
 										<td class="theadap" align="left" colspan="2">
 											<table style="color:black; font-size:14px;">
@@ -359,11 +359,11 @@
 												</tr>
 											</table>
 										</td>
-									</tr>	
+									</tr>
 									<tr><td colspan="3" class="ui-bottom-border-color" style="font-weight: bold;">Checklist</td></tr>
 									<tr >
 										<td class="ui-desk-style-table" colspan="3">
-											<table class="ui-content-form" width="100%" border="0">	
+											<table class="ui-content-form" width="100%" border="0">
 												<tr style="height:20px;">
 													<td class="td-assest">Checklist Description: </td>
 													<td><?=isset($asset_chklist[0]->checklistDescription) == TRUE ? $asset_chklist[0]->checklistDescription : 'N/A' ?></td>
@@ -403,10 +403,10 @@
 												<tr style="height:20px;">
 													<td class="td-assest"s>Model: </td>
 													<td><?=isset($asset_chklist[0]->model) == TRUE ? $asset_chklist[0]->model : 'N/A' ?></td>
-												</tr>																							
+												</tr>
 											</table>
 										</td>
-									</tr>												
+									</tr>
 								</table>
 							</td>
 						</tr>

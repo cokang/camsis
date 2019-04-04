@@ -178,6 +178,7 @@ console.log(json);
       trHTML +='</tr>';
 	  }
       trHTML +='<tr><td colspan="3" class="ui-bottom-border-color" style="font-weight: bold;"></td></tr>';
+      trHTML +='<tr><td width="15%"></td><td style="font-weight: bold; width:30%; text-align:right;">Updated By:</td><td width="20%">'+json['takenby'][elementId]+'</tr>';
       i++;
        }
       }

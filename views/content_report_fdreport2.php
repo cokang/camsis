@@ -102,6 +102,7 @@ if ($this->input->get('ex') == 'excel'){
 							<th <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Completion<br>Date</th>
 							<th <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Completion<br>Time</th>
 							<th <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Closed<br>By</th>
+							<th <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Acceptance By<br>By</th>
 							<th <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Duration<br>of Repair (Days)</th>
 							<th <?php if($this->input->get('wid')== 1){ echo "style='width:10%;'";}?>>Actual Work Done</th>
 						<?php  } else {?>
@@ -131,6 +132,7 @@ if ($this->input->get('ex') == 'excel'){
 							<td><?= ($row->v_closeddate) ? date("d/m/Y",strtotime($row->v_closeddate)) : 'N/A' ?></td>
 							<td><?= ($row->v_closedtime) ? $row->v_closedtime : 'N/A' ?></td>
 							<td><?= ($row->closedby) ? $row->closedby : 'N/A' ?></td>
+							<td><?= ($row->v_AcceptedBy) ? $row->v_AcceptedBy : 'N/A' ?></td>
 							<td><?= (($row->V_request_type == "A10") || ($row->V_request_type == "A3") || ($row->v_tag_no == $assetone)) ? '0' : $row->DiffDate ?></td>
 							<td><?= ($row->v_summary) ? $row->v_summary : 'N/A' ?></td>
 						<?php } else { ?>
@@ -198,6 +200,7 @@ if ($this->input->get('ex') == 'excel'){
 							<th <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Completion<br>Date</th>
 							<th <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Completion<br>Time</th>
 							<th <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Closed<br>By</th>
+							<th <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Acceptance<br>By</th>
 							<th <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Duration<br>of Repair (Days)</th>
 							<th <?php if($this->input->get('wid')== 1){ echo "style='width:10%;'";}?>>Actual Work Done</th>
 						<?php  } else {?>
@@ -217,7 +220,7 @@ if ($this->input->get('ex') == 'excel'){
 					<tr>
 						<td><?=$numrow?></td>
 						<td><?=isset($row->D_date) ? date("d-m-Y",strtotime($row->D_date)) : 'N/A' ?></td>
-						<td><?=isset($row->D_time) ? $row->D_time : 'N/A' ?></td>				
+						<td><?=isset($row->D_time) ? $row->D_time : 'N/A' ?></td>
 					 <?php if ($this->input->get('ex')=='') { ?>
 				      <td><?=($row->V_Request_no) ? anchor ('contentcontroller/AssetRegis?wrk_ord='.$row->V_Request_no.'&assetno='.$row->V_Asset_no.'&m='.date("m",strtotime($this->input->get('jobdate'))).'&y='.date("Y",strtotime($this->input->get('jobdate'))).'&stat='.$this->input->get('stat').'&resch=fbfb&state='.$this->input->get('state'),''.$row->V_Request_no.'' ) : 'N/A' ?></td>
 						<td><?=(($row->V_Asset_no) && $row->V_Asset_no != 'N/A') ? anchor ('contentcontroller/AssetRegis?tab=Maintenance&assetno='.$row->V_Asset_no.'&state='.$this->input->get('state'),''.$row->v_tag_no.'' ) : 'N/A' ?></td>
@@ -225,7 +228,7 @@ if ($this->input->get('ex') == 'excel'){
 			            <td><?=($row->V_Request_no) ? $row->V_Request_no : 'N/A' ?></td>
 						<td><?=(($row->V_Asset_no) && $row->V_Asset_no != 'N/A') ? $row->v_tag_no : 'N/A' ?></td>
 						<?php } ?>
-						
+
 						<td><?= ($row->ReqSummary) ? $row->ReqSummary : 'N/A' ?></td>
 						<td><?= ($row->v_location_code) ? $row->v_location_code : 'N/A' ?></td>
 						<td><?= ($row->V_requestor) ? $row->V_requestor : 'N/A' ?></td>
@@ -234,6 +237,7 @@ if ($this->input->get('ex') == 'excel'){
 							<td><?= ($row->v_closeddate) ? date("d/m/Y",strtotime($row->v_closeddate)) : 'N/A' ?></td>
 							<td><?= ($row->v_closedtime) ? $row->v_closedtime : 'N/A' ?></td>
 							<td><?= ($row->closedby) ? $row->closedby : 'N/A' ?></td>
+							<td><?= ($row->v_AcceptedBy) ? $row->v_AcceptedBy : 'N/A' ?></td>
 							<td><?= (($row->V_request_type == "A10") || ($row->V_request_type == "A3") || ($row->v_tag_no == $assetone)) ? '0' : $row->DiffDate ?></td>
 							<td><?= ($row->v_summary) ? $row->v_summary : 'N/A' ?></td>
 						<?php } else { ?>

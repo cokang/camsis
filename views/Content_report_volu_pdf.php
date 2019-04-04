@@ -1,5 +1,5 @@
 <?php include 'pdf_head.php';?>
-<?php 
+<?php
 $colspan='colspan="16"';
 $rowspan ="";
 
@@ -7,7 +7,7 @@ $rowspan ="";
 if (($this->session->userdata('usersess')=='BES') && ($this->input->get('req') <> 'A9')) {
 $rowspan = 'rowspan="2"';
 $colspan='colspan="18"';
-//exit();	
+//exit();
 }
 ?>
 	<html>
@@ -52,7 +52,7 @@ $colspan='colspan="18"';
 				break;
 			case "F":
 				$tulis = "Floor - Related Report";
-				break;	
+				break;
 			case "WD":
 				$tulis = "Wall / Door - Related Report";
 				break;
@@ -61,15 +61,15 @@ $colspan='colspan="18"';
 				break;
 			case "W":
 				$tulis = "Window - Related Report";
-				break;	
+				break;
 			case "FIX":
 				$tulis = "Fixtures - Related Report";
 				break;
 			case "FUR":
 				$tulis = "Furniture / Fitting - Related Report";
-				break;					
+				break;
 			default:
-				$tulis = "All";	
+				$tulis = "All";
 				break;
 			} ?>
 <table class="rport-header">
@@ -87,7 +87,7 @@ $colspan='colspan="18"';
 			<th <?=$rowspan?>>Date Req</th>
 			<th <?=$rowspan?>>Time Req</th>
 			<th <?=$rowspan?>>Request No</th>
-			<th <?=$rowspan?>>Asset No</th>				
+			<th <?=$rowspan?>>Asset No</th>
 			<th <?=$rowspan?>>Request Summary</th>
 			<th <?=$rowspan?>>ULC</th>
 			<th <?=$rowspan?>>Requestor<br>Name</th>
@@ -99,6 +99,7 @@ $colspan='colspan="18"';
 			<th <?=$rowspan?>>Completion<br>Date</th>
 			<th <?=$rowspan?>>Completion<br>Time</th>
 			<th <?=$rowspan?>>Closed<br>By</th>
+			<th <?=$rowspan?>>Acceptance By</th>
 			<th <?=$rowspan?>>Duration<br>of Repair (Days)</th>
 			<th <?=$rowspan?>>Actual Work Done</th>
 			<?php  } else {?>
@@ -130,7 +131,7 @@ $colspan='colspan="18"';
 			<td><?= ($row->D_time) ? $row->D_time : 'N/A' ?></td>
 			<?php if  ($this->input->get('ex') != 'excel'){ ?>
 			<td><?=($row->V_Request_no) ? anchor ('contentcontroller/AssetRegis?wrk_ord='.$row->V_Request_no.'&assetno='.$row->V_Asset_no.'&m='.$this->input->get('m').'&y='.$this->input->get('y').'&stat='.$this->input->get('stat').'&resch=fbfb&state='.$this->input->get('state'),''.$row->V_Request_no.'' ) : 'N/A' ?></td>
-			<td><?=(($row->V_Asset_no) && $row->V_Asset_no != 'N/A') ? anchor ('contentcontroller/AssetRegis?tab=Maintenance&assetno='.$row->V_Asset_no.'&state='.$this->input->get('state'),''.$row->v_tag_no.'' ) : 'N/A' ?></td>			
+			<td><?=(($row->V_Asset_no) && $row->V_Asset_no != 'N/A') ? anchor ('contentcontroller/AssetRegis?tab=Maintenance&assetno='.$row->V_Asset_no.'&state='.$this->input->get('state'),''.$row->v_tag_no.'' ) : 'N/A' ?></td>
 			<?php }else{ ?>
 			<td> <?=isset($row->V_Request_no) ? $row->V_Request_no : ''?></td>
 			<td> <?=isset($row->v_tag_no) ? $row->v_tag_no : ''?></td>
@@ -147,6 +148,7 @@ $colspan='colspan="18"';
 			<td><?= ($row->v_closeddate) ? date("d/m/Y",strtotime($row->v_closeddate)) : 'N/A' ?></td>
 			<td><?= ($row->v_closedtime) ? $row->v_closedtime : 'N/A' ?></td>
 			<td><?= ($row->closedby) ? $row->closedby : 'N/A' ?></td>
+			<td><?= ($row->v_AcceptedBy) ? $row->v_AcceptedBy : 'N/A' ?></td>
 
 			<?php if (($this->input->get('broughtfwd') != '') && ($row->v_tag_no != $assetone) && ($row->V_request_type != "A34") && ($row->V_request_type != "A10") && ($row->linker == "none")){ ?>
 			<!--<td><?=$row->DiffDate?></td>-->
@@ -156,7 +158,7 @@ $colspan='colspan="18"';
 			<?php } ?>
 
 					<?php  if (($row->v_tag_no) && $row->v_tag_no != 'N/A') {$assetone = $row->v_tag_no;} else {$assetone = $numrow;}
-						if (($row->v_location_code) && $row->v_location_code != 'N/A') {$locationone = $row->v_location_code;} else {$locationone = $numrow;}					
+						if (($row->v_location_code) && $row->v_location_code != 'N/A') {$locationone = $row->v_location_code;} else {$locationone = $numrow;}
 					?>
 
 			<td><?= ($row->v_summary) ? $row->v_summary : 'N/A' ?></td>
@@ -171,7 +173,7 @@ $colspan='colspan="18"';
 			<?php } else { ?>
 			<td><?= (($row->V_request_type == "A10") || ($row->V_request_type == "A34") || ($row->v_tag_no == $assetone) || ($row->v_location_code == $locationone) || ($row->linker != "none")) ? '0' : $row->DiffDate ?></td>
 			<?php } ?>
-			
+
 			<?php  if (($row->v_tag_no) && $row->v_tag_no != 'N/A') {$assetone = $row->v_tag_no;} else {$assetone = $numrow;}
 						 if (($row->v_location_code) && $row->v_location_code != 'N/A') {$locationone = $row->v_location_code;} else {$locationone = $numrow;}
 			?>
@@ -183,7 +185,7 @@ $colspan='colspan="18"';
 			<?php } else { ?>
 			<td><?= ($row->v_asset_grp) ? $row->v_asset_grp : 'N/A' ?></td>
 			<?php } ?>
-		</tr>	
+		</tr>
 		<?php $numrow++; ?>
 		<?php endforeach;?>
 		<?php }else { ?>
@@ -191,7 +193,7 @@ $colspan='colspan="18"';
 			<td <?=$colspan?>><span style="color:red;">NO RECORDS FOUND FOR THIS WORK ORDER.</span></td>
 		</tr>
 		<?php } ?>
-	</table>	
+	</table>
 	<body>
 </html>
 <?php include 'pdf_footer.php';?>

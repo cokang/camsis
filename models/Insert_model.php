@@ -1463,6 +1463,9 @@ function visitplus_woexist($value,$variable,$value1,$variable1){
 
 			$query1 = $this->db->get('pmis2_emg_jobvisit1');
 			//$query2 = $this->db->get('pmis2_emg_jobvisit1tow');
+			  $this->load->model('get_model');
+          $username = $this->get_model->userfullname($this->session->userdata('v_UserName'));
+		   $fullname = $username[0]->v_UserName;
 
 
 			if($query1->num_rows()>0){
@@ -1498,6 +1501,7 @@ function visitplus_woexist($value,$variable,$value1,$variable1){
 						 'v_ReschAuthBy' => $this->input->post('n_rschAuth'),
 						 'v_Actionflag' => 'U',
 						 'd_Timestamp' => date("Y-m-d H:i:s"),
+						 'takenby'=>$fullname,
 						);
 				//print_r($insert_data);
 				//echo '<br><br>';
@@ -1646,6 +1650,7 @@ function visitplus_woexist($value,$variable,$value1,$variable1){
 						 'v_HospitalCode' => $this->session->userdata('hosp_code'),
 						 'v_Actionflag' => 'I',
 						 'd_Timestamp' => date("Y-m-d H:i:s"),
+						 'takenby'=>$fullname,
 						);
 						//print_r($insert_data);
 						//echo '<br><br>';

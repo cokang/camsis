@@ -16,7 +16,7 @@
 			<th rowspan="2" style="width:19px;">No</th>
 			<th rowspan="2"><?=($filby == 'RI') ? 'RI' : 'PPM' ?> Scheduled Date</th>
 			<th rowspan="2"><?=($filby == 'RI') ? 'RI' : 'PPM' ?> Work Order</th>
-			<th rowspan="2">Asset No</th>	
+			<th rowspan="2">Asset No</th>
 			<th rowspan="2" style="width:8%;">Equipment Name</th>
 			<th rowspan="2">UDP</th>
 			<th rowspan="2">Freq</th>
@@ -25,6 +25,7 @@
 			<th rowspan="2">Remark</th>
 			<th rowspan="2">Visit Date</th>
 			<th rowspan="2">Reschedule Date</th>
+			<th rowspan="2">Acceptance By</th>
 			<th rowspan="2">Completion Date</th>
 			<th rowspan="2">Deparment (Location Code)</th>
 			<th rowspan="2">Asset Group</th>
@@ -39,7 +40,7 @@
 			<td><?= ($row->sd_duedt) ? date("d/m/Y",strtotime($row->sd_duedt)) : 'N/A' ?></td>
 			<?php if  ($this->input->get('ex') != 'excel'){ ?>
 			<td><?=($row->sv_wrkordno) ? $row->sv_wrkordno : 'N/A' ?></td>
-			<td><?=($row->sv_asset_no) && $row->sv_asset_no != 'N/A' ? $row->av_tag_no : 'N/A' ?></td>				
+			<td><?=($row->sv_asset_no) && $row->sv_asset_no != 'N/A' ? $row->av_tag_no : 'N/A' ?></td>
 			<?php }else{ ?>
 			<td> <?=isset($row->sv_wrkordno) ? $row->sv_wrkordno : ''?></td>
 			<td> <?=isset($row->av_tag_no) ? $row->av_tag_no : ''?></td>
@@ -54,10 +55,11 @@
 			<td><?= ($row->v_summary) ? $row->v_summary : 'N/A' ?></td>
 			<td><?= ($row->d_Date) ? date("d/m/Y",strtotime($row->d_Date)) : 'N/A' ?></td>
 			<td><?= ($row->d_Reschdt) ? date("d/m/Y",strtotime($row->d_Reschdt)) : 'N/A' ?></td>
+			<td><?= ($row->v_AcceptedBy) ? $row->v_AcceptedBy : 'N/A' ?></td>
 			<td><?= ($row->d_DateDone) ? $row->d_DateDone : 'N/A' ?></td>
 			<td><?= ($row->v_UserDeptDesc) ? $row->v_UserDeptDesc.' ('.$row->V_Location_code.')' : 'N/A' ?></td>
 			<td><?= ($row->v_asset_grp) ? $row->v_asset_grp : 'N/A' ?></td>
-		</tr>	
+		</tr>
 	<?php $numrow++; ?>
 	<?php endforeach;?>
 

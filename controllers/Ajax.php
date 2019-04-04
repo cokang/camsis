@@ -64,6 +64,7 @@ class ajax extends CI_Controller {
 			$data['Vendor'][$row->n_Visit] = explode('-',$row->v_Vendor1);
 			$data['PartRM'][$row->n_Visit] = number_format($row->n_PartRM,2);
 			$data['PartTrate'][$row->n_Visit] = number_format($row->n_PartTotal,2);
+			$data['takenby'][$row->n_Visit] = ($row->takenby) ? $row->takenby : '' ;
 			}
 		}
 		echo json_encode($data);

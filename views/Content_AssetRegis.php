@@ -203,7 +203,7 @@
 				  <tr>
 				    <td>Request Date</td>
 					<td><?=isset($list->schedule_d) ? date("d-m-Y H:i:s",strtotime($list->schedule_d)) : ''?></td>
-					<td>Verified By</td>
+					<td>Acceptance By</td>
 					<td><?=isset($list->v_AcceptedBy) ? $list->v_AcceptedBy : ''?></td>
 				  </tr>
 				  	<tr>
@@ -322,7 +322,7 @@
 				  <tr>
 				    <td>Completed Date</td>
 					<td><?=isset($list->v_closeddate) ? date("d-m-Y",strtotime($list->v_closeddate)) : ''?></td>
-					<td>Verified By</td>
+					<td>Acceptance By</td>
 					<td><?=isset($list->v_AcceptedBy) ? $list->v_AcceptedBy : ''?></td>
 				  </tr>
 				  <tr>

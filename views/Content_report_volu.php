@@ -25,8 +25,8 @@ if (($this->session->userdata('usersess')=='BES') && ($this->input->get('req') <
 $rowspan = 'rowspan=2';
 $display = '';
 $colspan="colspan='18'";
-//exit();	
-} 
+//exit();
+}
 ?>
 <?php $req = $this->input->get('req');?>
 <?php switch ($req) {
@@ -131,6 +131,7 @@ $colspan="colspan='18'";
 						<th <?=$rowspan?>>Completion<br>Date</th>
 						<th <?=$rowspan?>>Completion<br>Time</th>
 						<th <?=$rowspan?>>Closed<br>By</th>
+						<th <?=$rowspan?>>Acceptance By</th>
 						<th <?=$rowspan?>>Duration<br>of Repair (Days)</th>
 						<th <?=$rowspan?>>Actual Work Done</th>
 						<?php  } else {?>
@@ -174,6 +175,7 @@ $colspan="colspan='18'";
 									<td><?= ($row->v_closeddate) ? date("d/m/Y",strtotime($row->v_closeddate)) : 'N/A' ?></td>
 									<td><?= ($row->v_closedtime) ? $row->v_closedtime : 'N/A' ?></td>
 									<td><?= ($row->closedby) ? $row->closedby : 'N/A' ?></td>
+  								<td><?= ($row->v_AcceptedBy) ? $row->v_AcceptedBy : 'N/A' ?></td>
 									<?php if (($this->input->get('broughtfwd') != '') && ($row->v_tag_no != $assetone) && ($row->V_request_type != "A34") && ($row->V_request_type != "A10") && ($row->linker == "none")){ ?>
 										<!--<td><?=$row->DiffDate?></td>-->
 										<td><?= ($row->DiffDate) ? (($row->DiffDate > cal_days_in_month(CAL_GREGORIAN, $this->input->get('m'), $this->input->get('y'))) ? cal_days_in_month(CAL_GREGORIAN, $this->input->get('m'), $this->input->get('y')) : $row->DiffDate) : '1' ?></td>
@@ -194,7 +196,7 @@ $colspan="colspan='18'";
 									<?php } else { ?>
 										<?php if($this->session->userdata('usersess') == 'BES'){ ?>
 							<!--line-->		<td><?= (($row->V_request_type == "A10") || ($row->V_request_type == "A34") || (($row->v_tag_no == $assetone) && ($row->v_location_code == $locationone)) || ($row->linker != "none")) ? '0' : $row->DiffDate ?></td>
-										<?php }else { ?>						
+										<?php }else { ?>
 											<td><?= (($row->V_request_type == "A10") || ($row->V_request_type == "A34") || ($row->v_tag_no == $assetone) || ($row->v_location_code == $locationone) || ($row->linker != "none")) ? '0' : $row->DiffDate ?></td>
 										<?php } ?>
 									<?php } ?>
@@ -358,6 +360,7 @@ $colspan="colspan='18'";
 										<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Completion<br>Date</th>
 										<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Completion<br>Time</th>
 										<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Closed<br>By</th>
+										<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Acceptance<br>By</th>
 										<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Duration<br>of Repair (Days)</th>
 										<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:10%;'";}?>>Actual Work Done</th>
 									<?php  } else {?>
@@ -399,6 +402,7 @@ $colspan="colspan='18'";
 										<td><?= ($row->v_closeddate) ? date("d/m/Y",strtotime($row->v_closeddate)) : 'N/A' ?></td>
 										<td><?= ($row->v_closedtime) ? $row->v_closedtime : 'N/A' ?></td>
 										<td><?= ($row->closedby) ? $row->closedby : 'N/A' ?></td>
+                   <td><?= ($row->v_AcceptedBy) ? $row->v_AcceptedBy : 'N/A' ?></td>
 
 										<?php if (($this->input->get('broughtfwd') != '') && ($row->v_tag_no != $assetone) && ($row->V_request_type != "A34") && ($row->V_request_type != "A10") && ($row->linker == "none")){ ?>
 											<!--<td><?=$row->DiffDate?></td>-->
@@ -423,7 +427,7 @@ $colspan="colspan='18'";
 										<?php } else { ?>
 											<?php if($this->session->userdata('usersess') == 'BES'){ ?>
 							<!--line-->		<td><?= (($row->V_request_type == "A10") || ($row->V_request_type == "A34") || (($row->v_tag_no == $assetone) && ($row->v_location_code == $locationone)) || ($row->linker != "none")) ? '0' : $row->DiffDate ?></td>
-											<?php }else { ?>						
+											<?php }else { ?>
 											<td><?= (($row->V_request_type == "A10") || ($row->V_request_type == "A34") || ($row->v_tag_no == $assetone) || ($row->v_location_code == $locationone) || ($row->linker != "none")) ? '0' : $row->DiffDate ?></td>
 											<?php } ?>
 											<?php } ?>
@@ -595,13 +599,14 @@ $colspan="colspan='18'";
 									<th <?=$rowspan?>>ULC</th>
 									<th <?=$rowspan?>>Requestor<br>Name</th>
 									<th <?=$rowspan?>>Status</th>
-									
+
 									<th <?=$display?> colspan=2>Test</th>
-								
+
 									<?php if ($this->input->get('stat') == 'A') {?>
 										<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Completion<br>Date</th>
 										<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Completion<br>Time</th>
 										<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Closed<br>By</th>
+										<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Acceptance<br>By</th>
 										<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Duration<br>of Repair (Days)</th>
 										<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:10%;'";}?>>Actual Work Done</th>
 									<?php  } else {?>
@@ -615,7 +620,7 @@ $colspan="colspan='18'";
 									<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:10%;'";}?>>Dept/Loc</th>
 									<th <?=$rowspan?> ><?php if($this->input->get('wid')== 1){ echo "grp";}else{ if($this->input->get('broughtfwd') != ''){echo "Work Order Group";} else{echo "Asset Group";}}?></th>
 								</tr>
-							
+
                           <tr <?=$display?>>
 					<th style="position: sticky; top: 22px;">S</th>
 					<th style="position: sticky; top: 22px;">P</th>
@@ -637,14 +642,15 @@ $colspan="colspan='18'";
 										<td><?= ($row->v_location_code) ? $row->v_location_code : 'N/A' ?></td>
 										<td><?= ($row->V_requestor) ? $row->V_requestor : 'N/A' ?></td>
 										<td><?= ($row->V_request_status) ? $row->V_request_status : 'N/A' ?></td>
-										
+
 									    <td <?=$display?>><?= ($row->v_stest) ? $row->v_stest : 'N/A' ?></td>
 								        <td <?=$display?>><?= ($row->v_ptest) ? $row->v_ptest : 'N/A' ?></td>
-									
+
 										<?php if ($this->input->get('stat') == 'A') {?>
 											<td><?= ($row->v_closeddate) ? date("d/m/Y",strtotime($row->v_closeddate)) : 'N/A' ?></td>
 											<td><?= ($row->v_closedtime) ? $row->v_closedtime : 'N/A' ?></td>
 											<td><?= ($row->closedby) ? $row->closedby : 'N/A' ?></td>
+                      <td><?= ($row->v_AcceptedBy) ? $row->v_AcceptedBy : 'N/A' ?></td>
 
 											<?php if (($this->input->get('broughtfwd') != '') && ($row->v_tag_no != $assetone) && ($row->V_request_type != "A34") && ($row->V_request_type != "A10") && ($row->linker == "none")){ ?>
 												<!--<td><?=$row->DiffDate?></td>-->
@@ -667,7 +673,7 @@ $colspan="colspan='18'";
 											<?php } else { ?>
 											<?php if($this->session->userdata('usersess') == 'BES'){ ?>
 							<!--line-->		<td><?= (($row->V_request_type == "A10") || ($row->V_request_type == "A34") || (($row->v_tag_no == $assetone) && ($row->v_location_code == $locationone)) || ($row->linker != "none")) ? '0' : $row->DiffDate ?></td>
-											<?php }else { ?>						
+											<?php }else { ?>
 											<td><?= (($row->V_request_type == "A10") || ($row->V_request_type == "A34") || ($row->v_tag_no == $assetone) || ($row->v_location_code == $locationone) || ($row->linker != "none")) ? '0' : $row->DiffDate ?></td>
 											<?php } ?>
 											<?php } ?>
@@ -685,14 +691,14 @@ $colspan="colspan='18'";
 										<?php } ?>
 				        			</tr>
 								<?php $numrow++; endforeach;?>
-								
+
 			<?php } else {?>
 					<tr align="center" style="background:white; height:200px;">
 						<td <?=$colspan?>><span style="color:red;">NO RECORDS FOUND FOR THIS WORK ORDER.</span></td>
 					</tr>
-			
+
 				<?php } ?>
-								
+
 							</table>
 						</div>
 					</div>

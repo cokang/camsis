@@ -1,5 +1,5 @@
 <?php include 'pdf_head.php';?>
-<?php 
+<?php
 $x=$this->input->get('req');
 switch ($x) {
 	case "A2plan":
@@ -19,7 +19,7 @@ switch ($x) {
 		break;
 	default:
 		$tulis = "Schedule Corrective Maintenance (SCM) Listing";
-        $tulis2 = ' - '.date('F', mktime(0, 0, 0, $month, 10)).'&nbsp'.$year.' - FACILITY ENGINEERING SERVICES ( A2 - Schedule Corrective Maintenance (SCM) )'; 
+        $tulis2 = ' - '.date('F', mktime(0, 0, 0, $month, 10)).'&nbsp'.$year.' - FACILITY ENGINEERING SERVICES ( A2 - Schedule Corrective Maintenance (SCM) )';
 	    $tulis3 = 'Schedule Corrective Maintenance (SCM) Listing Work Order Status Report';
 		break;
 }
@@ -40,7 +40,7 @@ switch ($x) {
 				<th rowspan="2" style="width:19px;">No</th>
 				<th rowspan="2">Work Order Date</th>
 				<th rowspan="2" width="70">A2 Work Order</th>
-				<th rowspan="2">Asset No</th>	
+				<th rowspan="2">Asset No</th>
 				<th rowspan="2" width="90">Equipment Name</th>
 				<th rowspan="2" width="30">UDP</th>
 				<th rowspan="2" width="30">Status</th>
@@ -50,11 +50,12 @@ switch ($x) {
 				<!--<th rowspan="2">Schedule Date</th>-->
 				<th rowspan="2">Reschedule Date</th>
 				<th rowspan="2">Complete Date</th>
+				<th rowspan="2">Acceptance By</th>
 				<th rowspan="2" width="80">Deparment (Location Code)</th>
 				<th rowspan="2">Asset Group</th>
 			</tr>
 			<tr nobr="true">
-				<th>S</th>				
+				<th>S</th>
 				<th>P</th>
 			</tr>
 
@@ -67,13 +68,14 @@ switch ($x) {
 				<td><?= ($row->V_Asset_name) ? $row->V_Asset_name : 'N/A' ?></td>
 				<td><?= ($row->V_User_dept_code) ? $row->V_User_dept_code : 'N/A' ?></td>
 				<td><?= ($row->V_request_status) ? $row->V_request_status : 'N/A' ?></td>
-				<td><?= 'N/A' ?></td>				
+				<td><?= 'N/A' ?></td>
 				<td><?= 'N/A' ?></td>
 				<td><?= ($row->schedule_d) ? date("d/m/Y",strtotime($row->schedule_d)) : 'N/A' ?></td>
 				<td><?= ($row->v_ActionTaken) ? $row->v_ActionTaken : 'N/A' ?></td>
 				<td><?= ($row->dtresch) ? date("d/m/Y",strtotime($row->dtresch)) : 'N/A' ?></td>
 				<!--<td><?= 'N/A' ?></td>-->
 				<td><?= ($row->v_closeddate) ? date("d/m/Y",strtotime($row->v_closeddate)) : 'N/A' ?></td>
+				<td><?= ($row->v_AcceptedBy) ? $row->v_AcceptedBy : 'N/A' ?></td>
 				<td><?= ($row->v_UserDeptDesc) ? $row->v_location_name.' ('.$row->v_location_code.')' : 'N/A' ?></td>
 				<?php if ($this->input->get('broughtfwd') != '') { ?>
 				<td><?= ($row->V_Asset_WG_code) ? $row->V_Asset_WG_code : 'N/A' ?></td>

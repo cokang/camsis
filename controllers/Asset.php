@@ -10,26 +10,27 @@ class asset extends CI_Controller {
 	                //$this->load->model('test_ler');
 	//echo 'ade3';
 			$this->load->library('session');
-	//echo 'ade4';	
+	//echo 'ade4';
 			$this->is_logged_in();
 	//echo 'ade5';
-		
-		
+
+
 	}
-	
+
 		function is_logged_in()
 	{
-		
+
 		$is_logged_in = $this->session->userdata('v_UserName');
-		
+
 		if(!isset($is_logged_in) || $is_logged_in !=TRUE)
 		redirect('LoginController/index');
 	}
-	public function index() 
-	{ $this->load->model('get_model');	
+	public function index()
+	{ $this->load->model('get_model');
 	  $data['country_list'] = $this->get_model->get_dropdown_list_country();
 		$data['manufacturer_list'] = $this->get_model->get_dropdown_list_manufacturer();
 		$data['contract_list'] = $this->get_model->get_dropdown_list_contractcd();
+		$data['maintaincat'] = $this->get_model->get_maintaincat();
     $this ->load->view("head");
 		$this ->load->view("left");
 		$this ->load->view("content_assetnew", $data);

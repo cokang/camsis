@@ -89,7 +89,7 @@ if ($this->input->get('ex') == 'excel'){
 						<td><?=isset($row->	d_DueDt) ? date("d-m-Y",strtotime($row->d_DueDt)) : 'N/A' ?></td>
 						<td><?= 'N/A' ?></td>
 						<td><?=($row->v_WrkOrdNo) ? anchor ('contentcontroller/AssetRegis?wrk_ord='.$row->v_WrkOrdNo.'&assetno='.$row->v_Asset_no.'&m='.date("m",strtotime($this->input->get('jobdate'))).'&y='.date("Y",strtotime($this->input->get('jobdate'))).'&stat='.$this->input->get('stat').'&resch=fbfb&state='.$this->input->get('state'),''.$row->v_WrkOrdNo.'' ) : 'N/A' ?></td>
-						<td><?=(($row->v_Asset_no) && $row->v_Asset_no != 'N/A') ? anchor ('contentcontroller/AssetRegis?tab=Maintenance&assetno='.$row->v_Asset_no.'&state='.$this->input->get('state'),''.$row->v_Asset_no.'' ) : 'N/A' ?></td>
+						<td><?=(($row->v_Asset_no) && $row->v_Asset_no != 'N/A') ? anchor ('contentcontroller/AssetRegis?tab=Maintenance&assetno='.$row->v_Asset_no.'&state='.$this->input->get('state'),''.$row->v_tag_no.'' ) : 'N/A' ?></td>
 						<td><?= ($row->ReqSummary) ? $row->ReqSummary : 'N/A' ?></td>
 						<td><?= ($row->V_Location_code) ? $row->V_Location_code : 'N/A' ?></td>
 						<td><?= ($row->closedby) ? $row->closedby : 'N/A' ?></td>
@@ -167,7 +167,7 @@ if ($this->input->get('ex') == 'excel'){
 						<td><?=isset($row->	d_DueDt) ? date("d-m-Y",strtotime($row->d_DueDt)) : 'N/A' ?></td>
 						<td><?= 'N/A' ?></td>
 						<td><?=($row->v_WrkOrdNo) ? anchor ('contentcontroller/AssetRegis?wrk_ord='.$row->v_WrkOrdNo.'&assetno='.$row->v_Asset_no.'&m='.date("m",strtotime($this->input->get('jobdate'))).'&y='.date("Y",strtotime($this->input->get('jobdate'))).'&stat='.$this->input->get('stat').'&resch=fbfb&state='.$this->input->get('state'),''.$row->v_WrkOrdNo.'' ) : 'N/A' ?></td>
-						<td><?=(($row->v_Asset_no) && $row->v_Asset_no != 'N/A') ? anchor ('contentcontroller/AssetRegis?tab=Maintenance&assetno='.$row->v_Asset_no.'&state='.$this->input->get('state'),''.$row->v_Asset_no.'' ) : 'N/A' ?></td>
+						<td><?=(($row->v_Asset_no) && $row->v_Asset_no != 'N/A') ? anchor ('contentcontroller/AssetRegis?tab=Maintenance&assetno='.$row->v_Asset_no.'&state='.$this->input->get('state'),''.$row->v_tag_no.'' ) : 'N/A' ?></td>
 						<td><?= ($row->ReqSummary) ? $row->ReqSummary : 'N/A' ?></td>
 						<td><?= ($row->V_Location_code) ? $row->V_Location_code : 'N/A' ?></td>
 						<td><?= ($row->closedby) ? $row->closedby : 'N/A' ?></td>

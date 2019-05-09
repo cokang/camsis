@@ -604,10 +604,11 @@ class Procurement extends CI_Controller {
 		   $data['itemrec'] = $this->display_model->itemdet($row->MIRNcode);
 		   $data['t_record'][$key]->comment2=$data['itemrec'];
 		}
+		$this ->load->view("Content_tr_report_print.php",$data);
 			}
 			//echo "<pre>";
 //print_r($data['t_record']);
-			$this ->load->view("Content_tr_report_print.php",$data);
+			//$this ->load->view("Content_tr_report_print.php",$data);
 
 	}
 	public function e_request(){

@@ -20,6 +20,18 @@
 			<?php echo anchor ('workorder?parent='.$this->input->get('parent'),'<span class="ui-left_web">More Info <i class="icon-arrow-right"></i></span>','class="small-box-footer"'); ?>
 		</div>
 	</div>
+	<?php $ser=array('FES','BES','HKS'); ?>
+	<?php if((in_array($this->session->userdata('usersess'),$ser)) && (in_array("contentcontroller/AP", $chkers))){?>
+	<div class="box6">
+		<div class="small-box <?php echo $autocolor[1];?>">
+			<div class="inner2" >
+				<p>AP-Internal Request(AP)</p>
+			</div>
+			<div class="icon"><i class="icon-file-text2"></i></div>
+			<?php echo anchor ('workorder?wotype=AP&parent='.$this->input->get('parent'),'<span class="ui-left_web">More Info <i class="icon-arrow-right"></i></span>','class="small-box-footer"'); ?>
+		</div>
+	</div>
+	<?php } ?>
 	<div class="box6">
 		<div class="small-box <?php echo $autocolor[5];?>">
 			<div class="inner2" >

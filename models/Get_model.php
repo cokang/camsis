@@ -1107,7 +1107,7 @@ $this->db->where('ar.V_Hospitalcode = ', $this->session->userdata('hosp_code'));
 $this->db->select("distinct ppm.*, l.v_Location_Name, job.v_jobtype, job.v_weeksch, IFNULL(ar.V_Equip_code, job.v_checklistcode) AS v_checklistcode, dpt.v_userdeptdesc, ar.v_tag_no, ar.v_user_dept_code, ar.v_location_code, ar.v_model_no, ar.v_serial_no, ar.v_asset_no, am.v_checklistcode, ar.v_asset_name, m.new_asset_type, ag.V_Wrn_end_code, right(chklist.task_no, char_length(chklist.task_no)-6) AS TASKDESC FROM (`pmis2_egm_schconfirmmon` ppm) JOIN `pmis2_egm_assetregistration` ar ON `ppm`.`v_HospitalCode`=`ar`.`V_Hospitalcode` AND ppm.v_HospitalCode=ar.V_Hospitalcode AND ar.V_Asset_no=ppm.v_Asset_no AND ppm.v_Actionflag <> 'D' JOIN `pmis2_egm_assetreg_general` ag ON `ag`.`v_hospital_code` = `ar`.`v_hospitalcode` AND ag.v_asset_no = ar.v_asset_no JOIN `pmis2_egm_assetmaintenance` am ON `am`.`v_hospitalcode` = `ar`.`v_hospitalcode` AND am.v_assetno = ag.v_asset_no JOIN `pmis2_egm_assetlocation` l ON `ar`.`V_Location_code` = `l`.`V_location_code` AND ar.V_hospitalcode = l.v_hospitalcode JOIN `pmis2_sa_asset_mapping` m ON `m`.`old_asset_type` = `ar`.`v_equip_code` JOIN `pmis2_sa_userdept` dpt ON `ag`.`v_hospital_code` = `dpt`.`v_hospitalcode` AND ar.v_user_dept_code = dpt.v_userdeptcode JOIN `pmis2_egm_assetjobtype` job ON `ag`.`v_hospital_code` = `job`.`v_hospitalcode` AND ar.v_asset_no = job.v_asset_no AND ppm.v_jobtype = job.v_JobType AND ppm.v_year = job.v_Year LEFT OUTER JOIN `pmis2_egm_chklist` chklist ON left(`chklist`.`task_no` ,6) = job.v_ProcedureCode WHERE `ppm`.`v_Actionflag` <> 'D' AND `ppm`.`v_wrkordno` = '".$wrkordno."' AND `ar`.`V_Hospitalcode` = '".$this->session->userdata('hosp_code')."' AND ppm.v_ServiceCode = '".$this->session->userdata('usersess')."' ORDER BY RIGHT(chklist.task_no, char_length(chklist.task_no)-6) DESC", FALSE);
 $query = $this->db->get();
 //echo "laalla".$query->DWRate;
-echo $this->db->last_query();
+//echo $this->db->last_query();
 //exit();
 return $query->result();
 
@@ -2151,11 +2151,12 @@ function get_assetdetx($nilaiasset)
 {
 
 //$this->db->select('pmis2_sa_asset_mapping.new_asset_type, left(pmis2_sa_moh_asset_type.type_desc, 50)');
-$this->db->select(" pmis2_egm_assetregistration.V_Equip_code, pmis2_egm_assetregistration.V_Asset_no, pmis2_egm_assetregistration.V_Asset_name, pmis2_egm_assetregistration.V_Tag_no, pmis2_egm_assetregistration.V_User_Dept_code, pmis2_sa_userdept.v_UserDeptDesc, pmis2_egm_assetregistration.V_Location_code, pmis2_egm_assetregistration.V_Manufacturer , pmis2_egm_assetmaintenance.V_Criticality, pmis2_egm_assetmaintenance.V_AssetCondition, pmis2_egm_assetmaintenance.v_AssetStatus, pmis2_egm_assetregistration.V_Model_no, pmis2_egm_assetregistration.V_Serial_no, pmis2_egm_assetregistration.V_hospitalcode, pmis2_egm_assetreg_general.N_Cost, asset_images.file_name ", FALSE);
+$this->db->select(" pmis2_egm_assetregistration.V_Equip_code, pmis2_egm_assetregistration.V_Asset_no, pmis2_egm_assetregistration.V_Asset_name, pmis2_egm_assetregistration.V_Tag_no, pmis2_egm_assetregistration.V_User_Dept_code, pmis2_sa_userdept.v_UserDeptDesc, pmis2_egm_assetregistration.V_Location_code, pmis2_egm_assetregistration.V_Manufacturer , pmis2_egm_assetmaintenance.V_Criticality, pmis2_egm_assetmaintenance.V_AssetCondition, pmis2_egm_assetmaintenance.v_AssetStatus, pmis2_egm_assetregistration.V_Model_no, pmis2_egm_assetregistration.V_Serial_no, pmis2_egm_assetregistration.V_hospitalcode, pmis2_egm_assetreg_general.N_Cost, asset_images.file_name,pmis2_egm_maintaincat.cat_name ", FALSE);
 $this->db->join('pmis2_egm_assetmaintenance','pmis2_egm_assetregistration.v_asset_no = pmis2_egm_assetmaintenance.v_assetno AND pmis2_egm_assetregistration.v_hospitalcode = pmis2_egm_assetmaintenance.v_hospitalcode');
 $this->db->join('pmis2_egm_assetreg_general','pmis2_egm_assetregistration.v_asset_no = pmis2_egm_assetreg_general.v_asset_no AND pmis2_egm_assetregistration.v_hospitalcode = pmis2_egm_assetreg_general.v_hospital_code');
 $this->db->join('asset_images','pmis2_egm_assetreg_general.v_asset_no = asset_images.asset_no AND pmis2_egm_assetreg_general.v_hospital_code = asset_images.hospital AND asset_images.action_flag <> "D"','left outer'); //
 $this->db->join('pmis2_sa_userdept','pmis2_sa_userdept.v_userdeptcode = pmis2_egm_assetregistration.V_User_Dept_code AND pmis2_egm_assetreg_general.v_hospital_code = pmis2_sa_userdept.v_HospitalCode AND pmis2_sa_userdept.v_actionflag <> "D"','left outer');
+$this->db->join('pmis2_egm_maintaincat','pmis2_egm_maintaincat.id_cat=pmis2_egm_assetregistration.V_GEN_status AND pmis2_egm_maintaincat.v_service="BES"','left outer');
 $this->db->where('pmis2_egm_assetregistration.v_hospitalcode = ', $this->session->userdata('hosp_code'));
 $this->db->where('pmis2_egm_assetregistration.v_actionflag <> ', 'D');
 $this->db->where('pmis2_egm_assetregistration.v_service_code = ', $this->session->userdata('usersess'));
@@ -4540,5 +4541,22 @@ if ($nDayCount < count($sDay)) {
 	return $nakantarcal;
 	}
 
+
+	function get_maintaincat()
+{
+$this->db->from('pmis2_egm_maintaincat');
+$this->db->order_by('id');
+$result = $this->db->get();
+$return = array();
+$return[''] = 'Please Select';
+if($result->num_rows() > 0) {
+foreach($result->result_array() as $key=> $row) {
+$return[$row['id_cat'].'|'. $row['cat_name']] = $row['cat_name'];
+}
+}
+
+        return $return;
+
+}
 }
 ?>

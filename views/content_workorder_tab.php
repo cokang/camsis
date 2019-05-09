@@ -1,4 +1,4 @@
-				
+
 			<tr class="ui-left_web">
 				<?php if ($this->session->userdata('usersess')=='HKS' ) {?>
 				<?= ($this->input->get('work-a') == '0') ? '<td class="ui-highlight" align="center" colspan="0" height="30px" >' : '<td class="ui-content-menu-desk-color" align="center" colspan="0" height="30px" >'?>
@@ -11,11 +11,15 @@
 				<?php echo anchor ('contentcontroller/workorder?&work-a=5'.'&y='.$year.'&m='.$month. '&parent='.$this->input->get('parent'), 'A7'); ?></td>
 				<?= ($this->input->get('work-a') == '7') ? '<td class="ui-highlight" align="center" colspan="0"' : '<td class="ui-content-menu-desk-color" align="center" colspan="0">'?>
 				<?php echo anchor ('contentcontroller/workorder?&work-a=7'.'&y='.$year.'&m='.$month. '&parent='.$this->input->get('parent'), 'A9'); ?></td>
+			<?php if ((in_array("contentcontroller/AP", $chkers))) { ?>
 				<?= ($this->input->get('work-a') == '10') ? '<td class="ui-highlight" align="center" colspan="0">' : '<td class="ui-content-menu-desk-color" align="center" colspan="0">'?>
+				<?php echo anchor ('contentcontroller/workorder?&work-a=12'.'&y='.$year.'&m='.$month. '&parent='.$this->input->get('parent'), 'AP'); ?></td>
+			<?php } ?>
+				<?= ($this->input->get('work-a') == '12') ? '<td class="ui-highlight" align="center" colspan="0">' : '<td class="ui-content-menu-desk-color" align="center" colspan="0">'?>
 				<?php echo anchor ('contentcontroller/workorder?&work-a=10'.'&y='.$year.'&m='.$month. '&parent='.$this->input->get('parent'), 'Open & BO'); ?></td>
-												
+
 				<?php } else { ?>
-				
+
 				<?= ($this->input->get('work-a') == '0') ? '<td class="ui-highlight" align="center" colspan="0" height="30px" >' : '<td class="ui-content-menu-desk-color" align="center" colspan="0" height="30px" >'?>
 				<?php echo anchor ('contentcontroller/workorder?&work-a=0'.'&y='.$year.'&m='.$month. '&parent='.$this->input->get('parent'), 'All'); ?></td>
 				<?= ($this->input->get('work-a') == '1') ? '<td class="ui-highlight" align="center" colspan="0">' : '<td class="ui-content-menu-desk-color" align="center" colspan="0">'?>
@@ -39,14 +43,19 @@
 				<?= ($this->input->get('work-a') == '10') ? '<td class="ui-highlight" align="center" colspan="0">' : '<td class="ui-content-menu-desk-color" align="center" colspan="0">'?>
 				<?php echo anchor ('contentcontroller/workorder?&work-a=10'.'&y='.$year.'&m='.$month. '&parent='.$this->input->get('parent'), 'A10'); ?></td>
 				<?= ($this->input->get('work-a') == '11') ? '<td class="ui-highlight" align="center" colspan="0">' : '<td class="ui-content-menu-desk-color" align="center" colspan="0">'?>
+					<?php $ser=array('FES','BES'); ?>
+	         <?php if((in_array($this->session->userdata('usersess'),$ser)) && (in_array("contentcontroller/AP", $chkers))){?>
+				<?php echo anchor ('contentcontroller/workorder?&work-a=12'.'&y='.$year.'&m='.$month. '&parent='.$this->input->get('parent'), 'AP'); ?></td>
+				<?= ($this->input->get('work-a') == '12') ? '<td class="ui-highlight" align="center" colspan="0">' : '<td class="ui-content-menu-desk-color" align="center" colspan="0">'?>
+			 <?php } ?>
 				<?php echo anchor ('contentcontroller/workorder?&work-a=11'.'&y='.$year.'&m='.$month. '&parent='.$this->input->get('parent'), 'Open & BO'); ?></td>
 			</tr>
 			<?php } ?>
 			<tr class="ui-color-contents-style-1">
 			<td colspan="12">
 			<?php if ($this->session->userdata('usersess')=='HKS' ) {?>
-			
-			
+
+
 							<?php switch ($tabber) {
     case "4":
         $tulis = "A4";
@@ -66,11 +75,16 @@
     case "9":
         $tulis = "A9";
 		$left = base_url().'index.php/contentcontroller/workorder?&work-a=7'.'&y='.$year.'&m='.$month. '&parent='.$this->input->get('parent');
+		$right = base_url().'index.php/contentcontroller/workorder?&work-a=10'.'&y='.$year.'&m='.$month. '&parent='.$this->input->get('parent');
+        break;
+    case "10":
+        $tulis = "AP-Internal Request(AP)";
+		$left = base_url().'index.php/contentcontroller/workorder?&work-a=9'.'&y='.$year.'&m='.$month. '&parent='.$this->input->get('parent');
 		$right = base_url().'index.php/contentcontroller/workorder?&work-a=11'.'&y='.$year.'&m='.$month. '&parent='.$this->input->get('parent');
         break;
     case "11":
         $tulis = "Opened & BO";
-		$left = base_url().'index.php/contentcontroller/workorder?&work-a=9'.'&y='.$year.'&m='.$month. '&parent='.$this->input->get('parent');
+		$left = base_url().'index.php/contentcontroller/workorder?&work-a=10'.'&y='.$year.'&m='.$month. '&parent='.$this->input->get('parent');
 		$right = "";
         break;
     default:
@@ -128,6 +142,11 @@
 	case "10":
         $tulis = "A10";
 		$left = base_url().'index.php/contentcontroller/workorder?&work-a=9'.'&y='.$year.'&m='.$month. '&parent='.$this->input->get('parent');
+		$right = base_url().'index.php/contentcontroller/workorder?&work-a=12'.'&y='.$year.'&m='.$month. '&parent='.$this->input->get('parent');
+        break;
+	  case "12":
+        $tulis = "AP-Internal Request(AP)";
+		$left = base_url().'index.php/contentcontroller/workorder?&work-a=10'.'&y='.$year.'&m='.$month. '&parent='.$this->input->get('parent');
 		$right = base_url().'index.php/contentcontroller/workorder?&work-a=11'.'&y='.$year.'&m='.$month. '&parent='.$this->input->get('parent');
         break;
     case "11":
@@ -142,7 +161,7 @@
 } ?>
 <?php }?>
 		<?php if ($this->input->get('work-a') == $tabber) {?>
-		<div class="divmenu"> 
+		<div class="divmenu">
 			<div class="divmenuleft">
 			<?php if ($left == ""){?>
 			 &nbsp;

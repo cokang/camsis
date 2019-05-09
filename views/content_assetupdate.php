@@ -9,6 +9,7 @@
 			<?php } else { ?>
 			<div class="n-reqttitle">No PPM WO Generated</div>
 			<?php } ?>
+			<?php if (in_array("contentcontroller/assetupdate", $chkers)) {$blhkex = "";} else {$blhkex = "disabled";}?>
 			<div class="n-reqttitle">Current VO Claim&nbsp;: <?=isset($asset_vo[0]->vvfReportNo) == TRUE ? $asset_vo[0]->vvfReportNo : 'N/A'?></div>
 			<div class="ui-main-form-1">
 				<div class="middle_d">
@@ -17,7 +18,7 @@
 							<td colspan="2" class="ui-header-new">
 								<b><span class="textmenu" style="float:left;">Registration</span></b>
 								<span class="textmenu1" style="float:right;padding-top:0px;">
-									<?php echo anchor ('contentcontroller/updateReg?assetno='.$assetn, '<button type="button" class="btn-button btn-primary-button">Update</button>'); ?>
+									<?php echo anchor ('contentcontroller/updateReg?assetno='.$assetn, '<button type="button" class="btn-button btn-primary-button"'.$blhkex.'>Update</button>'); ?>
 								</span>
 							</td>
 						</tr>
@@ -54,7 +55,7 @@
 									</tr>
 									<tr>
 										<td class="td-assest">Group: </td>
-										<td><?=$asset_UMDNS[0]->Asset_Group?></td>
+										<td><?=$asset_det[0]->v_asset_grp?></td>
 									</tr>
 
 									<tr>
@@ -81,7 +82,7 @@
 							<td colspan="2" class="ui-header-new">
 								<b><span class="textmenu" style="float:left;">General Comments</span></b>
 								<span class="textmenu1" style="float:right;padding-top:0px;">
-									<?php echo anchor ('contentcontroller/updatecom?assetno='.$assetn, '<button type="button" class="btn-button btn-primary-button">Update</button>'); ?>
+									<?php echo anchor ('contentcontroller/updatecom?assetno='.$assetn, '<button type="button" class="btn-button btn-primary-button"'.$blhkex.'>Update</button>'); ?>
 								</span>
 							</td>
 						</tr>
@@ -104,7 +105,7 @@
 							<td colspan="2" class="ui-header-new">
 								<b><span class="textmenu" style="float:left;">Asset Acquisition</span></b>
 								<span class="textmenu1" style="float:right;padding-top:0px;">
-									<?php echo anchor ('contentcontroller/updateacqu?assetno='.$assetn, '<button type="button" class="btn-button btn-primary-button">Update</button>'); ?>
+									<?php echo anchor ('contentcontroller/updateacqu?assetno='.$assetn, '<button type="button" class="btn-button btn-primary-button"'.$blhkex.'>Update</button>'); ?>
 								</span>
 							</td>
 						</tr>
@@ -149,7 +150,7 @@
 							<td colspan="2" class="ui-header-new">
 								<b><span class="textmenu" style="float:left;">Specification</span></b>
 								<span class="textmenu1" style="float:right;padding-top:0px;">
-									<?php echo anchor ('contentcontroller/updatespec?assetno='.$assetn, '<button type="button" class="btn-button btn-primary-button">Update</button>'); ?>
+									<?php echo anchor ('contentcontroller/updatespec?assetno='.$assetn, '<button type="button" class="btn-button btn-primary-button" '.$blhkex.'>Update</button>'); ?>
 								</span>
 							</td>
 						</tr>
@@ -211,7 +212,7 @@
 							<td colspan="2" class="ui-header-new">
 								<b><span class="textmenu" style="float:left;">Commissioning</span></b>
 								<span class="textmenu1" style="float:right;padding-top:0px;">
-									<?php echo anchor ('contentcontroller/updatecommissioning?assetno='.$assetn, '<button type="button" class="btn-button btn-primary-button">Update</button>'); ?>
+									<?php echo anchor ('contentcontroller/updatecommissioning?assetno='.$assetn, '<button type="button" class="btn-button btn-primary-button"'.$blhkex.'>Update</button>'); ?>
 								</span>
 							</td>
 						</tr>
@@ -271,7 +272,7 @@
 							<td colspan="2" class="ui-header-new">
 								<b><span class="textmenu" style="float:left;">Maintenance Status</span></b>
 								<span class="textmenu1" style="float:right;padding-top:0px;">
-									<?php echo anchor ('contentcontroller/updatemaintenance?assetno='.$assetn, '<button type="button" class="btn-button btn-primary-button">Update</button>'); ?>
+									<?php echo anchor ('contentcontroller/updatemaintenance?assetno='.$assetn, '<button type="button" class="btn-button btn-primary-button"'.$blhkex.'>Update</button>'); ?>
 								</span>
 							</td>
 						</tr>

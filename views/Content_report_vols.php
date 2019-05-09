@@ -89,7 +89,7 @@ if ($this->input->get('ex') == 'excel'){
 					<th rowspan=2>Remark</th>
 					<th rowspan=2>Visit Date</th>
 					<th rowspan=2>Reschedule Date</th>
-					<th rowspan=2>Acceptance By</th>
+					<!--<th rowspan=2>Acceptance By</th>-->
 					<th rowspan=2>Completion Date</th>
 					<th rowspan=2>Deparment (Location Code)</th>
 					<th rowspan=2>Asset Group</th>
@@ -142,7 +142,7 @@ if ($this->input->get('ex') == 'excel'){
 				<th rowspan=2>Remark</th>
 				<th rowspan=2>Visit Date</th>
 				<th rowspan=2>Reschedule Date</th>
-				<th rowspan=2>Acceptance By</th>
+				<!--<th rowspan=2>Acceptance By</th>-->
 				<th rowspan=2>Completion Date</th>
 				<th rowspan=2>Deparment (Location Code)</th>
 				<th rowspan=2>Asset Group</th>
@@ -186,7 +186,7 @@ if ($this->input->get('ex') == 'excel'){
 					</td>
 					<td><?= ($row->d_Date) ? date("d-m-Y",strtotime($row->d_Date)) : 'N/A' ?></td>
 					<td><?= ($row->d_Reschdt) ? date("d-m-Y",strtotime($row->d_Reschdt)) : 'N/A' ?></td>
-					<td><?= ($row->v_AcceptedBy) ? $row->v_AcceptedBy : 'N/A' ?></td>
+					<!--<td><?= ($row->v_AcceptedBy) ? $row->v_AcceptedBy : 'N/A' ?></td>-->
 					<td><?= ($row->d_DateDone) ? date("d-m-Y",strtotime($row->d_DateDone)) : 'N/A' ?></td>
 					<td><?= ($row->v_UserDeptDesc) ? $row->v_UserDeptDesc.' ('.$row->V_Location_code.')' : 'N/A' ?></td>
 					<td><?= ($row->v_asset_grp) ? $row->v_asset_grp : 'N/A' ?></td>
@@ -260,7 +260,7 @@ if ($this->input->get('ex') == 'excel'){
 								<th rowspan=2 style="width:50%;">Remark</th>
 								<th rowspan=2 style="width:7%;">Visit Date</th>
 								<th rowspan=2 style="width:7%;">Reschedule Date</th>
-								<th rowspan=2 style="width:7%;">Acceptance By</th>
+								<!--<th rowspan=2 style="width:7%;">Acceptance By</th>-->
 								<th rowspan=2 style="width:7%;">Completion Date</th>
 								<th rowspan=2 style="width:12%;">Deparment (Location Code)</th>
 								<th rowspan=2>Asset Group</th>
@@ -305,7 +305,7 @@ if ($this->input->get('ex') == 'excel'){
 								<td><?= ($row->d_Date) ? date("d-m-Y",strtotime($row->d_Date)) : 'N/A' ?></td>
 								<td><?= ($row->d_Reschdt) ? date("d-m-Y",strtotime($row->d_Reschdt)) : 'N/A' ?></td>
 								<td><?= ($row->d_DateDone) ? date("d-m-Y",strtotime($row->d_DateDone)) : 'N/A' ?></td>
-								<td><?= ($row->v_AcceptedBy) ? $row->v_AcceptedBy : 'N/A' ?></td>
+								<!--<td><?= ($row->v_AcceptedBy) ? $row->v_AcceptedBy : 'N/A' ?></td>-->
 								<td><?= ($row->v_UserDeptDesc) ? $row->v_UserDeptDesc.' ('.$row->V_Location_code.')' : 'N/A' ?></td>
 								<td><?= ($row->v_asset_grp) ? $row->v_asset_grp : 'N/A' ?></td>
 							</tr>
@@ -398,7 +398,7 @@ if ($this->input->get('ex') == 'excel'){
 								<th rowspan=2 style="width:17%;">Remark</th>
 								<th rowspan=2 style="width:7%;">Visit Date</th>
 								<th rowspan=2 style="width:7%;">Reschedule Date</th>
-								<th rowspan=2 style="width:7%;">Acceptance By</th>
+								<!--<th rowspan=2 style="width:7%;">Acceptance By</th>-->
 								<th rowspan=2 style="width:7%;">Completion Date</th>
 								<th rowspan=2 style="width:12%;">Deparment (Location Code)</th>
 								<th rowspan=2>Asset Group</th>
@@ -442,7 +442,7 @@ if ($this->input->get('ex') == 'excel'){
 								</td>
 								<td><?= ($row->d_Date) ? date("d-m-Y",strtotime($row->d_Date)) : 'N/A' ?></td>
 								<td><?= ($row->d_Reschdt) ? date("d-m-Y",strtotime($row->d_Reschdt)) : 'N/A' ?></td>
-								<td><?= ($row->v_AcceptedBy) ? $row->v_AcceptedBy : 'N/A' ?></td>
+								<!--<td><?= ($row->v_AcceptedBy) ? $row->v_AcceptedBy : 'N/A' ?></td>-->
 								<td><?= ($row->d_DateDone) ? date("d-m-Y",strtotime($row->d_DateDone)) : 'N/A' ?></td>
 								<td><?= ($row->v_UserDeptDesc) ? $row->v_UserDeptDesc.' ('.$row->V_Location_code.')' : 'N/A' ?></td>
 								<td><?= ($row->v_asset_grp) ? $row->v_asset_grp : 'N/A' ?></td>

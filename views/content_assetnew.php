@@ -201,16 +201,35 @@
 										<td style="padding-left:10px;">Asset Group :</td>
 										<td style="padding-left:10px;" valign="top">
 										<?php 
+										$layanan=$this->session->userdata('usersess');
 											$assetgroup = array(
 												'' => 'Please Select',
 												'1' => 'Group 1',
 												'2' => 'Group 2',
 												'3' => 'Group 3',
 												);
+											$assetgroup2 = array(
+												'' => 'Please Select',
+												'1' => 'Group 1',
+												'1B' => 'Group 1B',
+												'2' => 'Group 2',
+												'3' => 'Group 3',
+												'4' => 'Group 4',
+												'5' => 'Group 5',
+												);	
 										?>
-										<?php echo form_dropdown('a_group', $assetgroup, set_value('a_group') , 'class="dropdown"'); ?>
+										<?php echo form_dropdown('a_group',($layanan=='BES') ? $assetgroup2 : $assetgroup , set_value('a_group') , 'class="dropdown"'); ?>
 										</td>
-									</tr>									
+									</tr>
+                                   <?php if ($layanan=='BES') {?>									
+									<tr>
+										<td style="padding-left:10px;">Maintenance Category :</td>
+										<td style="padding-left:10px;" valign="top">
+									
+										<?php echo form_dropdown('maintaincat', $maintaincat , set_value('maintaincat') , 'class="dropdown"'); ?>
+										</td>
+									</tr>
+								   <?php } ?>									
 								</table>
 							</td>
 						</tr>
@@ -416,7 +435,7 @@
 					<tr class="ui-color-contents-style-1" height="30px">
 						<td colspan="2" class="ui-header-new"><b>Asset Class</b></td>
 					</tr>
-					<tr >
+					<tr>
 						<td class="ui-desk-style-table">
 							<table class="ui-content-form" width="100%" border="0">	
 								<tr>

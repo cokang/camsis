@@ -1,7 +1,7 @@
-<?php  
+<?php
 //echo 'panggil ctrl';
 class workorder_ctrl extends CI_Controller {
-	
+
   function index()
   {
 	  //echo "nilaitag".$this->input->post('n_tag_number');
@@ -55,16 +55,21 @@ class workorder_ctrl extends CI_Controller {
 		//$this->form_validation->set_rules('n_tag_number','Location2','trim');
 		//$this->form_validation->set_rules('n_asset_number','Location2','trim');
 		//$this->form_validation->set_rules('n_location2','Location2','trim');
-		//$this->form_validation->set_rules('n_serial_number','Serial Number','trim|required');	
+		//$this->form_validation->set_rules('n_serial_number','Serial Number','trim|required');
 		//$this->form_validation->set_rules('n_name','Name','trim|required');
-			
+
 		if($this->form_validation->run()==FALSE)
 		{
 		$this ->load->view("head");
 		$this ->load->view("left");
+		//$this ->load->view("Content_deskrequest");
+		if($this->input->get('wo')=='AP'){
+	    $this ->load->view("Content_deskrequestAP");
+		}else{
 		$this ->load->view("Content_deskrequest");
+		     }
 		}
-		
+
 		else
 		{
 		$this ->load->view("head");
@@ -72,29 +77,29 @@ class workorder_ctrl extends CI_Controller {
 		$this ->load->view("form_confirmrequest");
 		}
   }
-	
+
 	function confirmation_workorder(){
-	
+
 	  $is_logged_in = $this->session->userdata('usersess');
-		
+
 		if(!isset($is_logged_in) || $is_logged_in !=TRUE)
 		redirect('logincontroller/index');
-	
-		$this->load->model('get_seqno');	
-		//$data['service_apa'] = $this->loginModel->validate3();	
+
+		$this->load->model('get_seqno');
+		//$data['service_apa'] = $this->loginModel->validate3();
 		$RN=$this->get_seqno->funcNewRequestNoAPBESYS($this->input->post('n_request_type'), '', date("Y"));
 		//echo "nilai wo : " . $RN;
 		//exit();
-		//$RN="RQ/A4/B01714/14";	
+		//$RN="RQ/A4/B01714/14";
 		$this->load->model('get_model');
 		$username = $this->get_model->userfullname($this->session->userdata('v_UserName'));
 		$fullname = $username[0]->v_UserName;
 
 		$this->load->model('insert_model');
-		
-		
+
+
 		$insert_data = array(
-		
+
 		'V_servicecode'=>$this->session->userdata('usersess'),
 		'V_requestor'=>$this->input->post('n_requested'),
 		'V_request_type'=>$this->input->post('n_request_type'),
@@ -128,7 +133,7 @@ class workorder_ctrl extends CI_Controller {
 		$thenomasset = $nomasset[0]->V_Tag_no;
 		echo "dpt nama : ".$thenomasset;
 		}
-		
+
 		if (($this->session->userdata('usersess') == 'BES') && ($this->input->post('n_request_type') == 'A4')) {
                 if ($this->input->post('n_asset_number')){
 		$nomasset = $this->get_model->get_assetdet2($this->input->post('n_asset_number'));
@@ -139,39 +144,41 @@ class workorder_ctrl extends CI_Controller {
 		}
 		*/
 		//exit();
-		
-		
+
+
 		//$this->send_mail_frmout('nezam@advancepact.com',$RN,$this->input->post('n_summary'));
 		//}
 		// echo $this->db->last_query();
-		//exit();	
+		//exit();
 		if($this->input->post('chkbox') == 'ON' ){
 		//echo 'text';
 		redirect('contentcontroller/print_workorder?wrk_ord='.$RN);
 		}else{
-		redirect('contentcontroller/workorder?parent='.$this->input->post('parent').'&wonos='.$RN);
+		//redirect('contentcontroller/workorder?parent='.$this->input->post('parent').'&wonos='.$RN);
+		$link=array('AP'=>'&work-a=12');
+		redirect('contentcontroller/workorder?parent='.$this->input->post('parent').'&wonos='.$RN.$link[$this->input->post('n_request_type')]);
 		}
-		
-		
-			
+
+
+
 		}
-		
-		 public function send_mail_frmout($emailto, $wono="", $summary="") { 
-         $from_email = "camsis@advancepact.com"; 
-         //$to_email = $this->input->post('email'); 
-         $to_email = $emailto; 
-   
-         //Load email library 
-         $this->load->library('email'); 
-   
-         $this->email->from($from_email, 'CAMSIS System'); 
+
+		 public function send_mail_frmout($emailto, $wono="", $summary="") {
+         $from_email = "camsis@advancepact.com";
+         //$to_email = $this->input->post('email');
+         $to_email = $emailto;
+
+         //Load email library
+         $this->load->library('email');
+
+         $this->email->from($from_email, 'CAMSIS System');
          $this->email->to($to_email);
-         $this->email->subject('WO '.$wono.' created'); 
-         $this->email->message('WO '.$wono.' have been created'); 
-   
-         //Send mail 
+         $this->email->subject('WO '.$wono.' created');
+         $this->email->message('WO '.$wono.' have been created');
+
+         //Send mail
          $this->email->send();
-      } 
-	
+      }
+
 }
 ?>

@@ -1,17 +1,17 @@
-<?php  
+<?php
 class asset_ctrl extends CI_Controller {
-	
+
 	// Validates different money formats
-// 
+//
 // Author: Antonio Max - 2012
-// 
+//
 // params: $input > number or money str
 //         $params > 3 params CSV string
 //                   thousand_separator, decimal_separator, error_msg
 //
 // returns: BOOL
 //
-function is_money_multi($input, $params) {   
+function is_money_multi($input, $params) {
 
     @list($thousand, $decimal, $message) = explode(',', $params);
     $thousand = (empty($thousand) || $thousand === 'COMMA') ? ',' : '.';
@@ -30,10 +30,10 @@ function is_money_multi($input, $params) {
     }
     return TRUE;
 }
-	
+
   function index()
   {
-	  
+
     // load libraries for URL and form processing
     $this->load->helper(array('form', 'url'));
     // load library for form validation
@@ -52,7 +52,7 @@ function is_money_multi($input, $params) {
 		$this->form_validation->set_rules('n_op_hours','OP Hours Code','trim');
 		$this->form_validation->set_rules('n_manufacturer','Manufacturer','trim');
 		$this->form_validation->set_rules('n_model','Model','trim');
-		$this->form_validation->set_rules('n_brand','Brand','trim');		
+		$this->form_validation->set_rules('n_brand','Brand','trim');
 		$this->form_validation->set_rules('n_request_number','T&C Request Number','trim');
 		$this->form_validation->set_rules('n_serial','n_serial','trim');
 		$this->form_validation->set_rules('n_contract_code','Contract Code','trim');
@@ -84,20 +84,20 @@ function is_money_multi($input, $params) {
 		$this->form_validation->set_rules('n_asset_type','Asset Type','trim');
 		$this->form_validation->set_rules('a_group','Asset Group','trim|required');
 		$this->form_validation->set_rules('V1Location','Asset Variation Location','trim');
-		
+
 /*		$this->form_validation->set_rules('n_asset_workgroup','*Asset Workgroup','trim|required');
 		$this->form_validation->set_rules('n_user_department','*User Department','trim|required');
 		$this->form_validation->set_rules('n_location','*Location','trim|required');
 		$this->form_validation->set_rules('n_register_date','*Register Date','trim|required');
 		/*
-		
+
 		$this->form_validation->set_rules('n_remarks','*Remarks ','trim|required');
 		$this->form_validation->set_rules('n_chasis_no','*Chasis No','trim|required');
 		$this->form_validation->set_rules('n_engine_no','*Engine No','trim|required');
 		$this->form_validation->set_rules('n_registration_no','*Registration No','trim|required');
-		
-		
-		
+
+
+
 		$this->form_validation->set_rules('n_asset_status','Asset Status','trim|required');
 		$this->form_validation->set_rules('n_asset_condition','Asset Condition','trim|required');
 		$this->form_validation->set_rules('n_variation_status','Variation Status','trim|required');
@@ -109,18 +109,19 @@ function is_money_multi($input, $params) {
 		$this->form_validation->set_rules('n_snf_no','SNF / VNF Ref No ','trim|required');
 		$this->form_validation->set_rules('n_submission_date','Submission Date','trim|required');
 		$this->form_validation->set_rules('n_asset_class','Asset Class','trim|required');
-		*/	
+		*/
 		if($this->form_validation->run()==FALSE)
 		{
-		$this->load->model('get_model');	
+		$this->load->model('get_model');
 	  $data['country_list'] = $this->get_model->get_dropdown_list_country();
 		$data['manufacturer_list'] = $this->get_model->get_dropdown_list_manufacturer();
 		$data['contract_list'] = $this->get_model->get_dropdown_list_contractcd();
+		$data['maintaincat'] = $this->get_model->get_maintaincat();
     $this ->load->view("head");
 		$this ->load->view("left");
 		$this ->load->view("content_assetnew", $data);
 		}
-		
+
 		else
 		{
 		$this ->load->view("head");
@@ -128,18 +129,18 @@ function is_money_multi($input, $params) {
 		$this ->load->view("content_assetnew_confirm");
 		}
   }
-	
+
 	function confirmation_asset(){
-	
+
 		$this->load->model('insert_model');
-		$this->load->model('get_model');	
-	
-		//$data['service_apa'] = $this->loginModel->validate3();	
+		$this->load->model('get_model');
+
+		//$data['service_apa'] = $this->loginModel->validate3();
 		/*
 		'===COMPUTE NEW ASSET NUMBER BASED ON LAST ASSET NUMBER REGISTERED FOR THIS CATEGORY IN THIS SITE======
 		sSQL = "SELECT isnull (max( cast (right(rtrim(v_asset_no),4) as int)), 0) newno " & _
 					"FROM pmis2_egm_assetregistration (nolock) " & _
-						"WHERE v_hospitalcode='" & session("sitecode") & "' " & _ 
+						"WHERE v_hospitalcode='" & session("sitecode") & "' " & _
 							"AND v_equip_code='" & sEquipCode & "'"
 		'response.write ssql
 	    	Set uConn= gsubDBCreateCon
@@ -153,9 +154,9 @@ function is_money_multi($input, $params) {
 			sAssetNo = sEquipCode & "-" & right("0000" & cstr(sAssetNo),4)
 		end if
 		*/
-		
-		
-		$RN="BEINF01-0001";	
+
+
+		$RN="BEINF01-0001";
 		$RNTagclass="F";
 		$nilaibaru = $this->get_model->get_assetnewnum($this->input->post('n_equipment_code'));
 		//print_r($nilaibaru);
@@ -166,17 +167,17 @@ function is_money_multi($input, $params) {
 		$RNTagclass=$this->get_model->get_assetnewtagclass($this->input->post('n_equipment_code'));
 		//echo "nilai class ".$RNTagclass[0]->nm2."<br>";
 		$nilaibarutag = $this->get_model->get_assetnewtag($RNTagclass[0]->nm2);
-		
-		//$RNTag=$this->session->userdata('hosp_code').str_pad($nilaibarutag[0]->thenum, 8, 0, STR_PAD_LEFT);	
+
+		//$RNTag=$this->session->userdata('hosp_code').str_pad($nilaibarutag[0]->thenum, 8, 0, STR_PAD_LEFT);
 		$RNTag=$this->session->userdata('hosp_code')." ".$RNTagclass[0]->nm2.str_pad($nilaibarutag[0]->thenum, 5, 0, STR_PAD_LEFT);
 		//echo "nilai baru ".$RNTag;
 		//exit();
 		$assetname="New Asset";
-		
-	
-		
-		
-//for getting rates		
+
+
+
+
+//for getting rates
 		//$rates = $this->get_model->get_vo_rates('10-046','5000');
 		//echo "lalalalla : ". $this->input->post('n_equipment_code') .",".$this->input->post('n_cost');
 		$rates = $this->get_model->get_vo_rates($this->input->post('n_asset_type'),$this->input->post('n_cost'));
@@ -186,14 +187,14 @@ function is_money_multi($input, $params) {
 		echo number_format($rates[0]->FeeDW, 2, '.', '')."<br>";
 		echo number_format($rates[0]->FeePW, 2, '.', '')."<br>";
 //for getting rates
-//get asset name		
+//get asset name
     $asset_name = $this->get_model->get_assetname($this->input->post('n_asset_type'));
 		echo $asset_name[0]->asset_type."<br>";
 		echo $asset_name[0]->asset_desc."<br>";
-//get asset name		
+//get asset name
 //		$asset_name = $this->get_model->get_assetdetail('BECEN04');
-		
-		
+
+
 
 /*
 foreach ($rates->result() as $row)
@@ -202,10 +203,11 @@ foreach ($rates->result() as $row)
 }
 */
 		//echo $rates
-//		exit();	
-		
+//		exit();
+
 		//echo "mmbmbmmbmb : " . $this->input->post('n_register_date') .":". $this->input->post('n_purchase_date') .":". $this->input->post('n_commissioned_on') ."<br>";
 		//exit();
+    $maintaincat=($this->input->post('maintaincat')) ? $this->input->post('maintaincat') : null;
 		$insert_dataassetreg = array(
 		'V_Asset_no'=>$RN,
 		'V_Asset_name'=>$asset_name[0]->asset_desc,
@@ -229,16 +231,17 @@ foreach ($rates->result() as $row)
 		'v_chasisno'=>$this->input->post('n_chasis_no'),
 		'v_engineno'=>$this->input->post('n_engine_no'),
 		'v_registrationno'=>$this->input->post('n_registration_no'),
-		'v_asset_grp'=>$this->input->post('a_group')
-	
+		'v_asset_grp'=>$this->input->post('a_group'),
+		'V_GEN_status'=>$maintaincat
+
 		);
 		//print_r($insert_dataassetreg);
 		//exit();
 		$this->insert_model->ins_assetreg($insert_dataassetreg,TRUE);
-		
+
 		//echo $this->db->last_query()."<br>";
 		//exit();
-		
+
 		$insert_dataassetrege = array(
 		'V_Asset_no'=>$RN,
 		'V_Hospital_code'=>$this->session->userdata('hosp_code'),
@@ -266,31 +269,31 @@ foreach ($rates->result() as $row)
 		'V_username'=>$this->input->post('n_user_name'),
 		'v_Procedure_code'=>$this->input->post('n_procedure'),
 		'V_Mnl_Draw_no'=>$this->input->post('n_manual_drawing')
-	
+
 		);
-		
+
 		$this->insert_model->ins_assetreggen($insert_dataassetrege,TRUE);
-		
+
 		echo $this->db->last_query();
 		//exit();
-		
+
 		if (date('m') < 7) {
   	$sVOClaimPeriod="P1".date('y'); // WARNING: assuming month is an external array assuming year is an external array
 		}
 		else {
   	$sVOClaimPeriod="P2".date('y'); // WARNING: assuming year is an external array
 		}
-		
-		
-		
+
+
+
 		$sVLocation="";
     $sVDate="";
-		
-		
-		
-		//switch (str_replace(":","",substr($this->input->post('n_variation_status'),0,3))) 
+
+
+
+		//switch (str_replace(":","",substr($this->input->post('n_variation_status'),0,3)))
 		switch ($this->input->post('n_variation_status'))
-{		
+{
   	case "V1": // WARNING: assuming sVariation is an external function
     $bNewVariation=false;
     $sVOClaimPeriod="NULL";
@@ -363,9 +366,9 @@ foreach ($rates->result() as $row)
     $sVOSNFVNFNo="";
     break;
 }
-		
+
 		$insert_dataassetmaint = array(
-		
+
 		'V_Assetno'=>$RN,
 		'V_ActionFlag'=>"I",
 		'v_hospitalcode'=>$this->session->userdata('hosp_code'),
@@ -384,18 +387,18 @@ foreach ($rates->result() as $row)
 		/*
 		'V_servicecode'=>$this->session->userdata('n_snf_no'),
 		'V_servicecode'=>$this->session->userdata('n_Remark'),
-		
+
 		*/
-	
+
 		);
-		
-		
-		
+
+
+
 		$this->insert_model->ins_assetmaintainance($insert_dataassetmaint,TRUE);
-		
+
 		echo "<br>".$this->db->last_query();
 		//exit();
-		
+
 		if (date('m') < 7) {
   	$sVOClaimPeriod="P1".date('y'); // WARNING: assuming month is an external array assuming year is an external array
 		}
@@ -404,16 +407,16 @@ foreach ($rates->result() as $row)
 		}
 		//echo "nilai sVOClaimPeriod : ".$sVOClaimPeriod;
 		//exit();
-		
-		
-		echo "nilai : ".$sVOClaimPeriod."<br>" ;  
+
+
+		echo "nilai : ".$sVOClaimPeriod."<br>" ;
 		echo "nilai2 : VVFBEM/".$this->session->userdata('hosp_code')."/".$sVOClaimPeriod."/".date("Y");
 		//"."VVFBEM/BPH/".$sVOClaimPeriod."/".date("Y");
 		//echo "nilai3 : "."VVFBEM/BPH/".$sVOClaimPeriod."/".date("Y");BPH/SNF/VNF/JUN2009
-		
-		
+
+
 //echo "<br> ok";
-//exit();	
+//exit();
 /*
  		if (strlen($sVOSNFVNFNo) > 0) {
   	$sVOSNFVNFNo=$this->input->post('n_snfvnf');
@@ -424,50 +427,50 @@ foreach ($rates->result() as $row)
   	$sVOSubmissionDate="NULL";
 		}
 */
-		
+
 		$insert_vodata = array(
-		
-		'vvfReportNo'=>"VVFBEM/".$this->session->userdata('hosp_code')."/".$sVOClaimPeriod."/".date("Y"),		
-		'vvfRefNo'=>$this->input->post('n_snfvnf'),		
+
+		'vvfReportNo'=>"VVFBEM/".$this->session->userdata('hosp_code')."/".$sVOClaimPeriod."/".date("Y"),
+		'vvfRefNo'=>$this->input->post('n_snfvnf'),
 		'vvfHospitalCode'=>$this->session->userdata('hosp_code'),
-		'vvfDept'=>$this->input->post('n_user_department'),		
-		'vvfAssetNo'=>$RN,		
+		'vvfDept'=>$this->input->post('n_user_department'),
+		'vvfAssetNo'=>$RN,
 		'vvfAssetTagNo'=>$RNTag,
-		'vvfAssetType'=>$asset_name[0]->asset_type,		
-		'vvfAssetDesc'=>$asset_name[0]->asset_desc,	
+		'vvfAssetType'=>$asset_name[0]->asset_type,
+		'vvfAssetDesc'=>$asset_name[0]->asset_desc,
 		'vvfMfg'=>$this->input->post('n_manufacture'),
-		'vvfModel'=>$this->input->post('n_model'),		
-		'vvfPurchaseCost'=>$this->input->post('n_cost'),	
+		'vvfModel'=>$this->input->post('n_model'),
+		'vvfPurchaseCost'=>$this->input->post('n_cost'),
 		'vvfVStatus'=>$this->input->post('n_variation_status'),
-		'vvfDateComm'=>$this->input->post('n_commissioned_on'),		
-		'vvfDateStart'=>$this->input->post('n_commissioned_on'),		
+		'vvfDateComm'=>$this->input->post('n_commissioned_on'),
+		'vvfDateStart'=>$this->input->post('n_commissioned_on'),
 //		'vvfDateStop'=>,
-		'vvfDateWarrantyEnd'=>$this->input->post('n_warranty_expire'),	
-//		'vvfAssetLockedDate'=>,	
+		'vvfDateWarrantyEnd'=>$this->input->post('n_warranty_expire'),
+//		'vvfAssetLockedDate'=>,
 //		'vvfAssetLockedStatus'=>,
-//		'vvfAssetLockedBy'=>,	
-//		'vvfAuthorizedDate'=>,	
+//		'vvfAssetLockedBy'=>,
+//		'vvfAuthorizedDate'=>,
 //		'vvfAuthorizedStatus'=>,
-//		'vvfAuthorizedBy'=>,	
-		'vvfActionflag'=>"I",		
+//		'vvfAuthorizedBy'=>,
+		'vvfActionflag'=>"I",
 		'vvfTimestamp'=>date('Y-m-d H:i:s'),
-		'vvfSubmissionDate'=>$this->input->post('n_submission_date'),	
-		'vvfRateDW'=>number_format($rates[0]->DWRate, 2, '.', ''),		
+		'vvfSubmissionDate'=>$this->input->post('n_submission_date'),
+		'vvfRateDW'=>number_format($rates[0]->DWRate, 2, '.', ''),
 		'vvfRatePW'=>number_format($rates[0]->PWRate, 2, '.', ''),
-		'vvfFeeDW'=>number_format($rates[0]->FeeDW, 2, '.', ''),     		
-		'vvfFeePW'=>number_format($rates[0]->FeePW, 2, '.', '')		
+		'vvfFeeDW'=>number_format($rates[0]->FeeDW, 2, '.', ''),
+		'vvfFeePW'=>number_format($rates[0]->FeePW, 2, '.', '')
 //		'vvfHQRemarksDate'=>,
 //		'vvfHQRemarks'=>
 		);
-		
+
 		$this->insert_model->ins_vo($insert_vodata,TRUE);
-		
+
 		echo "<br>".$this->db->last_query();
-		//exit();	
-		
+		//exit();
+
 		redirect('contentcontroller/assets');
-			
+
 		}
-	
+
 }
 ?>

@@ -10,25 +10,31 @@ class workorder extends CI_Controller {
 	                //$this->load->model('test_ler');
 	//echo 'ade3';
 			$this->load->library('session');
-	//echo 'ade4';	
+	//echo 'ade4';
 			$this->is_logged_in();
 	//echo 'ade5';
-		
-		
+
+
 	}
-	
+
 		function is_logged_in()
 	{
-		
+
 		$is_logged_in = $this->session->userdata('v_UserName');
-		
+
 		if(!isset($is_logged_in) || $is_logged_in !=TRUE)
 		redirect('LoginController/index');
 	}
-	public function index() 
+	public function index()
 	{
     $this ->load->view("head");
 		$this ->load->view("left");
+		//$this ->load->view("Content_deskrequest");
+
+		if($this->input->get('wotype')=='AP'){
+		$this ->load->view("Content_deskrequestAP");
+		}else{
 		$this ->load->view("Content_deskrequest");
+	    }
 	}
 }

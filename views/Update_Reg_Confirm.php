@@ -47,8 +47,37 @@
 			</tr>
 			<tr>
 				<td class="td-assest">Asset Group :</td>
-				<td ><input type="text" name="a_group" value="<?=$this->input->post('a_group') ?>" class="form-control-button n_wi-date"readonly></td>
+				<td><?php 
+										$layanan=$this->session->userdata('usersess');
+											$assetgroup = array(
+												'' => 'Please Select',
+												'1' => 'Group 1',
+												'2' => 'Group 2',
+												'3' => 'Group 3',
+												);
+											$assetgroup2 = array(
+												'' => 'Please Select',
+												'1' => 'Group 1',
+												'1B' => 'Group 1B',
+												'2' => 'Group 2',
+												'3' => 'Group 3',
+												'4' => 'Group 4',
+												'5' => 'Group 5',
+												);	
+										?>
+										<?php echo form_dropdown('a_group',($layanan=='BES') ? $assetgroup2 : $assetgroup , set_value('a_group') , 'class="dropdown n_wi-date" disabled'); ?></td>
 			</tr>
+		 <?php if ($layanan=='BES') {?>	
+           <?php $nilai= explode("|", $this->input->post('maintaincat'));?>		 
+									<tr>
+										<td class="td-assest">Maintenance Category :</td>
+										<td>
+										<?php echo form_dropdown('maintaincat',$nilai[1], ''  , 'class="dropdown n_wi-date" disabled'); ?>
+										</td>
+									</tr>
+				<?php echo form_hidden('a_group',$this->input->post('a_group'));?>				
+				<?php echo form_hidden('maintaincat',$nilai[0]);?>				
+								   <?php } ?>
 			<tr class="ui-header-new" style="height:40px;">
 				<td align="center" colspan="2" style="">
 					<!--<button type="button" class="btn-button btn-primary-button" style="width: 200px;">Change</button>-->

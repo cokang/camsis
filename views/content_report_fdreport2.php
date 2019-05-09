@@ -2,6 +2,7 @@
 $assetone = "0";
 $locationone = "0";
 $x = $this->input->get('x');
+$workdone=array(2,5);
 switch ($x) {
 	case "1":
 		$tulis = "Received for the date";
@@ -98,7 +99,7 @@ if ($this->input->get('ex') == 'excel'){
 						<th>ULC</th>
 						<th>Requestor<br>Name</th>
 						<th>Status</th>
-						<?php if ($this->input->get('x') == '2') {?>
+						<?php if (in_array($this->input->get('x'),$workdone)) {?>
 							<th <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Completion<br>Date</th>
 							<th <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Completion<br>Time</th>
 							<th <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Closed<br>By</th>
@@ -123,12 +124,13 @@ if ($this->input->get('ex') == 'excel'){
 						<td><?=isset($row->D_date) ? date("d-m-Y",strtotime($row->D_date)) : 'N/A' ?></td>
 						<td><?=isset($row->D_time) ? $row->D_time : 'N/A' ?></td>
 						<td><?=($row->V_Request_no) ? anchor ('contentcontroller/AssetRegis?wrk_ord='.$row->V_Request_no.'&assetno='.$row->V_Asset_no.'&m='.date("m",strtotime($this->input->get('jobdate'))).'&y='.date("Y",strtotime($this->input->get('jobdate'))).'&stat='.$this->input->get('stat').'&resch=fbfb&state='.$this->input->get('state'),''.$row->V_Request_no.'' ) : 'N/A' ?></td>
-						<td><?=(($row->V_Asset_no) && $row->V_Asset_no != 'N/A') ? anchor ('contentcontroller/AssetRegis?tab=Maintenance&assetno='.$row->V_Asset_no.'&state='.$this->input->get('state'),''.$row->v_tag_no.'' ) : 'N/A' ?></td>
+						<td style="white-space: wrap; width:100px; word-break: break-all;"><?=(($row->V_Asset_no) && $row->V_Asset_no != 'N/A') ? anchor ('contentcontroller/AssetRegis?tab=Maintenance&assetno='.$row->V_Asset_no.'&state='.$this->input->get('state'),''.$row->v_tag_no.'' ) : 'N/A' ?></td>
 						<td><?= ($row->ReqSummary) ? $row->ReqSummary : 'N/A' ?></td>
 						<td><?= ($row->v_location_code) ? $row->v_location_code : 'N/A' ?></td>
 						<td><?= ($row->V_requestor) ? $row->V_requestor : 'N/A' ?></td>
 						<td><?= ($row->V_request_status) ? $row->V_request_status : 'N/A' ?></td>
-						<?php if ($this->input->get('x') == '2') {?>
+				    
+						<?php if (in_array($this->input->get('x'),$workdone)) {?>
 							<td><?= ($row->v_closeddate) ? date("d/m/Y",strtotime($row->v_closeddate)) : 'N/A' ?></td>
 							<td><?= ($row->v_closedtime) ? $row->v_closedtime : 'N/A' ?></td>
 							<td><?= ($row->closedby) ? $row->closedby : 'N/A' ?></td>
@@ -188,7 +190,7 @@ if ($this->input->get('ex') == 'excel'){
 				<table class="tftable tbl-go" border="1" style="text-align:center;">
 					<tr>
 						<th>No</th>
-						<th <?php if($this->input->get('wid')== 1){ echo "style='width:30px;'";}?>>Date Req</th>
+						<th <?=($this->input->get('wid')== 1) ? "style='width:30px;'" : "width='5%'";?>>Date Req</th>
 						<th>Time Req</th>
 						<th>Request No</th>
 						<th>Asset No</th>
@@ -196,7 +198,8 @@ if ($this->input->get('ex') == 'excel'){
 						<th>ULC</th>
 						<th>Requestor<br>Name</th>
 						<th>Status</th>
-						<?php if ($this->input->get('x') == '2') {?>
+					
+						<?php if (in_array($this->input->get('x'),$workdone)) {?>
 							<th <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Completion<br>Date</th>
 							<th <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Completion<br>Time</th>
 							<th <?php if($this->input->get('wid')== 1){ echo "style='width:5%;'";}?>>Closed<br>By</th>
@@ -223,7 +226,7 @@ if ($this->input->get('ex') == 'excel'){
 						<td><?=isset($row->D_time) ? $row->D_time : 'N/A' ?></td>
 					 <?php if ($this->input->get('ex')=='') { ?>
 				      <td><?=($row->V_Request_no) ? anchor ('contentcontroller/AssetRegis?wrk_ord='.$row->V_Request_no.'&assetno='.$row->V_Asset_no.'&m='.date("m",strtotime($this->input->get('jobdate'))).'&y='.date("Y",strtotime($this->input->get('jobdate'))).'&stat='.$this->input->get('stat').'&resch=fbfb&state='.$this->input->get('state'),''.$row->V_Request_no.'' ) : 'N/A' ?></td>
-						<td><?=(($row->V_Asset_no) && $row->V_Asset_no != 'N/A') ? anchor ('contentcontroller/AssetRegis?tab=Maintenance&assetno='.$row->V_Asset_no.'&state='.$this->input->get('state'),''.$row->v_tag_no.'' ) : 'N/A' ?></td>
+						<td style="white-space: wrap; width:100px; word-break: break-all;"><?=(($row->V_Asset_no) && $row->V_Asset_no != 'N/A') ? anchor ('contentcontroller/AssetRegis?tab=Maintenance&assetno='.$row->V_Asset_no.'&state='.$this->input->get('state'),''.$row->v_tag_no.'' ) : 'N/A' ?></td>
 						<?php }else{ ?>
 			            <td><?=($row->V_Request_no) ? $row->V_Request_no : 'N/A' ?></td>
 						<td><?=(($row->V_Asset_no) && $row->V_Asset_no != 'N/A') ? $row->v_tag_no : 'N/A' ?></td>
@@ -233,7 +236,8 @@ if ($this->input->get('ex') == 'excel'){
 						<td><?= ($row->v_location_code) ? $row->v_location_code : 'N/A' ?></td>
 						<td><?= ($row->V_requestor) ? $row->V_requestor : 'N/A' ?></td>
 						<td><?= ($row->V_request_status) ? $row->V_request_status : 'N/A' ?></td>
-						<?php if ($this->input->get('x') == '2') {?>
+				
+						<?php if (in_array($this->input->get('x'),$workdone)) {?>
 							<td><?= ($row->v_closeddate) ? date("d/m/Y",strtotime($row->v_closeddate)) : 'N/A' ?></td>
 							<td><?= ($row->v_closedtime) ? $row->v_closedtime : 'N/A' ?></td>
 							<td><?= ($row->closedby) ? $row->closedby : 'N/A' ?></td>

@@ -198,6 +198,10 @@ function funcSaveAPBESYSNextSeqNo($sType, $nNo, $nYearToUpdate) {
 		case "PP" :
 		case "PPB" :
 			$sTypeToCheck = "P";
+			break;
+       case "AP";
+$sTypeToCheck = "AP";
+		break;
 			$nNextNo = $nNo; 	//<---LAST NUMBER PASSED BY PPM IS THE NEXT AVAILABLE NUMBER
 	}
 //echo "</br> sTypeToCheck ".$sTypeToCheck;
@@ -319,7 +323,9 @@ function funcGetAPBESYSSeqNoFormat($sType) {
 											  //				SSS=I.E. "MKA" 3 CHAR SITE CODE, UNIQUE PER HOSPITAL PER YEAR
 												//				00000=5 DIGITS RUNNING NUMBER
 												//				YYYY=3 DIGITS CURRENT YEAR
-												
+				case "AP" :
+				$sFormat = "SSS/DDD/BBBNNNNN/YY";	//<---FOR AP
+			break;									
 			//===YANG NI PLAK, DEN TAK PAHAM APO KO BONDO YANG EKAU MINTAK=======
 			default :
 				return "Error: Unknown request type to generate sequence number.";
@@ -377,6 +383,10 @@ function funcGetAPBESYSNextSeqNo($sType, $nYearToFind)
 		case "PP" :
 		case "PPB" :
 			$sTypeToCheck = "P";
+			break;
+	case "AP" :
+	$sTypeToCheck = "AP";
+	break;
 	}
 //echo '<br>sTypeToCheck2 '.$sTypeToCheck;
 $hosp = array($this->session->userdata('hosp_code'), "XXX");	
@@ -509,7 +519,9 @@ function funcFormatAPBESYSSeqNo($sFormat, $sType, $nNo, $nYearToUse)
 		case "A12" :
 			$sFormat = str_replace("DDD", "AV", $sFormat);
 			break;
-
+		case "AP" :
+		$sFormat = str_replace("DDD", "AP", $sFormat);
+		break;
 		case "P" :
 		case "PP" :
 		case "PPB" :
@@ -542,7 +554,9 @@ function funcFormatAPBESYSSeqNo($sFormat, $sType, $nNo, $nYearToUse)
 		case "PPB" :
 			$sFormat = str_replace("AAA", $sType, $sFormat);
 			break;
-			
+		case "AP" :
+		$sFormat = str_replace("DDD", "AP", $sFormat);
+		break;
 		case "P" :
 		case "PP" :
 		case "PPB" :

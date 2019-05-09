@@ -38,7 +38,8 @@
 								<th>Request<br>Number</th>
 								<th>User<br>Dept</th>
 								<th>Asset&nbsp;Number</th>
-								<th>Respond Findings</th>
+								<th width="15%">Respond Findings</th>
+								<th>Actual Work Done</th>
 								<th>Type Of Work</th>
 								<th>Status</th>
 								<th>Respond<br>Date</th>
@@ -51,6 +52,7 @@
 								<td><?=isset($row->v_UserDeptDesc) ? $row->v_UserDeptDesc : ''?></td>
 								<td><?=isset($row->V_Tag_no) ? $row->V_Tag_no : 'N/A'?></td>
 								<td style="white-space: wrap; width:100px; word-break: break-all;"><?=isset($row->V_summary) ? $row->V_summary : ''?></td>
+								<td><?=isset($row->aWrkdone) ? $row->aWrkdone : 'N/A'?></td>
 								<td><?=isset($row->V_request_type) ? $row->V_request_type : ''?></td>
 								<td><?=isset($row->V_request_status) ? $row->V_request_status : ''?></td>
 								<td><?=isset($row->v_respondate) ? date("d/m/Y",strtotime($row->v_respondate)) : ''?></td>

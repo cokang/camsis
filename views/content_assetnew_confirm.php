@@ -177,7 +177,14 @@
 									<tr>
 										<td style="padding-left:10px;">Asset Group :</td>
 										<td style="padding-left:10px;"><input type="text" name="a_group" value="<?php echo set_value('a_group'); ?>" class="form-control-button"disabled></td>
-									</tr>									
+									</tr>	
+									<?php if($this->input->post('maintaincat')) { ?>
+									   <?php $nilai= explode("|", $this->input->post('maintaincat'));?>		 
+									<tr>
+										<td style="padding-left:10px;">Maintenance Category :</td>
+										<td style="padding-left:10px;"><input type="text" name="maintaincat" value="<?php echo $nilai[1]; ?>" class="form-control-button"disabled></td>
+									</tr>
+                                    <?php } ?>									
 								</table>
 							</td>
 						</tr>
@@ -340,5 +347,6 @@
 <?php echo form_hidden('n_asset_class',$this->input->post('n_asset_class'));?>
 <?php echo form_hidden('n_asset_type',$this->input->post('n_asset_type'));?>
 <?php echo form_hidden('a_group',$this->input->post('a_group'));?>
+<?php echo form_hidden('maintaincat',$nilai[0]);?>
 <?php echo form_close(); ?>
 </html>

@@ -3,8 +3,9 @@
 class ajaxasset extends CI_Controller {
 	public function index(){
 		$this->load->model("get_model");
+		$display = ($this->session->userdata('usersess')=='BES') ? '' : 'style="display:none"';
 		$data['asset_det'] = $this->get_model->get_assetdetx(trim($this->input->get('ast')));
-		echo '<table class="ui-content-middle-menu-workorder3" width="100%" id="no-more-tables"><tr class="ui-menu-color-header" style="color:white; font-weight:bold;"><th>No</th><th >Asset Image</th><th>Asset No</th><th>Asset Name</th><th>User<br />Dept</th><th>Location</th><th>Condition</th><th>Status</th><th>Model</th><th>Manu<br />Facturer</th><th>Serial No</th><th>Purchase <br />Cost</th></tr>';
+		echo '<table class="ui-content-middle-menu-workorder3" width="100%" id="no-more-tables"><tr class="ui-menu-color-header" style="color:white; font-weight:bold;"><th>No</th><th >Asset Image</th><th>Asset No</th><th>Asset Name</th><th '.$display.' width="12%">Maintenance Category</th><th>User<br />Dept</th><th>Location</th><th>Condition</th><th >Status</th><th>Model</th><th>Manu<br />Facturer</th><th>Serial No</th><th>Purchase <br />Cost</th></tr>';
 		$i = 1;
 		//print_r(trim($this->input->get('ast')));
 		//$result = array_map('trim', $data['asset_det']);
@@ -20,6 +21,7 @@ class ajaxasset extends CI_Controller {
 			}
 			echo '<td data-title="Asset No :">'.$row->V_Tag_no.'</td>';
 			echo '<td data-title="Asset Name :">'.$row->V_Asset_name.'</td>';
+			echo '<td '.$display.' data-title="Maintenance Category :">'.$row->cat_name.'</td>';
 			echo '<td data-title="User Dept:">'.$row->V_User_Dept_code.' ('.$row->v_UserDeptDesc.')</td>';
 			echo '<td data-title="Location:">'.$row->V_Location_code.'</td>';
 			echo '<td data-title="Condition:">'.$row->V_AssetCondition.'</td>';

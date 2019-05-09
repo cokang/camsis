@@ -9,6 +9,7 @@ $array = [
 	['contentcontroller/report_reswos/'],
 	['contentcontroller/report_sls/'],
 	['contentcontroller/report_reqwosbya2/'],
+	['contentcontroller/report_reqAP/'],
 ]
 
 ?>
@@ -55,6 +56,8 @@ foreach ($array as $list) {
 								text: 'Statutory & Lisense'
 							<?php }elseif ($this->uri->slash_segment(1) .$this->uri->slash_segment(2) == 'contentcontroller/report_reqwosbya2/') {?>
 								text: 'A2'
+							<?php }elseif ($this->uri->slash_segment(1) .$this->uri->slash_segment(2) == 'contentcontroller/report_reqAP/') {?>
+								text: 'AP-Internal Request'
 							<?php } ?>
 						}
 					},
@@ -209,7 +212,30 @@ foreach ($array as $list) {
 						data: [<?php if ($rqsum[0]->notcomp == 0){ echo '0';}else{echo $rqsum[0]->notcomp;}?>],
 						stack: '3'
 					}]
+	             <?php }elseif ($this->uri->slash_segment(1) .$this->uri->slash_segment(2) == 'contentcontroller/report_reqAP/') {?>
 
+					series: [{
+						name: 'Total AP-Internal Request',
+						data: [<?php if ($rqsum[0]->total == 0){ echo '0';}else{echo $rqsum[0]->total;}?>],
+						stack: '1'
+					}, {
+						name: 'Total Completed',
+						data: [<?php if ($rqsum[0]->comp == 0){ echo '0';}else{echo $rqsum[0]->comp;}?>],
+						stack: '2'
+					}
+					, {
+						name: 'Completed < 15 Days',
+						data: [<?php if ($rqsum[0]->compin15d == 0){ echo '0';}else{echo $rqsum[0]->compin15d;}?>],
+						stack: '3'
+					}, {
+						name: 'Completed > 15 Days',
+						data: [<?php if ($rqsum[0]->compm15d == 0){ echo '0';}else{echo $rqsum[0]->compm15d;}?>],
+						stack: '4'
+					}, {
+						name: 'Total Outstanding',
+						data: [<?php if ($rqsum[0]->notcomp == 0){ echo '0';}else{echo $rqsum[0]->notcomp;}?>],
+						stack: '5'
+					}]
 					<?php } ?>
 				});
 			});

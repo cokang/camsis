@@ -120,7 +120,7 @@ if ($this->input->get('ex') == ''){
 					<!--<th rowspan=2>Schedule Date</th>-->
 					<th rowspan=2>Reschedule Date</th>
 					<th rowspan=2>Complete Date</th>
-					<th rowspan=2>Acceptance By</th>
+					<!--<th rowspan=2>Acceptance By</th>-->
 					<th rowspan=2>Deparment (Location Code)</th>
 					<th rowspan=2>Asset Group</th>
 				</tr>
@@ -172,7 +172,7 @@ if ($this->input->get('ex') == ''){
 				<!--<th rowspan=2>Schedule Date</th>-->
 				<th rowspan=2>Reschedule Date</th>
 				<th rowspan=2>Complete Date</th>
-				<th rowspan=2>Acceptance By</th>
+				<!--<th rowspan=2>Acceptance By</th>-->
 				<th rowspan=2>Deparment (Location Code)</th>
 				<th rowspan=2>Asset Group</th>
 			</tr>
@@ -198,7 +198,7 @@ if ($this->input->get('ex') == ''){
 				<td><?= ($row->dtresch) ? date("d/m/Y",strtotime($row->dtresch)) : 'N/A' ?></td>
 				<!--<td><?= 'N/A' ?></td>-->
 				<td><?= ($row->v_closeddate) ? date("d/m/Y",strtotime($row->v_closeddate)) : 'N/A' ?></td>
-				<td><?= ($row->v_AcceptedBy) ? $row->v_AcceptedBy : 'N/A' ?></td>
+				<!--<td><?= ($row->v_AcceptedBy) ? $row->v_AcceptedBy : 'N/A' ?></td>-->
 
 				<td><?= ($row->v_UserDeptDesc) ? $row->v_location_name.' ('.$row->v_location_code.')' : 'N/A' ?></td>
 				<?php if ($this->input->get('broughtfwd') != '') { ?>
@@ -398,7 +398,7 @@ if ($this->input->get('ex') == ''){
 							<!--<th rowspan=2 style="width:7%;">Schedule Date</th>-->
 							<th rowspan=2 style="width:7%;">Reschedule Date</th>
 							<th rowspan=2 style="width:7%;">Complete Date</th>
-							<th rowspan=2 style="width:7%;">Acceptance By</th>
+							<!--<th rowspan=2 style="width:7%;">Acceptance By</th>-->
 							<th rowspan=2 style="width:10%;">Deparment (Location Code)</th>
 							<th rowspan=2 style="width:5%;">Asset Group</th>
 						</tr>
@@ -429,7 +429,7 @@ if ($this->input->get('ex') == ''){
 							<td><?= ($row->dtresch) ? date("d/m/Y",strtotime($row->dtresch)) : 'N/A' ?></td>
 							<!--<td><?= 'N/A' ?></td>-->
 							<td><?= ($row->v_closeddate) ? date("d/m/Y",strtotime($row->v_closeddate)) : 'N/A' ?></td>
-							<td><?= ($row->v_AcceptedBy) ? $row->v_AcceptedBy : 'N/A' ?></td>
+							<!--<td><?= ($row->v_AcceptedBy) ? $row->v_AcceptedBy : 'N/A' ?></td>-->
 
 							<td><?= ($row->v_UserDeptDesc) ? $row->v_location_name.' ('.$row->v_location_code.')' : 'N/A' ?></td>
 				<?php if ($this->input->get('broughtfwd') != '') { ?>
@@ -602,7 +602,7 @@ if ($this->input->get('ex') == ''){
 							<!--<th rowspan=2 style="width:7%;">Schedule Date</th>-->
 							<th rowspan=2 style="width:7%;">Reschedule Date</th>
 							<th rowspan=2 style="width:7%;">Complete Date</th>
-							<th rowspan=2 style="width:7%;">Acceptance By</th>
+							<!--<th rowspan=2 style="width:7%;">Acceptance By</th>-->
 							<th rowspan=2 style="width:12%;">Deparment (Location Code)</th>
 							<th rowspan=2>Asset Group</th>
 						</tr>
@@ -634,7 +634,7 @@ if ($this->input->get('ex') == ''){
 							<td><?= ($row->dtresch) ? date("d/m/Y",strtotime($row->dtresch)) : 'N/A' ?></td>
 							<!--<td><?= 'N/A' ?></td>-->
 							<td><?= ($row->v_closeddate) ? date("d/m/Y",strtotime($row->v_closeddate)) : 'N/A' ?></td>
-							<td><?= ($row->v_AcceptedBy) ? $row->v_AcceptedBy : 'N/A' ?></td>
+							<!--<td><?= ($row->v_AcceptedBy) ? $row->v_AcceptedBy : 'N/A' ?></td>-->
 
 							<td><?= ($row->v_UserDeptDesc) ? $row->v_location_name.' ('.$row->v_location_code.')' : 'N/A' ?></td>
 							<?php if ($this->input->get('broughtfwd') != '') { ?>

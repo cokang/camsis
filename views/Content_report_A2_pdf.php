@@ -50,7 +50,7 @@ switch ($x) {
 				<!--<th rowspan="2">Schedule Date</th>-->
 				<th rowspan="2">Reschedule Date</th>
 				<th rowspan="2">Complete Date</th>
-				<th rowspan="2">Acceptance By</th>
+				<!--<th rowspan="2">Acceptance By</th>-->
 				<th rowspan="2" width="80">Deparment (Location Code)</th>
 				<th rowspan="2">Asset Group</th>
 			</tr>
@@ -75,7 +75,7 @@ switch ($x) {
 				<td><?= ($row->dtresch) ? date("d/m/Y",strtotime($row->dtresch)) : 'N/A' ?></td>
 				<!--<td><?= 'N/A' ?></td>-->
 				<td><?= ($row->v_closeddate) ? date("d/m/Y",strtotime($row->v_closeddate)) : 'N/A' ?></td>
-				<td><?= ($row->v_AcceptedBy) ? $row->v_AcceptedBy : 'N/A' ?></td>
+				<!--<td><?= ($row->v_AcceptedBy) ? $row->v_AcceptedBy : 'N/A' ?></td>-->
 				<td><?= ($row->v_UserDeptDesc) ? $row->v_location_name.' ('.$row->v_location_code.')' : 'N/A' ?></td>
 				<?php if ($this->input->get('broughtfwd') != '') { ?>
 				<td><?= ($row->V_Asset_WG_code) ? $row->V_Asset_WG_code : 'N/A' ?></td>

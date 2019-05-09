@@ -56,20 +56,52 @@
 				<tr>
 					<td class="td-assest">Asset Group :</td>			
 					<td><?php 
-						$assetgroup = array(
-							'' => 'Please Select',
-							'1' => 'Group 1',
-							'2' => 'Group 2',
-							'3' => 'Group 3',
-							);
-					?>
-					<?php echo form_dropdown('a_group', $assetgroup, set_value('a_group',isset($asset_det[0]->v_asset_grp) == TRUE ? $asset_det[0]->v_asset_grp : 'N/A') , 'class="dropdown n_wi-date"'); ?></td>
+										$layanan=$this->session->userdata('usersess');
+											$assetgroup = array(
+												'' => 'Please Select',
+												'1' => 'Group 1',
+												'2' => 'Group 2',
+												'3' => 'Group 3',
+												);
+											$assetgroup2 = array(
+												'' => 'Please Select',
+												'1' => 'Group 1',
+												'1B' => 'Group 1B',
+												'2' => 'Group 2',
+												'3' => 'Group 3',
+												'4' => 'Group 4',
+												'5' => 'Group 5',
+												);	
+										?>
+										<?php echo form_dropdown('a_group',($layanan=='BES') ? $assetgroup2 : $assetgroup , set_value('a_group',isset($asset_det[0]->v_asset_grp) == TRUE ? $asset_det[0]->v_asset_grp : 'N/A') , 'class="dropdown n_wi-date"'); ?></td>
 				</tr>
+				      <?php if ($layanan=='BES') {?>
+					  <?php
+					  $setnilai=null;
+					  if($asset_det[0]->V_GEN_status){
+					  foreach ($maintaincat as $key=>$test){
+						  $nilai= explode("|", $key);
+						 if($nilai[0]==$asset_det[0]->V_GEN_status){
+							 $setnilai=$key; 
+						 }
+					  }
+					   }
+					  ?>
+									<tr>
+										<td style="padding-left:10px;">Maintenance Category :</td>
+										<td  valign="top">
+									
+										<?php echo form_dropdown('maintaincat', $maintaincat , set_value('maintaincat',isset($asset_det[0]->V_GEN_status) == TRUE ? $setnilai : 'N/A')  , 'class="dropdown n_wi-date"'); ?>
+										</td>
+									</tr>
+								   <?php } ?>
 				<tr class="ui-header-new">
 					<td align="center" colspan="2"><input type="submit" class="btn-button btn-primary-button" name="mysubmit" value="Save" style="width:200px;"></td>
 				</tr>
+				
 			</table>
-		</div>	
+		</div>
+		
 		</form>				
 	</div>
 <?php include 'content_jv_popup.php';?>

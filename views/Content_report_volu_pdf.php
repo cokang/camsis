@@ -68,6 +68,9 @@ $colspan='colspan="18"';
 			case "FUR":
 				$tulis = "Furniture / Fitting - Related Report";
 				break;
+			case "AP":
+				$tulis = "AP - Internal Request";
+				break;
 			default:
 				$tulis = "All";
 				break;

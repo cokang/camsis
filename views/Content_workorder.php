@@ -42,9 +42,12 @@
     case "9":
         $tulis = "A9";
         break;
-		case "10":
+	case "10":
         $tulis = "A10";
         break;
+	case "AP":
+        $tulis = "AP-Internal Request(AP)";
+        break;	
     case "11":
         $tulis = "Opened & BO";
         break;
@@ -53,10 +56,10 @@
 } ?>
 			<?php include 'content_workorder_tab.php';?>
 			<tr class="ui-color-contents-style-1 nonetr">
-				<td colspan="12" height="40px" style="padding-left:10px; color:black;"><?=$tulis?> Requests <span style="color:red;"><?= $totalrec > 0 ? ': Total WO '.$totalrec : ''?> <?=$status?></span></td>
+				<td colspan="13" height="40px" style="padding-left:10px; color:black;"><?=$tulis?> Requests <span style="color:red;"><?= $totalrec > 0 ? ': Total WO '.$totalrec : ''?> <?=$status?></span></td>
 			</tr>
 			<tr class="ui-color-contents-style-1">
-				<td colspan="12" height="40px">
+				<td colspan="13" height="40px">
 					<table width="100%" class="ui-content-middle-menu-desk">
 						<tr style="background:#B3130A;">
 							<td width="3%" height="30px">
@@ -79,10 +82,10 @@
 				</td>
 			</tr>	
 			<tr class="ui-color-contents-style-1 ui-left_web">
-				<td height="25px" colspan="12"></td>
+				<td height="25px" colspan="13"></td>
 				</tr>		
 			<tr class="ui-color-contents-style-1">
-				<td colspan="12" style="">
+				<td colspan="13" style="">
 				<style>
 				.ui-content-middle-menu-workorder2 tr td {padding:8px;font-size:14px;}
 				</style>
@@ -185,7 +188,7 @@
 				</td>
 			</tr>
 			<tr class="ui-header-new" style="height:5px;">
-				<td align="center" colspan="12">
+				<td align="center" colspan="13">
 				</td>
 			</tr>
 		</table>

@@ -147,7 +147,7 @@ for ($dyear = '2015';$dyear <= date("Y");$dyear++){
 					<th>Total Outstanding</th>
 				</tr>
 				<tr style="text-align:center;">
-					<td><?=$year?></td>
+					<td><?=date('F', mktime(0, 0, 0, $month, 10))?> <?=$year?></td>
 					<td><?php if ($rqsum[0]->total == 0) { echo "0"; } else {echo anchor('contentcontroller/report_a2?m='.$month.'&y='.$year.'&req='.$reqtype.'&stat=fbfb&grp='.$this->input->get('grp').'&btp=1',$rqsum[0]->total);} ?></td>
 					<td><?php if ($rqsum[0]->comp == 0) { echo "0"; } else {echo anchor('contentcontroller/report_a2?m='.$month.'&y='.$year.'&req='.$reqtype.'&stat=A&grp='.$this->input->get('grp').'&btp=1',$rqsum[0]->comp);} ?></td>
 					<td><?php if ($rqsum[0]->resch == 0) {echo "0";} else {echo anchor('contentcontroller/report_a2?m='.$month.'&y='.$year.'&req='.$reqtype.'&stat=fbfb&grp='.$this->input->get('grp').'&btp=1&resch=in',$rqsum[0]->resch);} ?></td>

@@ -38,7 +38,7 @@
 				    <td>Hospital</td>
 					<td><?=isset($row->V_Hospitalcode) ? $row->V_Hospitalcode : ''?></td>
 					<td>Asset No</td>
-					<td><?=isset($row->V_Asset_no) ? $row->V_Asset_no : ''?></td>
+					<td><?=isset($row->V_Tag_no) ? $row->V_Tag_no : ''?></td>
 				  </tr>
 				  <tr>
 				    <td>Asset Description</td>

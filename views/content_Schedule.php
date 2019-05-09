@@ -12,6 +12,8 @@
 								'1B' => 'Group 1B',
 								'2' => 'Group 2',
 								'3' => 'Group 3',
+								'4' => 'Group 4',
+								'5' => 'Group 5'
 								);
 						?>
 						<?php echo form_dropdown('grp', $assetgroup, set_value('grp',$grpsel) , 'class="dropdown" style="width:140px;" onchange="this.form.submit()"'); ?>
@@ -621,6 +623,23 @@
 				</td>
 			</tr>
 			<?php  } ?>
+
+			<?php  if (in_array("contentcontroller/AP",$chkers)) { ?>
+			<tr class="<?php  $number++; echo evenodd($number); ?>">
+				<td colspan="4">
+					<?php echo anchor ('contentcontroller/report_reqAP?m='.$month.'&y='.$year.'&grp='.$this->input->get('grp').'&req=AP', '<img src="'. base_url() .'images/user.png" alt="" class="ui-icon"/>&nbsp;&nbsp;&nbsp;&nbsp;Request Work Order Summary AP'); ?>
+				</td>
+			</tr>
+			<?php  } ?>
+			<?php // if (!in_array(substr($this->session->userdata('v_UserName'),0,4),$kecuali)) { ?>
+				<?php  if (in_array("contentcontroller/AP",$chkers)) { ?>
+			<tr class="<?php  $number++; echo evenodd($number); ?>">
+				<td colspan="4">
+					<?php echo anchor ('contentcontroller/report_volAP?m='.$month.'&y='.$year.'&stat=fbfb&grp='.$this->input->get('grp').'&req=AP', '<img src="'. base_url() .'images/user.png" alt="" class="ui-icon"/>&nbsp;&nbsp;&nbsp;&nbsp;Request Work Order Listing AP'); ?>
+				</td>
+			</tr>
+			<?php  } ?>
+
 			<tr class="ui-header-new" style="height:2px;">
 				<td align="center" colspan="7">
 				</td>

@@ -95,6 +95,7 @@ if ($this->input->get('ex') == 'excel'){
 					<th>Asset<br/>Status</th>
 					<th>File/MDA</th>
 					<th>Asset Group</th>
+					<th>Maintenance Category</th>
 				</tr>
 			</thead>
 			<?php  if (!empty($record)) {?>
@@ -123,6 +124,7 @@ if ($this->input->get('ex') == 'excel'){
 					<td><?= ($row->v_AssetStatus) ? $row->v_AssetStatus : 'N/A' ?></td>
 					<td><?= ($row->V_File_Ref_no) ? $row->V_File_Ref_no : 'N/A' ?></td>
 					<td><?= ($row->v_asset_grp) ? $row->v_asset_grp : 'N/A' ?></td>
+					<td><?= ($row->cat_name) ? $row->cat_name : 'N/A' ?></td>
 				</tr>
 				<?php $numrow++; endforeach;?>
 			</tbody>

@@ -191,8 +191,8 @@ if ($this->input->get('ex') == ''){
 				<td><?= ($row->V_Asset_name) ? $row->V_Asset_name : 'N/A' ?></td>
 				<td><?= ($row->V_User_dept_code) ? $row->V_User_dept_code : 'N/A' ?></td>
 				<td><?= ($row->V_request_status) ? $row->V_request_status : 'N/A' ?></td>
-				<td><?= 'N/A' ?></td>
-				<td><?= 'N/A' ?></td>
+				<td><?= ($row->v_stest) ? $row->v_stest : 'N/A' ?></td>
+				<td><?= ($row->v_ptest) ? $row->v_ptest : 'N/A' ?></td>
 				<td><?= ($row->schedule_d) ? date("d/m/Y",strtotime($row->schedule_d)) : 'N/A' ?></td>
 				<td><?= ($row->v_ActionTaken) ? $row->v_ActionTaken : 'N/A' ?></td>
 				<td><?= ($row->dtresch) ? date("d/m/Y",strtotime($row->dtresch)) : 'N/A' ?></td>
@@ -392,7 +392,7 @@ if ($this->input->get('ex') == ''){
 							<th rowspan=2 style="width:7%;">Equipment Name</th>
 							<th rowspan=2 style="width:4%;">UDP</th>
 							<th rowspan=2 style="width:4%;">Status</th>
-							<th colspan=2 style="width:5%;">Test</th>
+							<th colspan=2 style="width:6%;">Test</th>
 							<th rowspan=2 style="width:7%;">Schedule Date</th>
 							<th rowspan=2 style="width:20%;">Remark</th>
 							<!--<th rowspan=2 style="width:7%;">Schedule Date</th>-->
@@ -422,8 +422,8 @@ if ($this->input->get('ex') == ''){
 							<td><?= ($row->V_Asset_name) ? $row->V_Asset_name : 'N/A' ?></td>
 							<td><?= ($row->V_User_dept_code) ? $row->V_User_dept_code : 'N/A' ?></td>
 							<td><?= ($row->V_request_status) ? $row->V_request_status : 'N/A' ?></td>
-							<td><?= 'N/A' ?></td>
-							<td><?= 'N/A' ?></td>
+						     <td><?= ($row->v_stest) ? $row->v_stest : 'N/A' ?></td>
+							<td><?= ($row->v_ptest) ? $row->v_ptest : 'N/A' ?></td>
 							<td><?= ($row->schedule_d) ? date("d/m/Y",strtotime($row->schedule_d)) : 'N/A' ?></td>
 							<td><?= ($row->v_ActionTaken) ? $row->v_ActionTaken : 'N/A' ?></td>
 							<td><?= ($row->dtresch) ? date("d/m/Y",strtotime($row->dtresch)) : 'N/A' ?></td>
@@ -627,8 +627,8 @@ if ($this->input->get('ex') == ''){
 							<td><?= ($row->V_Asset_name) ? $row->V_Asset_name : 'N/A' ?></td>
 							<td><?= ($row->V_User_dept_code) ? $row->V_User_dept_code : 'N/A' ?></td>
 							<td><?= ($row->V_request_status) ? $row->V_request_status : 'N/A' ?></td>
-							<td><?= 'N/A' ?></td>
-							<td><?= 'N/A' ?></td>
+							<td><?= ($row->v_stest) ? $row->v_stest : 'N/A' ?></td>
+							<td><?= ($row->v_ptest) ? $row->v_ptest : 'N/A' ?></td>
 							<td><?= ($row->schedule_d) ? date("d/m/Y",strtotime($row->schedule_d)) : 'N/A' ?></td>
 							<td><?= ($row->v_ActionTaken) ? $row->v_ActionTaken : 'N/A' ?></td>
 							<td><?= ($row->dtresch) ? date("d/m/Y",strtotime($row->dtresch)) : 'N/A' ?></td>

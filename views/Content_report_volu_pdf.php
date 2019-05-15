@@ -118,6 +118,7 @@ $colspan='colspan="18"';
 			<?php } else { ?>
 			<th <?=$rowspan?> style="width:35px;">Asset Group</th>
 			<?php } ?>
+			<th <?=$rowspan?>>Request Reason</th>
 		</tr>
 			<?php if (($this->session->userdata('usersess')=='BES') && ($this->input->get('req') <> 'A9')) { ?>
 		   <tr>
@@ -188,6 +189,7 @@ $colspan='colspan="18"';
 			<?php } else { ?>
 			<td><?= ($row->v_asset_grp) ? $row->v_asset_grp : 'N/A' ?></td>
 			<?php } ?>
+			 <td><?= ($row->v_ref_status) ? $row->v_ref_status : 'N/A' ?></td>
 		</tr>
 		<?php $numrow++; ?>
 		<?php endforeach;?>

@@ -1,9 +1,9 @@
 <?php
 
 class workorderlist_update_ctrl extends CI_Controller{
-	
+
 	function index(){
-	
+
     // load libraries for URL and form processing
     $this->load->helper(array('form', 'url'));
     // load library for form validation
@@ -49,7 +49,7 @@ class workorderlist_update_ctrl extends CI_Controller{
 
 if($this->form_validation->run()==FALSE)
 		{
-			
+
 		$data['wrk_ord'] = $this->input->post('wrk_ord');
 		$this->load->model("get_model");
 		$data['record'] = $this->get_model->request_update($data['wrk_ord']);
@@ -57,7 +57,7 @@ if($this->form_validation->run()==FALSE)
 		$this ->load->view("left");
 		$this ->load->view("Content_workorderlist_update",$data);
 		}
-		
+
 		else
 		{
 		$data['wrk_ord'] = $this->input->post('wrk_ord');
@@ -74,6 +74,7 @@ if($this->form_validation->run()==FALSE)
 		$this->load->model('update_model');
 		$insert_data = array(
 	                         'V_priority_code' => $this->input->post('n_priority'),
+	                         'v_ref_status' => $this->input->post('n_reason'),
 							 'D_time'=>$this->input->post('n_hour').':'.str_pad($this->input->post('n_min'), 2, 0, STR_PAD_LEFT),
 	                         'V_summary' => $this->input->post('n_summary'),
 	                         'V_Asset_no' => $this->input->post('n_asset_number'),
@@ -100,10 +101,10 @@ if($this->form_validation->run()==FALSE)
 		$fullname = $username[0]->v_UserName;
 
 		$this->load->model('insert_model');
-		
-		
+
+
 		$insert_data = array(
-		
+
 		'V_servicecode'=>$this->session->userdata('usersess'),
 		'V_requestor'=>$this->input->post('n_requested'),
 		'V_request_type'=>'A4',
@@ -144,9 +145,9 @@ if($this->form_validation->run()==FALSE)
 		$this->update_model->bookingwoused($insert_data,$RN);
 		redirect('contentcontroller/booking_list?whatid='.$this->input->post('whatid'));
 	}
-	
 
-	
+
+
 	}
 
 }

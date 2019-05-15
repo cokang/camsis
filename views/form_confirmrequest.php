@@ -37,6 +37,13 @@
 											<td style="padding-left:10px;" valign="top"><input type="text" name="n_priority"  value="<?php echo $this->input->post('n_priority');?>" class="form-control-button2 n_wi-date2" readonly/>
 											</td>
 										</tr>
+										<?php if($this->input->get('wo')=='AP'){?>
+										<tr>
+											<td style="padding-left:10px;" valign="top">Request Reason :  </td>
+											<td style="padding-left:10px;" valign="top"><input type="text" name="n_reason"  value="<?php echo $this->input->post('n_reason');?>" class="form-control-button2 n_wi-date2" readonly/>
+											</td>
+										</tr>
+										<?php } ?>
 										<tr>
 											<td style="padding-left:10px;" valign="top">Summary : </td>
 											<td style="padding-left:10px;"><textarea class="Input" name="n_summary n_com2" readonly><?php echo set_value('n_summary'); ?></textarea></td>
@@ -163,6 +170,7 @@
 			</table>
 		</div>
 	<?php echo form_hidden('n_request_type',$this->input->post('n_request_type'));?>
+	<?php echo form_hidden('n_reason',$this->input->post('n_reason'));?>
 	<?php echo form_hidden('n_request_date',date('y-m-d',strtotime($this->input->post('n_request_date'))));?>
 	<?php echo form_hidden('n_priority',$this->input->post('n_priority'));?>
 	<?php echo form_hidden('V_servicecode',$this->session->userdata('usersess'));?>

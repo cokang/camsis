@@ -9,11 +9,11 @@ if ($this->input->get('ex') == 'excel'){
 <?php if ($this->input->get('ex') == ''){ ?>
 	<div id="Instruction" class="pr-printer">
 		<div class="header-pr">Statutory &amp; License Summary </div>
-		<button onclick="javascript:myFunction('report_rsls?m=<?=$month?>&y=<?=$year?>&none=closed&stat=<?php echo $this->input->get('stat');?>');" class="btn-button btn-primary-button">PRINT</button>
+		<button onclick="javascript:myFunction('report_rsls?m=<?=$month?>&y=<?=$year?>&none=closed&stat=<?php echo $this->input->get('stat');?>&expiring=<?=$this->input->get('expiring');?>');" class="btn-button btn-primary-button">PRINT</button>
 		<button type="cancel" class="btn-button btn-primary-button" onclick="window.history.back()">CANCEL</button>
 	<?php if (($this->input->get('ex') == '') or ($this->input->get('none') == '')){?>
-		<a href="<?php echo base_url();?>index.php/contentcontroller/report_rsls?m=<?=$this->input->get('m');?>&y=<?=$this->input->get('y');?>&ex=excel&none=close&stat=<?=$this->input->get('stat');?>&grp=<?=$this->input->get('grp');?>" style="float:right; margin-right:40px;"><img src="<?php echo base_url();?>images/excel.png" style="width:40px; height:38px; position:absolute;" title="export to excel"></a>
-		<a href="<?php echo base_url();?>index.php/contentcontroller/report_rsls?m=<?=$this->input->get('m');?>&y=<?=$this->input->get('y');?>&pdf=1&stat=<?=$this->input->get('stat');?>&grp=<?=$this->input->get('grp');?>" style="float:right; margin-right:80px;"><img src="<?php echo base_url();?>images/pdf.png" style="width:40px; height:38px; position:absolute;" title="export to pdf"></a>
+		<a href="<?php echo base_url();?>index.php/contentcontroller/report_rsls?m=<?=$this->input->get('m');?>&y=<?=$this->input->get('y');?>&ex=excel&none=close&stat=<?=$this->input->get('stat');?>&expiring=<?=$this->input->get('expiring');?>&grp=<?=$this->input->get('grp');?>" style="float:right; margin-right:40px;"><img src="<?php echo base_url();?>images/excel.png" style="width:40px; height:38px; position:absolute;" title="export to excel"></a>
+		<a href="<?php echo base_url();?>index.php/contentcontroller/report_rsls?m=<?=$this->input->get('m');?>&y=<?=$this->input->get('y');?>&pdf=1&stat=<?=$this->input->get('stat');?>&expiring=<?=$this->input->get('expiring');?>&grp=<?=$this->input->get('grp');?>" style="float:right; margin-right:80px;"><img src="<?php echo base_url();?>images/pdf.png" style="width:40px; height:38px; position:absolute;" title="export to pdf"></a>
 	<?php } ?>
 	</div>
 <?php } ?>

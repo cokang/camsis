@@ -130,6 +130,31 @@
 									<label for="radio-1-2"></label><span style="color:red;"> Emergency</span><br>
 								</td>
 							</tr>
+									<?php $str = explode("/",$this->input->post('wrk_ord'));?>
+								 <?php if(in_array("AP",$str)) {?>	
+							<tr>
+										<td></td>
+										</tr>
+										<tr>
+										<td></td>
+										</tr>
+										<tr>
+										<td></td>
+										</tr>
+										<tr>
+											<td style="padding-left:10px;" valign="top">Request Reason:  </td>
+											<td style="padding-left:10px;" valign="top">
+												<input type="radio" id="radio-1-15" name="n_reason" class="regular-radio" value="MRIN" <?php echo set_radio('n_reason', 'MRIN'); ?> <?= isset($record[0]->v_ref_status) &&  $record[0]->v_ref_status == 'MRIN' ? 'checked' : ''?>//>
+												<label for="radio-1-15"></label> MRIN<br>
+												<input type="radio" id="radio-1-16" name="n_reason" class="regular-radio" value="Quotation" <?php echo set_radio('n_reason', 'Quotation'); ?> <?= isset($record[0]->v_ref_status) &&  $record[0]->v_ref_status == 'Quotation' ? 'checked' : ''?>/>
+												<label for="radio-1-16"></label> Quotation<br>
+												<input type="radio" id="radio-1-17" name="n_reason" class="regular-radio" value="Operation" <?php echo set_radio('n_reason', 'Operation'); ?> <?= isset($record[0]->v_ref_status) &&  $record[0]->v_ref_status == 'Operation' ? 'checked' : ''?>/>
+												<label for="radio-1-17"></label> Operation<br>
+												<input type="radio" id="radio-1-18" name="n_reason" class="regular-radio" value="Others" <?php echo set_radio('n_reason', 'Others'); ?> <?= isset($record[0]->v_ref_status) &&  $record[0]->v_ref_status == 'Others' ? 'checked' : ''?>/>
+												<label for="radio-1-18"></label> Others<br>
+											</td>
+										</tr>
+								 <?php } ?>	
 							<tr>
 								<td class="td-assest" valign="top">Summary : </td>
 								<td ><textarea name="n_summary" class="input n_com2"><?php echo set_value('n_summary', isset($record[0]->V_summary) == TRUE ? $record[0]->V_summary : 'N/A'); ?></textarea></td>
@@ -170,7 +195,9 @@
 							</tr>
 							<tr>
 								<td class="td-assest" valign="top">Designation : </td>
-								<td  valign="top">	
+								<?php $str = explode("/",$this->input->get('wrk_ord'));?>
+								<td  valign="top">
+                                   <?php if(!in_array("AP",$str)) {?>								
 									<input type="radio" id="radio-1-3" name="n_designation" class="regular-radio" value = "Doctor" <?php echo set_radio('n_designation', 'Doctor', TRUE); ?><?= isset($record[0]->V_MohDesg) && $record[0]->V_MohDesg == 'Doctor' ? 'checked' : 'checked'?>/>   
 									<label for="radio-1-3"></label> Doctor<br>
 									<input type="radio" id="radio-1-4" name="n_designation" class="regular-radio" value = "Matron" <?php echo set_radio('n_designation', 'Matron'); ?><?= isset($record[0]->V_MohDesg) && $record[0]->V_MohDesg == 'Matron' ? 'checked' : ''?>/>   
@@ -188,11 +215,12 @@
 									<input type="radio" id="radio-1-10" name="n_designation" class="regular-radio" value = "Staff Nurse" <?php echo set_radio('n_designation', 'Staff Nurse'); ?><?= isset($record[0]->V_MohDesg) && $record[0]->V_MohDesg == 'Staff Nurse' ? 'checked' : ''?>/>   
 									<label for="radio-1-10"></label> Staff Nurse<br>
 									<input type="radio" id="radio-1-11" name="n_designation" class="regular-radio" value = "Supervisor" <?php echo set_radio('n_designation', 'Supervisor'); ?><?= isset($record[0]->V_MohDesg) && $record[0]->V_MohDesg == 'Supervisor' ? 'checked' : ''?>/>   
-									<label for="radio-1-11"></label> Supervisor<br>
-									<input type="radio" id="radio-1-12" name="n_designation" class="regular-radio" value = "APSB" <?php echo set_radio('n_designation', 'APSB'); ?><?= isset($record[0]->V_MohDesg) && $record[0]->V_MohDesg == 'APSB' ? 'checked' : ''?>/>   
-									<label for="radio-1-12"></label> APSB<br>
+									<label for="radio-1-11"></label> Supervisor<br>                                  
 									<input type="radio" id="radio-1-13" name="n_designation" class="regular-radio" value = "PMSB" <?php echo set_radio('n_designation', 'PMSB'); ?><?= isset($record[0]->V_MohDesg) && $record[0]->V_MohDesg == 'PMSB' ? 'checked' : ''?>/>   
 									<label for="radio-1-13"></label> PMSB<br>
+								   <?php } ?>
+								   <input type="radio" id="radio-1-12" name="n_designation" class="regular-radio" value = "APSB" <?php echo set_radio('n_designation', 'APSB'); ?><?= isset($record[0]->V_MohDesg) && $record[0]->V_MohDesg == 'APSB' ? 'checked' : ''?>/>   
+									<label for="radio-1-12"></label> APSB<br>  
 									<input type="radio" id="radio-1-14" name="n_designation" class="regular-radio" value = "APFMS" <?php echo set_radio('n_designation', 'APFMS'); ?><?= isset($record[0]->V_MohDesg) && $record[0]->V_MohDesg == 'APFMS' ? 'checked' : ''?>/>   
 									<label for="radio-1-14"></label> APFMS<br>
 								</td>

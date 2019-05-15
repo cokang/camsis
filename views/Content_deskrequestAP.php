@@ -141,6 +141,28 @@
 											</td>
 										</tr>
 										<tr>
+										<td></td>
+										</tr>
+										<tr>
+										<td></td>
+										</tr>
+										<tr>
+										<td></td>
+										</tr>
+										<tr>
+											<td style="padding-left:10px;" valign="top">Request Reason:  </td>
+											<td style="padding-left:10px;" valign="top">
+												<input type="radio" id="radio-1-15" name="n_reason" class="regular-radio" value="MRIN" <?php echo set_radio('n_reason', 'MRIN'); ?>/>
+												<label for="radio-1-15"></label> MRIN<br>
+												<input type="radio" id="radio-1-16" name="n_reason" class="regular-radio" value="Quotation" <?php echo set_radio('n_reason', 'Quotation'); ?>/>
+												<label for="radio-1-16"></label> Quotation<br>
+												<input type="radio" id="radio-1-17" name="n_reason" class="regular-radio" value="Operation" <?php echo set_radio('n_reason', 'Operation'); ?>/>
+												<label for="radio-1-17"></label> Operation<br>
+												<input type="radio" id="radio-1-18" name="n_reason" class="regular-radio" value="Others" <?php echo set_radio('n_reason', 'Others'); ?>/>
+												<label for="radio-1-18"></label> Others<br>
+											</td>
+										</tr>
+										<tr>
 											<td style="padding-left:10px;" valign="top">Summary : </td>
 											<td style="padding-left:10px;"><textarea class="Input n_com2" name="n_summary" cols="17" rows="6"><?php echo set_value('n_summary'); ?></textarea></td>
 										</tr>
@@ -154,7 +176,7 @@
 					<?php if ($this->session->userdata('usersess')=='BES' OR $this->session->userdata('usersess')=='FES') {?>
 					<table class="ui-content-form-reg">
 						<tr style="color:white;" height="30px">
-							<td colspan="2" class="ui-header-new"><b>Related Asset (Compulsory For A4 Request)</b></td>
+							<td colspan="2" class="ui-header-new"><b>Related Asset</b></td>
 						</tr>
 						<tr >
 							<td class="ui-desk-style-table">
@@ -199,28 +221,6 @@
 									<tr>
 										<td style="padding-left:10px;" valign="top">Designation : </td>
 										<td style="padding-left:10px; padding-top:5px;" valign="top">
-											<input type="radio" id="radio-1-15" name="n_designation" class="regular-radio" value = "Professor" <?php echo set_radio('n_designation', 'Professor', TRUE); ?>/>
-											<label for="radio-1-15"></label> Professor<br>
-											<input type="radio" id="radio-1-16" name="n_designation" class="regular-radio" value = "Doctor" <?php echo set_radio('n_designation', 'Doctor'); ?>/>
-											<label for="radio-1-16"></label> Doctor<br>
-											<input type="radio" id="radio-1-17" name="n_designation" class="regular-radio" value = "Matron" <?php echo set_radio('n_designation', 'Matron'); ?>/>
-											<label for="radio-1-17"></label> Matron<br>
-											<input type="radio" id="radio-1-18" name="n_designation" class="regular-radio" value = "Medical Assistant" <?php echo set_radio('n_designation', 'Medical Assistant'); ?>/>
-											<label for="radio-1-18"></label> Medical Assistant<br>
-											<input type="radio" id="radio-1-19" name="n_designation" class="regular-radio" value = "IIUM Officer" <?php echo set_radio('n_designation', 'IIUM Officer'); ?>/>
-											<label for="radio-1-19"></label> IIUM Officer<br>
-											<input type="radio" id="radio-1-20" name="n_designation" class="regular-radio" value = "Sister In-Charge" <?php echo set_radio('n_designation', 'Sister In-Charge'); ?>/>
-											<label for="radio-1-20"></label> Sister In-Charge<br>
-											<input type="radio" id="radio-1-21" name="n_designation" class="regular-radio" value = "Sister On Duty" <?php echo set_radio('n_designation', 'Sister On Duty'); ?>/>
-											<label for="radio-1-21"></label> Sister On Duty<br>
-											<input type="radio" id="radio-1-22" name="n_designation" class="regular-radio" value = "Specialist" <?php echo set_radio('n_designation', 'Specialist'); ?>/>
-											<label for="radio-1-22"></label> Specialist<br>
-											<input type="radio" id="radio-1-23" name="n_designation" class="regular-radio" value = "Staff Nurse" <?php echo set_radio('n_designation', 'Staff Nurse'); ?>/>
-											<label for="radio-1-23"></label> Staff Nurse<br>
-											<input type="radio" id="radio-1-24" name="n_designation" class="regular-radio" value = "Supervisor" <?php echo set_radio('n_designation', 'Supervisor'); ?>/>
-											<label for="radio-1-24"></label> Supervisor<br>
-											<input type="radio" id="radio-1-25" name="n_designation" class="regular-radio" value = "PMSB" <?php echo set_radio('n_designation', 'PMSB'); ?>/>
-											<label for="radio-1-25"></label> PMSB<br>
 											<input type="radio" id="radio-1-26" name="n_designation" class="regular-radio" value = "APFMS" <?php echo set_radio('n_designation', 'APFMS'); ?>/>
 											<label for="radio-1-26"></label> APFMS<br>
 											<input type="radio" id="radio-1-27" name="n_designation" class="regular-radio" value = "APSB" <?php echo set_radio('n_designation', 'APSB'); ?>/>

@@ -98,6 +98,7 @@ $colspan="colspan='18'";
 						<?php } else { ?>
 						<th <?=$rowspan?>>Asset Group</th>
 						<?php } ?>
+						<th <?=$rowspan?>>Request Reason</th>
 					</tr>
 					<?php if (($this->session->userdata('usersess')=='BES') && ($this->input->get('req') <> 'A9')) { ?>
                     <tr <?=$display?>>
@@ -166,6 +167,7 @@ $colspan="colspan='18'";
 								<?php } else { ?>
 									<td><?= ($row->v_asset_grp) ? $row->v_asset_grp : 'N/A' ?></td>
 								<?php } ?>
+									 <td><?= ($row->v_ref_status) ? $row->v_ref_status : 'N/A' ?></td>
 							</tr>
 	        					<?php $numrow++; ?>
 			    		<?php endforeach;?>
@@ -302,6 +304,7 @@ $colspan="colspan='18'";
 
 									<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:10%;'";}?>>Dept/Loc</th>
 									<th <?=$rowspan?>><?php if($this->input->get('wid')== 1){ echo "grp";}else{ if($this->input->get('broughtfwd') != ''){echo "Work Order Group";} else{echo "Asset Group";}}?></th>
+								<th <?=$rowspan?>>Request Reason</th>
 								</tr>
 								<tr <?=$display?>>
 					            <th>S</th>
@@ -372,7 +375,7 @@ $colspan="colspan='18'";
 									<?php } else { ?>
 										<td><?= ($row->v_asset_grp) ? $row->v_asset_grp : 'N/A' ?></td>
 									<?php } ?>
-
+	                              <td><?= ($row->v_ref_status) ? $row->v_ref_status : 'N/A' ?></td>
 			        			</tr>
 
 					<?php $numrow++; ?>
@@ -522,6 +525,7 @@ $colspan="colspan='18'";
 
 									<th <?=$rowspan?> <?php if($this->input->get('wid')== 1){ echo "style='width:10%;'";}?>>Dept/Loc</th>
 									<th <?=$rowspan?> ><?php if($this->input->get('wid')== 1){ echo "grp";}else{ if($this->input->get('broughtfwd') != ''){echo "Work Order Group";} else{echo "Asset Group";}}?></th>
+									<th <?=$rowspan?>>Request Reason</th>
 								</tr>
 
                           <tr <?=$display?>>
@@ -592,6 +596,7 @@ $colspan="colspan='18'";
 										<?php } else { ?>
 											<td><?= ($row->v_asset_grp) ? $row->v_asset_grp : 'N/A' ?></td>
 										<?php } ?>
+										<td><?= ($row->v_ref_status) ? $row->v_ref_status : 'N/A' ?></td>
 				        			</tr>
 								<?php $numrow++; endforeach;?>
 

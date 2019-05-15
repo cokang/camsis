@@ -10,6 +10,9 @@ class workorder_ctrl extends CI_Controller {
     // load library for form validation
     $this->load->library('form_validation');
     // validation rule
+	    if ($this->input->get('wo')=='AP'){
+		$this->form_validation->set_rules('n_reason','Request Reason','trim|required');
+		}
 		$this->form_validation->set_rules('n_request_type','Request Type','trim|required');
 		$this->form_validation->set_rules('n_request_date','Request Date','trim|required');
 		$this->form_validation->set_rules('n_hour','Hour Requested','trim|required');
@@ -103,6 +106,7 @@ class workorder_ctrl extends CI_Controller {
 		'V_servicecode'=>$this->session->userdata('usersess'),
 		'V_requestor'=>$this->input->post('n_requested'),
 		'V_request_type'=>$this->input->post('n_request_type'),
+		'v_ref_status'=>$this->input->post('n_reason'),
 		'D_date'=> $this->input->post('n_request_date') ? date('Y-m-d ', strtotime($this->input->post('n_request_date'))).$this->input->post('n_hour').':'.str_pad($this->input->post('n_min'), 2, 0, STR_PAD_LEFT) : NULL,
 		'D_time'=>$this->input->post('n_hour').':'.str_pad($this->input->post('n_min'), 2, 0, STR_PAD_LEFT),
 		'V_MohDesg'=>$this->input->post('n_designation'),

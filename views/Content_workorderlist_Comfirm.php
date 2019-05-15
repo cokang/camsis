@@ -126,6 +126,31 @@
 									<label for="radio-1-2"></label><span style="color:red;"> Emergency</span><br>
 								</td>
 							</tr>
+								<?php $str = explode("/",$this->input->post('wrk_ord'));?>
+								 <?php if(in_array("AP",$str)) {?>	
+								<tr>
+										<td></td>
+										</tr>
+										<tr>
+										<td></td>
+										</tr>
+										<tr>
+										<td></td>
+										</tr>
+										<tr>
+											<td style="padding-left:10px;" valign="top">Request Reason:  </td>
+											<td style="padding-left:10px;" valign="top">
+												<input type="radio" id="radio-1-15" name="n_reason" class="regular-radio" value="MRIN" <?php echo set_radio('n_reason', 'MRIN'); ?> disabled/>
+												<label for="radio-1-15"></label> MRIN<br>
+												<input type="radio" id="radio-1-16" name="n_reason" class="regular-radio" value="Quotation" <?php echo set_radio('n_reason', 'Quotation'); ?> disabled/>
+												<label for="radio-1-16"></label> Quotation<br>
+												<input type="radio" id="radio-1-17" name="n_reason" class="regular-radio" value="Operation" <?php echo set_radio('n_reason', 'Operation'); ?> disabled/>
+												<label for="radio-1-17"></label> Operation<br>
+												<input type="radio" id="radio-1-18" name="n_reason" class="regular-radio" value="Others" <?php echo set_radio('n_reason', 'Others'); ?>disabled/>
+												<label for="radio-1-18"></label> Others<br>
+											</td>
+										</tr>
+								 <?php } ?>
 							<tr>
 								<td class="td-assest" valign="top">Summary : </td>
 								<td><textarea name="n_summary" class="input n_com2" disabled><?php echo set_value('n_summary'); ?></textarea></td>
@@ -164,7 +189,9 @@
 							</tr>
 							<tr>
 								<td class="td-assest" valign="top">Designation : </td>
+								<?php $str = explode("/",$this->input->post('wrk_ord'));?>
 								<td valign="top">	
+								 <?php if(!in_array("AP",$str)) {?>	
 									<input type="radio" id="radio-1-3" name="n_designation" class="regular-radio" <?php echo set_radio('n_designation', 'Doctor',true); ?> disabled/>   
 									<label for="radio-1-3"></label> Doctor<br>
 									<input type="radio" id="radio-1-4" name="n_designation" class="regular-radio" <?php echo set_radio('n_designation', 'Matron',true); ?> disabled/>   
@@ -183,10 +210,12 @@
 									<label for="radio-1-10"></label> Staff Nurse<br>
 									<input type="radio" id="radio-1-11" name="n_designation" class="regular-radio" <?php echo set_radio('n_designation', 'Supervisor',true); ?> disabled/>   
 									<label for="radio-1-11"></label> Supervisor<br>
-									<input type="radio" id="radio-1-12" name="n_designation" class="regular-radio" value = "APSB" <?php echo set_radio('n_designation', 'APSB'); ?><?= isset($record[0]->V_MohDesg) && $record[0]->V_MohDesg == 'APSB' ? 'checked' : ''?>disabled/>   
-									<label for="radio-1-12"></label> APSB<br>
 									<input type="radio" id="radio-1-13" name="n_designation" class="regular-radio" value = "PMSB" <?php echo set_radio('n_designation', 'PMSB'); ?><?= isset($record[0]->V_MohDesg) && $record[0]->V_MohDesg == 'PMSB' ? 'checked' : ''?>disabled/>   
 									<label for="radio-1-13"></label> PMSB<br>
+								 <?php } ?>
+									<input type="radio" id="radio-1-12" name="n_designation" class="regular-radio" value = "APSB" <?php echo set_radio('n_designation', 'APSB'); ?><?= isset($record[0]->V_MohDesg) && $record[0]->V_MohDesg == 'APSB' ? 'checked' : ''?>disabled/>   
+									<label for="radio-1-12"></label> APSB<br>
+							
 									<input type="radio" id="radio-1-14" name="n_designation" class="regular-radio" value = "APFMS" <?php echo set_radio('n_designation', 'APFMS'); ?><?= isset($record[0]->V_MohDesg) && $record[0]->V_MohDesg == 'APFMS' ? 'checked' : ''?>disabled/>   
 									<label for="radio-1-14"></label> APFMS<br>
 
@@ -226,6 +255,7 @@
 			</tr>
 		</table>
 		<?php echo form_hidden('wrk_ord', $this->input->post('wrk_ord')); ?>
+		<?php echo form_hidden('n_reason', $this->input->post('n_reason')); ?>
 		<?php echo form_hidden('n_request_date',$this->input->post('n_request_date'));?>
 		<?php echo form_hidden('n_hour',$this->input->post('n_hour'));?>
 		<?php echo form_hidden('n_min',$this->input->post('n_min'));?>

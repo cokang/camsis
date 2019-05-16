@@ -643,7 +643,7 @@
 				<?php  if (!in_array("contentcontroller/asset_searchReport",$chkers)) { ?>
 			<tr class="<?php  $number++; echo evenodd($number); ?>">
 				<td colspan="4">
-					<?php echo anchor ('contentcontroller/asset_searchReport?m='.$month.'&y='.$year.'&stat=fbfb&grp='.$this->input->get('grp').'&req=AP', '<img src="'. base_url() .'images/user.png" alt="" class="ui-icon"/>&nbsp;&nbsp;&nbsp;&nbsp;Search Asset'); ?>
+					<?php echo anchor ('contentcontroller/asset_searchReport', '<img src="'. base_url() .'images/user.png" alt="" class="ui-icon"/>&nbsp;&nbsp;&nbsp;&nbsp;Search Asset'); ?>
 				</td>
 			</tr>
 			<?php  } ?>

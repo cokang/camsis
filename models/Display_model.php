@@ -460,27 +460,28 @@
 			return $query_result;
 		}
 
-		function searchassettag($srch){
-			$this->db->select('R.V_Asset_no, R.V_Asset_name, R.V_Tag_no, R.V_User_Dept_code, R.V_Location_code, R.V_Manufacturer , M.V_Criticality, M.V_AssetCondition, M.v_AssetStatus, R.V_Model_no, R.V_Serial_no, R.V_hospitalcode');
-			$this->db->from('pmis2_egm_assetregistration R');
-			$this->db->join("pmis2_egm_assetmaintenance M","M.v_AssetNo = R.V_Asset_no AND M.v_Hospitalcode=R.V_Hospitalcode AND R.V_Actionflag <> 'D' AND R.v_service_code = '".$this->session->userdata('usersess')."'");
-			$this->db->like('R.v_tag_no', trim(str_replace("TAG:","",strtoupper($srch))));
-			$this->db->or_like('R.v_asset_name', trim($srch));
-			$this->db->or_like('R.v_user_dept_code', trim($srch));
-			$this->db->or_like('M.v_assetno', trim($srch));
-			//$this->db->join('pmis2_egm_jobdonedet j','wp.v_WrkOrdNo = j.v_Wrkordno');
-			$this->db->where("R.v_service_code = ",$this->session->userdata('usersess'));
-			$this->db->where("R.v_Actionflag <> ", "D");
-			$this->db->where("M.v_Actionflag <> ", "D");
-			$this->db->where("R.v_hospitalcode = ", $this->session->userdata('hosp_code'));
-			$this->db->order_by("R.v_tag_no, R.V_Asset_no");
-			//$this->db->where("R.V_Hospitalcode <> ", "D");
-			$query = $this->db->get();
-			//echo $this->db->last_query();
-			//exit();
-			$query_result = $query->result();
-			return $query_result;
-		}
+    function searchassettag($srch){
+      $this->db->select('R.V_Asset_no, R.V_Asset_name, R.V_Tag_no, R.V_User_Dept_code, R.V_Location_code, R.V_Manufacturer , M.V_Criticality, M.V_AssetCondition, M.v_AssetStatus, R.V_Model_no, R.V_Serial_no, R.V_hospitalcode,L.v_Location_Name');
+      $this->db->from('pmis2_egm_assetregistration R');
+      $this->db->join("pmis2_egm_assetmaintenance M","M.v_AssetNo = R.V_Asset_no AND M.v_Hospitalcode=R.V_Hospitalcode AND R.V_Actionflag <> 'D' AND R.v_service_code = '".$this->session->userdata('usersess')."'");
+      $this->db->join("pmis2_egm_assetlocation L","L.V_location_code=R.V_Location_code AND L.V_Hospitalcode=R.V_Hospitalcode AND L.V_Actionflag <> 'D'","left outer");
+      $this->db->like('R.v_tag_no', trim(str_replace("TAG:","",strtoupper($srch))));
+      $this->db->or_like('R.v_asset_name', trim($srch));
+      $this->db->or_like('R.v_user_dept_code', trim($srch));
+      $this->db->or_like('M.v_assetno', trim($srch));
+      //$this->db->join('pmis2_egm_jobdonedet j','wp.v_WrkOrdNo = j.v_Wrkordno');
+      $this->db->where("R.v_service_code = ",$this->session->userdata('usersess'));
+      $this->db->where("R.v_Actionflag <> ", "D");
+      $this->db->where("M.v_Actionflag <> ", "D");
+      $this->db->where("R.v_hospitalcode = ", $this->session->userdata('hosp_code'));
+      $this->db->order_by("R.v_tag_no, R.V_Asset_no");
+      //$this->db->where("R.V_Hospitalcode <> ", "D");
+      $query = $this->db->get();
+      //echo $this->db->last_query();
+      //exit();
+      $query_result = $query->result();
+      return $query_result;
+    }
 
 		function searchwo($srch){
 			$this->db->select("a.*,IFNULL(G.V_Tag_no,'N/A') as V_Tag_no",FALSE);

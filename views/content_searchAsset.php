@@ -24,10 +24,15 @@
 // Ajax post
 $(document).ready(function() {
 $(".submit").click(function(event) {
+jQuery("div#result").hide();	
 event.preventDefault();
 jQuery.ajax({
+type: "POST",
+url: "<?=base_url('index.php/ajax/ajax_searchReport');?>",
+data: "searchquestion="+$('#serch').val(),
+//dataType: "json",
 success: function(res) {
-// Show Entered Value
+ $('#live_data').html(res);
 jQuery("div#result").show(res);
 }
 });
@@ -44,47 +49,21 @@ jQuery("div#result").show(res);
 <?php include 'content_headprint.php';?>
 <div id="Instruction" >
 <center><!-- View List :  -->
-<form method="get" action="">
-<input type="text" placeholder="Asset No">  
-<input type="submit" value="Search" class="submit" onchange="javascript: submit()"/></center>
+<form method="" action="" >
+<input type="text" placeholder="Asset No" id="serch">  
+<input type="submit" class="submit"  onchange="javascript: submit()"/></center>
 </form>
 </div>
 
-<!-- <div class="main">
-<div id="content" style="text-align: center;">
-<h2 style="text-align: center;" id="form_head">Search Asset</h2><br/>
-<div id="form_input"> -->
-<!-- <?php
 
-// Form Open
-echo form_open();
-
-// Name Field
-$data_name = array(
-'name' => 'name',
-'class' => 'input-form',
-'placeholder' => 'Please Enter Asset No',
-'id' => 'name'
-);
-echo form_input($data_name);
-?>
-
-<span id="form_button">
-<?php echo form_submit('submit', 'Submit', "class='submit'"); ?>
-</span>
-</div>
-<?php
-// Form Close
-echo form_close(); ?> -->
 
 <?php
 // Display Result Using Ajax
 echo "<div id='result' style='display: none; text-align: center;' class='m-div'>";
 echo "<table class='table'><tr>";
 echo "<td class='label_output'>Result</td></tr>";
-echo "<tr><td></td><td class='label_output'>Asset No</td><td class='label_output'>:</td><td class='label_output'>XXXXX</td></tr>";
-echo "<tr><td></td><td class='label_output'>Name</td><td class='label_output'>:</td><td class='label_output'>YYYYY</td></tr>";
-echo "<tr><td></td><td class='label_output'>Location</td><td class='label_output'>:</td><td class='label_output'>ZZZZZ</td></tr>";
+echo " <tbody id='live_data'>
+		</tbody>";
 echo "</table>";
 echo "</div>";
 echo "</div>";

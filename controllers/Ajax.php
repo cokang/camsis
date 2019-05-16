@@ -98,4 +98,23 @@ class ajax extends CI_Controller {
 	$rep = $this->display_model->rephos($this->input->get('hosp_code'));
      echo $rep[0]->Rep;
 	}
+	public function ajax_searchReport(){
+ $this->load->model('display_model');
+	 if (strlen($this->input->post('searchquestion')) > 0) {
+//echo 'masuk 1';
+$data['serch_result'] = $this->display_model->searchassettag($this->input->post('searchquestion'));
+foreach ($data['serch_result'] as $row){
+echo "<tr><td></td><td class='label_output'>Asset No</td><td class='label_output'>:</td><td class='label_output'>".$row->V_Tag_no."</td></tr>";
+echo "<tr><td></td><td class='label_output'>Name</td><td class='label_output'>:</td><td class='label_output'>".$row->V_Asset_name."</td></tr>";
+echo "<tr><td></td><td class='label_output'>Location</td><td class='label_output'>:</td><td class='label_output'>".$row->v_Location_Name." (".$row->V_Location_code.")</td></tr>";
+echo "<tr><td></td><td></td><td></td></tr>";
+echo "<tr><td></td><td></td><td></td></tr>";
+}
+} else {
+//echo 'masuk 2';
+$data['serch_result'] = $this->display_model->searchassettag('taknkjmp');
+}
+$test='fdfsdf';
+
+}
 }

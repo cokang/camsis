@@ -58,6 +58,7 @@
 											<td class="td-assest">Vendor Code  :</td>
 											<td><input type="text"  name="n_vendor_code" value="<?=set_value('n_vendor_code')?>" class="form-control-button2 n_wi-date2" disabled></td>
 										</tr>
+										<!--
 										<tr>
 											<td class="td-assest">Vendor Item Id :</td>
 											<td><input type="text"  name="n_vendor_itemid" value="<?=set_value('n_vendor_itemid')?>" class="form-control-button2 n_wi-date2" disabled></td>
@@ -65,12 +66,12 @@
 										<tr>
 											<td class="td-assest">Vendor Item Name :</td>
 											<td><input type="text"  name="n_vendor_itemname" value="<?=set_value('n_vendor_itemname')?>" class="form-control-button2 n_wi-date2" disabled></td>
-										</tr>
+										</tr>-->
 										<tr>
 											<td class="td-assest">Price  :</td>
 											<td><input type="text"  name="n_price" value="<?=set_value('n_price')?>" class="form-control-button2 n_wi-date2" disabled></td>
 										</tr>
-										<tr>
+										<!--<tr>
 											<td class="td-assest">Vendor Address :</td>
 											<td><input type="text"  name="n_vendor_address1" value="<?=set_value('n_vendor_address1')?>" class="form-control-button2 n_wi-date2" disabled></td>
 										</tr>
@@ -93,7 +94,7 @@
 										<tr>
 											<td class="td-assest">Contact Person :  </td>
 											<td><input type="text"  name="n_contact_person" value="<?=set_value('n_contact_person')?>" class="form-control-button2 n_wi-date2" disabled></td>
-										</tr>										
+										</tr>-->										
 									</table>
 								</td>
 							</tr>
@@ -102,7 +103,7 @@
 				</div>
 				<div class="ui-main-form-2">
 					<div class="middle_d">
-						<table width="100%" class="ui-content-form-reg" style="">
+						<!--<table width="100%" class="ui-content-form-reg" style="">
 							<tr >
 								<td class="ui-desk-style-table">
 									<table class="ui-content-form" width="100%" border="0">												
@@ -137,7 +138,7 @@
 									</table>
 								</td>
 							</tr>
-						</table>
+						</table>-->
 					</div>
 				</div>
 			<?php } ?>

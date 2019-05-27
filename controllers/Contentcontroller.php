@@ -8830,5 +8830,84 @@ public function rcm_fdreport2(){
       $this ->load->view("Content_report_voluAP", $data);
     }
   }
+
+    public function performa_ind(){
+
+    		$this ->load->view("head");
+    		$this ->load->view("left");
+    		$this ->load->view("content_performa_ind");
+    }
+  	public function bem_qap_performa2(){
+
+  		$this ->load->view("head");
+  		$this ->load->view("bem_qap_performa2");
+  	}
+  	public function performa_ind_any(){
+
+  		$this ->load->view("left");
+  		$this ->load->view("head");
+  		$this ->load->view("performa_ind_any");
+  	}
+  	public function cause(){
+
+  		$this ->load->view("head");
+  		$this ->load->view("cause");
+  	}
+   	public function qap_type_list(){
+   		$this ->load->view("left");
+  		$this ->load->view("head");
+  		$this ->load->view("Content_qap_type_list");
+   	}
+
+  	public function wrkorder_report(){
+  		$pilape = "";
+  		if ($this->input->get('serv') == "ele"){
+  		$pilape = "IIUM E";
+  		} elseif ($this->input->get('serv') == "mec"){
+  		$pilape = "IIUM M";
+  		} elseif ($this->input->get('serv') == "civ"){
+  		$pilape = "IIUM C";
+  		}
+  	  	$this->load->model("display_model");
+  		$data['records'] = $this->display_model->list_hospinfo();
+  		$data['fon']= ($this->input->get('fon')) ? $this->input->get('fon') : "";
+  		$data['year']= ($this->input->get('y') <> 0) ? $this->input->get('y') : date("Y");
+  		$data['month']= ($this->input->get('m') <> 0) ? sprintf("%02d", $this->input->get('m')) : date("m");
+  		$data['reqtype']= $this->input->get('req') ? $this->input->get('req') : '';
+  		$data['grpsel']= $this->input->get('grp') ? $this->input->get('grp') : '';
+  		$data['tag']= $this->input->get('tag') ? $this->input->get('tag') : '';
+  		$data['cm']= $this->input->get('cm') ? $this->input->get('cm') : '';
+  		$data['limab']= $this->input->get('limab') ? $this->input->get('limab') : '0';
+  		$data['bfwd'] = array();
+  		if ($data['tag'] == 'total')
+  		{
+  			$data['records'] = $this->display_model->broughtfwd($data['month'],$data['year']);
+  			//$data['bfwd'] = array();
+  			foreach ($data['records'] as $row){
+  				if (($row->notcomp != 0) && ($row->comp != 0)){
+  					$data['bfwd'][] = $row->month;
+  				}
+  			}
+  		}elseif ($data['tag'] == 'totala10'){
+            $data['records'] = $this->display_model->wo10_rpt($data['month'],$data['year']);
+  			//$data['bfwd'] = array();
+  			foreach ($data['records'] as $row){
+  				if (($row->notcomp != 0) && ($row->comp != 0)){
+  					$data['bfwd'][] = $row->month;
+  				}
+  			}
+
+  		}
+  		$data['record'] = $this->display_model->rpt_voluccc($data['month'],$data['year'],$this->input->get('stat'),$data['reqtype'],$this->input->get('broughtfwd'),$data['grpsel'],$pilape,$data['tag'],$data['cm'],$data['limab'],$data['bfwd'],"",$data['fon']);
+  		if ($this->input->get('pdf') == 1){
+  		$this ->load->view("content_wrkorder_report_pdf", $data);
+  		}else{
+  		$this ->load->view("headprinter");
+  		$this ->load->view("content_wrkorder_report" , $data);
+  	}
+  	}
+
+
+
 }
 ?>

@@ -307,4 +307,19 @@ if ('stockDtail/' == $this->uri->slash_segment(2) || 'stockact/' == $this->uri->
 		</div>";
 	//echo "dier mashuuuk";
 }
+if ($this->uri->slash_segment(1) .$this->uri->slash_segment(2) == 'contentcontroller/qap4_table/'){
+echo "
+		<div class='menu-class'>
+			<a href='qap4_'><span class='icon-play2' valign='middle'></span> Overall QAP Performance Indicator";
+	echo "	</a>
+		</div>";
+	}
+
+if ($this->uri->slash_segment(1) .$this->uri->slash_segment(2) == 'contentcontroller/qap4/' || $this->uri->slash_segment(1) .$this->uri->slash_segment(2) == 'contentcontroller/performa_ind/' || $this->uri->slash_segment(1) .$this->uri->slash_segment(2) == 'contentcontroller/performa_ind_any/' || $this->uri->slash_segment(1) .$this->uri->slash_segment(2) == 'contentcontroller/qap_type_list/' || $this->uri->slash_segment(1) .$this->uri->slash_segment(2) == 'contentcontroller/qap4_/'){
+echo "
+		<div class='menu-class'>
+			<a href='Central/BES/'><span class='icon-play2' valign='middle'></span> Central Function";
+	echo "	</a>
+		</div>";
+	}
 ?>

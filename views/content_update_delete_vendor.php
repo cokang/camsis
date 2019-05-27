@@ -23,11 +23,11 @@
 									<table class="ui-content-form" width="100%" border="0">												
 										<tr>
 											<td class="td-assest" style="width:40%;">Vendor Name : </td>
-											<td><?=isset($record[0]->VENDOR_NAME) ? $record[0]->VENDOR_NAME : ''?><input type="hidden"  name="n_vendor_name" value="<?=set_value('n_vendor_name',isset($record[0]->VENDOR_NAME) ? $record[0]->VENDOR_NAME : '')?>" class="form-control-button2 n_wi-date2"></td>
+											<td><?=isset($record[0]->actual_vendor) ? $record[0]->actual_vendor : ''?><input type="hidden"  name="n_vendor_name" value="<?=set_value('n_vendor_name',isset($record[0]->actual_vendor) ? $record[0]->actual_vendor : '')?>" class="form-control-button2 n_wi-date2"></td>
 										</tr>
 										<tr>
 											<td class="td-assest">Vendor Code : </td>
-											<td><?=isset($record[0]->VENDOR_CODE) ? $record[0]->VENDOR_CODE : ''?><input type="hidden"  name="n_vendor_code" value="<?=set_value('n_vendor_code',isset($record[0]->VENDOR_CODE) ? $record[0]->VENDOR_CODE : '')?>" class="form-control-button2 n_wi-date2"></td>
+											<td><?=isset($record[0]->Vendor_Item_Code) ? $record[0]->Vendor_Item_Code : ''?><input type="hidden"  name="n_vendor_code" value="<?=set_value('n_vendor_code',isset($record[0]->Vendor_Item_Code) ? $record[0]->Vendor_Item_Code : '')?>" class="form-control-button2 n_wi-date2"></td>
 										</tr>
 									</table>
 								</td>
@@ -52,25 +52,25 @@
 										<tr><td colspan="3" class="ui-bottom-border-color" style="font-weight: bold;">Vendor Details</td></tr>													
 										<tr>
 											<td class="td-assest" style="width:40%;">Vendor Name : </td>
-											<td><input type="text"  name="n_vendor_name" value="<?=set_value('n_vendor_name',isset($record[0]->VENDOR_NAME) ? $record[0]->VENDOR_NAME : '')?>" class="form-control-button2 n_wi-date2"></td>
+											<td><input type="text"  id="n_vendor_name" name="n_vendor_name" value="<?=set_value('n_vendor_name',isset($record[0]->actual_vendor) ? $record[0]->actual_vendor : '')?>" class="form-control-button2 n_wi-date2"></td>
 										</tr>
 										<tr>
 											<td class="td-assest">Vendor Code  :</td>
-											<td><input type="text"  name="n_vendor_code" value="<?=set_value('n_vendor_code',isset($record[0]->VENDOR_CODE) ? $record[0]->VENDOR_CODE : '')?>" class="form-control-button2 n_wi-date2"></td>
+											<td><input type="text"  id="n_vendor_code" name="n_vendor_code" value="<?=set_value('n_vendor_code',isset($record[0]->Vendor_Item_Code) ? $record[0]->Vendor_Item_Code : '')?>" class="form-control-button2 n_wi-date2"><span class="icon-windows" onclick="fCallpop_vendor(this)" value="vendorid"></span> <span class="ui-left_mobile n_wi-ec"><br/></span></td>
 										</tr>
-										<tr>
+										<!--<tr>
 											<td class="td-assest">Vendor Item Id :</td>
 											<td><input type="text"  name="n_vendor_itemid" value="<?=set_value('n_vendor_itemid',isset($record[0]->Vendor_Item_Code) ? $record[0]->Vendor_Item_Code : '')?>" class="form-control-button2 n_wi-date2"></td>
 										</tr>
 										<tr>
 											<td class="td-assest">Vendor Item Name :</td>
 											<td><input type="text"  name="n_vendor_itemname" value="<?=set_value('n_vendor_itemname',isset($record[0]->EQUIPMENT_TYPE_NAME) ? $record[0]->EQUIPMENT_TYPE_NAME : '')?>" class="form-control-button2 n_wi-date2"></td>
-										</tr>
+										</tr>-->
 										<tr>
 											<td class="td-assest">Price  :</td>
 											<td><input type="text"  name="n_price" value="<?=set_value('n_price',isset($record[0]->List_Price) ? number_format($record[0]->List_Price,2) : '')?>" class="form-control-button2 n_wi-date2"></td>
 										</tr>
-										<tr>
+										<!--<tr>
 											<td class="td-assest">Vendor Address :</td>
 											<td><input type="text"  name="n_vendor_address1" value="<?=set_value('n_vendor_address1',isset($record[0]->ADDRESS) ? $record[0]->ADDRESS : '')?>" class="form-control-button2 n_wi-date2"></td>
 										</tr>
@@ -93,7 +93,7 @@
 										<tr>
 											<td class="td-assest">Contact Person :  </td>
 											<td><input type="text"  name="n_contact_person" value="<?=set_value('n_contact_person',isset($record[0]->CONTACT_PERSON) ? $record[0]->CONTACT_PERSON : '')?>" class="form-control-button2 n_wi-date2"></td>
-										</tr>										
+										</tr>-->									
 									</table>
 								</td>
 							</tr>
@@ -102,7 +102,7 @@
 				</div>
 				<div class="ui-main-form-2">
 					<div class="middle_d">
-						<table width="100%" class="ui-content-form-reg" style="">
+						<!--<table width="100%" class="ui-content-form-reg" style="">
 							<tr >
 								<td class="ui-desk-style-table">
 									<table class="ui-content-form" width="100%" border="0">												
@@ -137,7 +137,7 @@
 									</table>
 								</td>
 							</tr>
-						</table>
+						</table>-->
 					</div>
 				</div>
 			<?php } ?>
@@ -158,5 +158,15 @@
 	<?php echo form_hidden('vid',$this->input->get_post('vid')) ?>
 	<?php echo form_hidden('viid',$this->input->get_post('viid')) ?>
 </form>
+
 </body>
 </html>
+<script>
+function fCallpop_vendor(a)
+		{
+			var parent = a.getAttribute('value');
+			winProp = 'width=1200,height=400,left=' + ((screen.width - 600) / 2) +',top=' + ((screen.height - 400) / 2) + ',menubar=no, directories=no, location=no, scrollbars=yes, statusbar=no, toolbar=no, resizable=no';
+			Win = window.open('<?php echo site_url('contentcontroller/pop_vendor')?>?parent='+parent+'', 'location', winProp);
+			Win.window.focus();
+		}
+</script>

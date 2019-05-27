@@ -42,7 +42,7 @@
 				<td colspan="2"  valign="top" align="center">
 					<div class="ui-left_web">
 						<h2 style="color: black;margin-top: 2%;">FES/BES - % of Assets Meeting/Exceeding Uptime Target</h2>
-						<table class="tblqap" style="width: 50%;">
+						<table class="tblqap ui-content-middle-menu-workorder2" style="width: 50%;">
 						<tr align="left" class="ui-middle-color">
 								<th colspan="5" style="background-color: grey;"><p style="float: left; height: 1px;margin-top: 0px; color: white;">BEMS QAP Performance Indicator</p></th>
 							</tr>
@@ -139,7 +139,7 @@
 								<td><?php echo anchor ('contentcontroller/indicator_noAsset', '3'); ?></td>
 								<td>100.00</td>
 								<td>0</td>
-								<td></td>
+								<td>0</td>
 								<td>0</td>
 								<td>0</td>
 								<td>0</td>

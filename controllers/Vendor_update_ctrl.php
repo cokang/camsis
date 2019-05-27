@@ -6,7 +6,7 @@ class vendor_update_ctrl extends CI_Controller{
 	    $this->load->helper(array('form', 'url'));
 	    // load library for form validation
 	    $this->load->library('form_validation');
-		
+
 		//validation rule
 		if ($this->input->get('tab') != 'Delete'){
 		$this->form_validation->set_rules('n_vendor_name','Vendor Name','trim|required');
@@ -26,28 +26,30 @@ class vendor_update_ctrl extends CI_Controller{
 		}
 		else{
 		$this->form_validation->set_rules('n_vendor_name','Vendor Name','trim');
-		$this->form_validation->set_rules('n_vendor_code','Vendor Code','trim');	
+		$this->form_validation->set_rules('n_vendor_code','Vendor Code','trim');
 		}
-		
+
 		if($this->form_validation->run()==FALSE)
 			{
 				$this ->load->view("head");
 				$this ->load->view("content_update_delete_vendor");
 			}
-			
+
 			else
 			{
 				$this ->load->view("head");
-				$this ->load->view("content_update_delete_vendor_confirm");			
+				$this ->load->view("content_update_delete_vendor_confirm");
 			}
 	}
-	
+
 	function comfirmation(){
 		$this->load->model('insert_model');
 		$this->load->model('update_model');
 		if ($this->input->post('tab') == 'New'){
 			$insert_data = array('Item_Code' => $this->input->post('code'),
-								 'Vendor_Item_Code' => $this->input->post('n_vendor_itemid'),
+								 //'Vendor_Item_Code' => $this->input->post('n_vendor_itemid'),
+					 			 'Vendor_Item_Code' => $this->input->post('n_vendor_code'),
+					 			 'actual_vendor' => $this->input->post('n_vendor_name'),
 								 'Vendor' => $this->input->post('n_vendor_code'),
 								 'List_Price' => $this->input->post('n_price'),
 								 'Time_stamp' => date("Y-m-d H:i:s"),
@@ -77,7 +79,9 @@ class vendor_update_ctrl extends CI_Controller{
 		}
 		else if($this->input->post('tab') == 'Update'){
 			$insert_data = array('Item_Code' => $this->input->post('code'),
-								 'Vendor_Item_Code' => $this->input->post('n_vendor_itemid'),
+								 //'Vendor_Item_Code' => $this->input->post('n_vendor_itemid'),
+								 'Vendor_Item_Code' => $this->input->post('n_vendor_code'),
+					 			 'actual_vendor' => $this->input->post('n_vendor_name'),
 								 'Vendor' => $this->input->post('n_vendor_code'),
 								 'List_Price' => $this->input->post('n_price'),
 								 'Time_stamp' => date("Y-m-d H:i:s"),
@@ -103,7 +107,7 @@ class vendor_update_ctrl extends CI_Controller{
 								 'BUMI_STATUS' => $this->input->post('b_status'));
 			//print_r($insert_data2);
 			//exit();
-			$this->update_model->tbl_vendor_info_u($insert_data2,$this->input->post('viid'));
+			//$this->update_model->tbl_vendor_info_u($insert_data2,$this->input->post('viid'));
 		}
 		else if($this->input->post('tab') == 'Delete'){
 			$insert_data = array(

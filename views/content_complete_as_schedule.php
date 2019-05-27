@@ -29,19 +29,22 @@
 		position: relative;
 		z-index: 1;
 	}
+	table.tblqap tr.row-color td{
+		background-color: #f5eeee;
+	}
 </style>
 <div style="left: 0px;width: 75px;margin-left: 20px;background: #EE8833">
 			<a href="./qap4_table"><span class="icon-triangle-left-large" valign="middle"></span> BACK   </a>
 		</div>
 <div class="ui-middle-screen" style="width: 100%; margin-left: 0px">
 	<div class="content-workorder">
-		<table class="ui-content-middle-menu-workorder" border="0" width="80%" height="80%" align="center">
+		<table class="ui-left_web ui-content-middle-menu-workorder" border="0" width="80%" height="80%" align="center">
 			<tr class="ui-color-contents-style">
 				<td colspan="2"  valign="top" align="center">
 					<div class="ui-left_web">
 						<h2 style="color: black;margin-top: 15px;">FES/BES - % of PPM Completed as Scheduled(100%)</h2>
-						<table class="tblqap">
-						<tr>
+						<table class="tblqap ui-content-middle-menu-workorder2">
+							<tr>
 								<th colspan="9"><p style="float: left; height: 1px;">FEMS, % OF PPM Completed as Scheduled >> Alor Gajah</p></th>
 							</tr>
 							<tr align="center">
@@ -72,9 +75,9 @@
 								<td>0</td>
 
 							</tr>
-							<tr align="center">
+							<tr align="center" class="row-color">
 								<td>4003/Air Conditioning, Chilled Water System, Chiller, Scre..</td>
-								<td>3<?php echo anchor ('contentcontroller/calculation_noAsset', '<u>3</u>'); ?></td>
+								<td><?php echo anchor ('contentcontroller/calculation_noAsset', '<u>3</u>'); ?></td>
 								<td>100.00</td>
 								<td>3</td>
 								<td>0</td>
@@ -94,7 +97,7 @@
 								<td>0</td>
 								<td>0</td>
 							</tr>
-							<tr align="center">
+							<tr align="center" class="row-color">
 								<td>4003/Air Conditioning, Chilled Water System, Pimary Chill...</td>
 								<td><?php echo anchor ('contentcontroller/calculation_noAsset', '<u>3</u>'); ?></td>
 								<td>NS</td>
@@ -116,7 +119,7 @@
 								<td>0</td>
 								<td>0</td>
 							</tr>
-							<tr align="center">
+							<tr align="center" class="row-color">
 								<td>4003/Air Conditioning, Chilled Water System, Water Tank</td>
 								<td><?php echo anchor ('contentcontroller/calculation_noAsset', '<u>2</u>'); ?></td>
 								<td>100.00</td>
@@ -138,7 +141,7 @@
 								<td>0</td>
 								<td>0</td>
 							</tr>
-							<tr align="center">
+							<tr align="center" class="row-color">
 								<td>4001/Air Conditioning, Fan Coil Unit</td>
 								<td><?php echo anchor ('contentcontroller/calculation_noAsset', '<u>44</u>'); ?></td>
 								<td>100.00</td>
@@ -161,7 +164,7 @@
 								<td>0</td>
 							</tr>
 						
-							 <tr align="center">
+							 <tr align="center" class="row-color">
 								<td>2201/Building autoation System, CPU & Software</td>
 								<td><?php echo anchor ('contentcontroller/calculation_noAsset', '<u>2</u>'); ?></td>
 								<td>NS</td>
@@ -183,7 +186,7 @@
 								<td>0</td>
 								<td>0</td>
 							</tr>
-							 <tr align="center">
+							 <tr align="center" class="row-color">
 								<td>2201/Building autoation System, Monitor</td>
 								<td><?php echo anchor ('contentcontroller/calculation_noAsset', '<u>2</u>'); ?></td>
 								<td>NS</td>
@@ -216,7 +219,36 @@
 				<td align="center" colspan="3">
 				</td>
 			</tr>
-		</table>
+		</table><table class="ui-mobile-table-desk ui-left_mobile" style="color:black;width:100%;">
+		    			<tr class="ui-color-color-color" > <!-- 'class="tr_color"> -->
+							<td >Asset Group/Asset Description</td>
+							<td class="td-desk">: test buzz</td>
+						</tr>
+						<tr>
+							<td>Number of Assets</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>% Of PPM Completed</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>PPM Scheduled</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>PPM Missed</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>SIQ No</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>CAR</td>
+							<td></td>
+						</tr>
+					</table>
 	</div>
 </div>
 	</body>

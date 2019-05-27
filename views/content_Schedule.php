@@ -648,6 +648,14 @@
 			</tr>
 			<?php  } ?>
 
+			<?php  if (in_array("contentcontroller/wrkorder_report",$chkers)) { ?>
+			<tr class="<?php  $number++; echo evenodd($number); ?>">
+				<td colspan="4">
+					<?php echo anchor ('contentcontroller/wrkorder_report', '<img src="'. base_url() .'images/user.png" alt="" class="ui-icon"/>&nbsp;&nbsp;&nbsp;&nbsp;Work Order Listing Details Report'); ?>
+				</td>
+			</tr>
+			<?php  } ?>
+
 			<tr class="ui-header-new" style="height:2px;">
 				<td align="center" colspan="7">
 				</td>

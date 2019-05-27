@@ -860,7 +860,7 @@ class Procurement extends CI_Controller {
 		$data['year']= ($this->input->get('y') <> 0) ? $this->input->get('y') : date("Y");
 		$data['month']= ($this->input->get('m') <> 0) ? sprintf("%02d", $this->input->get('m')) : date("m");
 		$this->load->model('display_model');
-		$data['record'] = $this->display_model->stock_asset();
+		$data['record'] = $this->display_model->stock_assetx();
 		$this ->load->view("head");
 		$this ->load->view("left");
 		$this ->load->view("Content_pro_catalog",$data);

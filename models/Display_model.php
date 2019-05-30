@@ -6439,5 +6439,15 @@ function get_release_note($maklumat){
         			return $query_result;
         		}
 
+				function type_QAPcode_list(){
+					$this->db->select('*');
+					$this->db->from('pmis2_sa_equip_code');
+					$this->db->where('v_ServiceCode',$this->session->userdata('usersess'));
+					$this->db->where('qap_type','Y');
+					$this->db->order_by('v_Equip_Desc','ASC');
+					$result=$this->db->get();
+				return $result->result();
+				}
+
 }
 ?>

@@ -48,9 +48,9 @@
 								<th>Year</th>
 							</tr>
 							<tr align="center" >
-								<td><?php echo anchor ('contentcontroller/qap4_table', '<u>IIUM</u>'); ?></td>
-								 <td>January</td>
-								<td>2019</td>
+								<td><?php echo anchor ('contentcontroller/qap4_table?month='.$month.'&year='.$year, '<u>IIUM</u>'); ?></td>
+								 <td><?=date("F", mktime(0, 0, 0, $month, 10));;?></td>
+								<td><?=$year;?></td>
 							</tr>
 							<tr>
 								<td colspan="3" class="white-border-rl">

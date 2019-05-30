@@ -44,8 +44,7 @@
    .bekas
   {
    border: 2px black solid;
-   margin-top: 6.5%;
-   width: 890px; 
+   margin-top: 6.5%; 
    height: 500px; 
    padding-top: 2%; 
    padding-left: 8%; 

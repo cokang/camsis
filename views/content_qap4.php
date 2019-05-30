@@ -36,6 +36,7 @@
 </style>
 <div class="ui-middle-screen">
 	<div class="content-workorder">
+	<?php echo form_open('contentcontroller/qap4_');?>
 		<table class="ui-content-middle-menu-workorder" border="0" width="80%" height="80%" align="center">
 			<tr class="ui-color-contents-style">
 				<td colspan="2"  valign="top" align="center">
@@ -53,35 +54,27 @@
 										<select name="month" class="dateselector">
 											<option><p style="text-decoration: underline;">Drop down<p></option>
 											<option value="1">January</option>
-											<option>February</option>
-											<option>March</option>
-											<option>April</option>
-											<option>May</option>
-											<option>June</option>
-											<option>July</option>
-											<option>August</option>
-											<option>September</option>
-											<option>October</option>
-											<option>November</option>
-											<option>December</option>
+											<option value="2">February</option>
+											<option value="3">March</option>
+											<option value="4">April</option>
+											<option value="5">May</option>
+											<option value="6">June</option>
+											<option value="7">July</option>
+											<option value="8">August</option>
+											<option value="9">September</option>
+											<option value="10">October</option>
+											<option value="11">November</option>
+											<option value="12">December</option>
 										</select>
 								</td>
 								<td>								
-									<select name="year" class="dateselector">
-										<option>Drop down</option>
-										<option>2008</option>
-										<option>2009</option>
-										<option>2010</option>
-										<option>2011</option>
-										<option>2012</option>
-										<option>2013</option>
-										<option>2014</option>
-										<option>2015</option>
-										<option>2016</option>
-										<option>2017</option>
-										<option>2018</option>
-										<option>2019</option>
-									</select>
+								<?php
+								$year_list[null]='<p style="text-decoration: underline;">Drop down<p>';
+									for ($dyear = '2008';$dyear <= date("Y");$dyear++){
+										$year_list[$dyear] = $dyear;
+									}
+									?>
+									<?php echo form_dropdown('year', $year_list , 'class="dateselector"'); ?>
 								</td>
 							</tr>
 							<tr>
@@ -95,7 +88,7 @@
 				</td>
 				<td valign="top">
 					<div class="ui-left_web" style="margin-top: 90px;">
-						<?php echo anchor ('contentcontroller/qap4_','<button style="padding: 5px;">Show</button>'); ?>
+						<button style="padding: 5px;">Show</button>
 
 					</div>
 				</td>
@@ -105,6 +98,7 @@
 				</td>
 			</tr>
 		</table>
+		
 	</div>
 </div>
 	</body>

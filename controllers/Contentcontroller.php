@@ -2821,7 +2821,7 @@ class Contentcontroller extends CI_Controller {
 		$data['month']= ($this->input->get('m') <> 0) ? sprintf("%02d", $this->input->get('m')) : date("m");
 		$this->load->model("get_model");
 		$data['validPeriod'] = $this->get_model->validPeriod(date('F',mktime(0, 0, 0, $data['month'], 10)),$data['year']);
-		$data['recordsiq'] = $this->get_model->SIQsummary_siq(date('F',mktime(0, 0, 0, $data['month'], 10)),$data['year']);
+		$data['recordsiq'] = $this->get_model->SIQsummary_siq(date('F',mktime(0, 0, 0, $data['month'], 10)),$data['year'],"");
 		$data['siq_no'] = 'SBE/'.$this->session->userdata('hosp_code').'/'.$data['year'].$data['month'];
 		//$data['siq_no'] = 'SBE/MKA/201501'; //for test
 		$data['recordcar'] = $this->get_model->SIQsummary_car($data['siq_no']);
@@ -8717,16 +8717,32 @@ public function rcm_fdreport2(){
 
 	public function qap4_(){
 
-		$this ->load->view("head");
-		$this ->load->view("left");
-		$this ->load->view("content_qap4_res");
+   $data['year']= ($this->input->post('year') <> 0) ? $this->input->post('year') : date("Y");
+   $data['month']= ($this->input->post('month') <> 0) ? sprintf("%02d", $this->input->post('month')) : date("m");
+
+   $this ->load->view("head");
+   $this ->load->view("left");
+   $this ->load->view("content_qap4_res",$data);
 	}
 
 	public function qap4_table(){
+	 $data['year']= ($this->input->get('year') <> 0) ? $this->input->get('year') : date("Y");
+	 $data['month']= ($this->input->get('month') <> 0) ? sprintf("%02d", $this->input->get('month')) : date("m");
+     $this->load->model("get_model");
+	 $data['BESsiq'] = $this->get_model->SIQsummary_siq(date('F',mktime(0, 0, 0, $data['month'], 10)),$data['year'],"BES");
+	 !is_null($data['BESsiq'][0]->ppm_siq) ? $data['bPPMSIQ'] = $data['BESsiq'][0]->ppm_siq : $data['bPPMSIQ'] = 0;
+	 !is_null($data['BESsiq'][0]->uptime_siq) ? $data['bUptimeSIQ'] = $data['BESsiq'][0]->uptime_siq : $data['bUptimeSIQ'] = 0;
+	 $data['besToSIQ'] = $data['bPPMSIQ'] + $data['bUptimeSIQ'];
 
+	 	 $data['FESsiq'] = $this->get_model->SIQsummary_siq(date('F',mktime(0, 0, 0, $data['month'], 10)),$data['year'],"FES");
+	 !is_null($data['FESsiq'][0]->ppm_siq) ? $data['fPPMSIQ'] = $data['FESsiq'][0]->ppm_siq : $data['fPPMSIQ'] = 0;
+	 !is_null($data['FESsiq'][0]->uptime_siq) ? $data['fUptimeSIQ'] = $data['FESsiq'][0]->uptime_siq : $data['fUptimeSIQ'] = 0;
+	 $data['fesToSIQ'] = $data['fPPMSIQ'] + $data['fUptimeSIQ'];
+	 //echo "<pre>";
+	 //print_r($data['recordsiq']);
 		$this ->load->view("head");
 		$this ->load->view("left");
-		$this ->load->view("content_qap4_table");
+		$this ->load->view("content_qap4_table",$data);
 	}
 	public function completed_as_schedule(){
 
@@ -8842,10 +8858,10 @@ public function rcm_fdreport2(){
   		$this ->load->view("head");
   		$this ->load->view("bem_qap_performa2");
   	}
-  	public function performa_ind_any(){
+    public function performa_ind_any(){
 
-  		$this ->load->view("left");
   		$this ->load->view("head");
+  		$this ->load->view("left");
   		$this ->load->view("performa_ind_any");
   	}
   	public function cause(){
@@ -8854,9 +8870,12 @@ public function rcm_fdreport2(){
   		$this ->load->view("cause");
   	}
    	public function qap_type_list(){
+		$this->load->model('display_model');
+		$data['result']=$this->display_model->type_QAPcode_list();
+
+      $this ->load->view("head");
    		$this ->load->view("left");
-  		$this ->load->view("head");
-  		$this ->load->view("Content_qap_type_list");
+  		$this ->load->view("Content_qap_type_list",$data);
    	}
 
   	public function wrkorder_report(){
@@ -8905,6 +8924,38 @@ public function rcm_fdreport2(){
   		$this ->load->view("headprinter");
   		$this ->load->view("content_wrkorder_report" , $data);
   	}
+  	}
+
+    public function hks(){
+  		$this ->load->view("head");
+   		$this ->load->view("left");
+  		$this ->load->view("content_hks");
+   	}
+
+   	public function hks_details(){
+   		$this ->load->view("head");
+   		$this ->load->view("left");
+  		$this ->load->view("content_hks_details");
+   	}
+
+   	public function hks_details2(){
+   		$this ->load->view("head");
+   		$this ->load->view("left");
+  		$this ->load->view("content_hks_details2");
+   	}
+
+   	public function hks_details3(){
+  		$this ->load->view("head");
+  		$this ->load->view("content_hks_details3");
+   	}
+   	public function bem_asset(){
+		$this ->load->view("head");
+		$this ->load->view("Bem_asset");
+	}
+	public function bem_qap_performa(){
+
+  		$this ->load->view("head");
+  		$this ->load->view("bem_qap_performa");
   	}
 
 

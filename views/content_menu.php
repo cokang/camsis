@@ -315,10 +315,25 @@ echo "
 		</div>";
 	}
 
-if ($this->uri->slash_segment(1) .$this->uri->slash_segment(2) == 'contentcontroller/qap4/' || $this->uri->slash_segment(1) .$this->uri->slash_segment(2) == 'contentcontroller/performa_ind/' || $this->uri->slash_segment(1) .$this->uri->slash_segment(2) == 'contentcontroller/performa_ind_any/' || $this->uri->slash_segment(1) .$this->uri->slash_segment(2) == 'contentcontroller/qap_type_list/' || $this->uri->slash_segment(1) .$this->uri->slash_segment(2) == 'contentcontroller/qap4_/'){
+if ($this->uri->slash_segment(1) .$this->uri->slash_segment(2) == 'contentcontroller/qap4/' || $this->uri->slash_segment(1) .$this->uri->slash_segment(2) == 'contentcontroller/performa_ind/' || $this->uri->slash_segment(1) .$this->uri->slash_segment(2) == 'contentcontroller/performa_ind_any/' || $this->uri->slash_segment(1) .$this->uri->slash_segment(2) == 'contentcontroller/qap_type_list/' || $this->uri->slash_segment(1) .$this->uri->slash_segment(2) == 'contentcontroller/qap4_/' || $this->uri->slash_segment(1) .$this->uri->slash_segment(2) == 'contentcontroller/hks/'){
 echo "
 		<div class='menu-class'>
 			<a href='Central/BES/'><span class='icon-play2' valign='middle'></span> Central Function";
+	echo "	</a>
+		</div>";
+	}
+
+	if ($this->uri->slash_segment(1) .$this->uri->slash_segment(2) == 'contentcontroller/hks_details/'){
+echo "
+		<div class='menu-class'>
+			<a href='hks'><span class='icon-play2' valign='middle'></span> HKS";
+	echo "	</a>
+		</div>";
+	}
+	if ($this->uri->slash_segment(1) .$this->uri->slash_segment(2) == 'contentcontroller/hks_details2/'){
+echo "
+		<div class='menu-class'>
+			<a href='hks'><span class='icon-play2' valign='middle'></span> HKS";
 	echo "	</a>
 		</div>";
 	}

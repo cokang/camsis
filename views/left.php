@@ -51,7 +51,7 @@
 			<div align="center"> <?php echo anchor ('logincontroller/logout','<button type="submit" class="btn btn-primary" style="width: 100%;"><span style="color:white;">Logout</span></button>');?></div>
 
 
-			<?php if( $this->uri->slash_segment(1) .$this->uri->slash_segment(2) == "contentcontroller/qap4/" || $this->uri->slash_segment(1) .$this->uri->slash_segment(2) == "contentcontroller/qap4_/" || $this->uri->slash_segment(1) .$this->uri->slash_segment(2) == "contentcontroller/qap_type_list/" || $this->uri->slash_segment(1) .$this->uri->slash_segment(2) == "contentcontroller/performa_ind_any/" | $this->uri->slash_segment(1) .$this->uri->slash_segment(2) == "contentcontroller/performa_ind/" | $this->uri->slash_segment(1) .$this->uri->slash_segment(2) == "contentcontroller/performa_ind_any/"){ ?>
+			<?php if( $this->uri->slash_segment(1) .$this->uri->slash_segment(2) == "contentcontroller/qap4/" || $this->uri->slash_segment(1) .$this->uri->slash_segment(2) == "contentcontroller/qap4_/" || $this->uri->slash_segment(1) .$this->uri->slash_segment(2) == "contentcontroller/qap_type_list/" || $this->uri->slash_segment(1) .$this->uri->slash_segment(2) == "contentcontroller/performa_ind_any/" | $this->uri->slash_segment(1) .$this->uri->slash_segment(2) == "contentcontroller/performa_ind/" || $this->uri->slash_segment(1) .$this->uri->slash_segment(2) == "contentcontroller/performa_ind_any/" || $this->uri->slash_segment(1) .$this->uri->slash_segment(2) == "contentcontroller/hks/"){ ?>
 			<div align="center" class="ui-header-left-color" style="padding-top:5px; padding-bottom:5px; color:black; margin-top: 6px;"> <?php echo anchor ('contentcontroller/qap4', 'Overall QAP Performance Indicator','style="font-size:20px;"'); ?>
 			</div>
 			<div align="center" class="ui-header-left-color" style="padding-top:5px; padding-bottom:5px; color:black; background-color: #FFE135 !important;">
@@ -71,7 +71,7 @@
 				<?php echo anchor ('contentcontroller/qap_type_list', 'QAP Type Code List','style="font-size:20px;"'); ?>
 			</div>
 			<div align="center" class="ui-header-left-color" style="padding-top:5px; padding-bottom:5px; color:black;">
-				HKS % Acceptable Quality Cleaning
+				<?php echo anchor ('contentcontroller/hks', 'HKS % Acceptable Quality Cleaning','style="font-size:20px;"'); ?>
 			</div>
 			<?php } ?>
 

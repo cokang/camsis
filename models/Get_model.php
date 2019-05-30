@@ -1580,7 +1580,8 @@ $query = $this->db->get();
 //exit();
 return $query->result();
 }
-function SIQsummary_siq($month,$year) {
+function SIQsummary_siq($month,$year,$serv="") {
+
 $this->db->select("SUM(CASE ind_code WHEN 'BES05' THEN 1 ELSE 0 END) AS ppm_siq, SUM(CASE ind_code WHEN 'BES06' THEN 1 ELSE 0 end) AS uptime_siq",FALSE);
 $this->db->from('mis_qap_siq_detail');
 $this->db->where('hosp_code',$this->session->userdata('hosp_code'));
@@ -1590,7 +1591,8 @@ $this->db->where('siq_month',substr($month,0,3));
 $this->db->where('siq_year',$year);
 //	$this->db->where('siq_year','2015'); //for test
 //$this->db->where('service','BES');
-$this->db->where('service',$this->session->userdata('usersess'));
+//$this->db->where('service',$this->session->userdata('usersess'));
+$this->db->where('service',($serv) ? $serv : $this->session->userdata('usersess'));
 $query = $this->db->get();
 //echo $this->db->last_query();
 //exit();

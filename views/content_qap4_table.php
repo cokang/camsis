@@ -52,23 +52,23 @@
 								<td rowspan="4">IIUM</td>
 								<td rowspan="2">FES</td>
 								<td><?php echo anchor ('contentcontroller/qap4_indicator', 'i)% of PPM Completed as Schedule(100%)'); ?></td>
-								<td>100%</td>
+								<td><?=($FESsiq[0]->ppm_siq) ? floor(($FESsiq[0]->ppm_siq/$fesToSIQ)*100) : '0';?>%</td>
 								<td><?php echo anchor ('contentcontroller/completed_as_schedule', 'PPM'); ?></td>
 							</tr>
 							<tr align="center">
 								<td><?php echo anchor ('contentcontroller/qap4_indicator', 'ii)% of Assets Meeting/Exceedinf Uptime Target(100%)'); ?></td>
-								<td>96%</td>
+								<td><?=$FESsiq[0]->uptime_siq;?>%</td>
 								<td><?php echo anchor ('contentcontroller/completed_as_schedule', 'Uptime'); ?></td>
 							</tr>
 							<tr align="center">
 								<td rowspan="2">BES</td>
 								<td><?php echo anchor ('contentcontroller/qap4_indicator', 'i)% of PPM Completed as Schedule(100%)'); ?></td>
-								<td>100%</td>
+								<td><?=($BESsiq[0]->ppm_siq) ? floor(($BESsiq[0]->ppm_siq/$besToSIQ)*100) : '0';?>%</td>
 								<td><?php echo anchor ('contentcontroller/completed_as_schedule', 'PPM'); ?></td>
 							</tr>
 							<tr align="center">
 								<td><?php echo anchor ('contentcontroller/qap4_indicator', 'ii)% of Assets Meeting/Exceedinf Uptime Target(100%)'); ?></td>
-								<td>96%</td>
+								<td><?=$BESsiq[0]->uptime_siq;?>%</td>
 								<td><?php echo anchor ('contentcontroller/completed_as_schedule', 'Uptime'); ?></td>
 							</tr>
 							<tr align="center">
